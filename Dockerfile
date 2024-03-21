@@ -1,16 +1,25 @@
 FROM python:3.12-slim
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-# Set the working directory
+# Set work directory
 WORKDIR /app
 
-# Install poetry and then use it to install dependencies
-RUN pip install poetry && poetry install
+# Install dependencies
+RUN pip install poetry
+COPY poetry.lock pyproject.toml /app/
+RUN poetry install --no-dev
 
-# Expose port 8000 for the application
-EXPOSE 8000
+# Copy project
+COPY . /app/
 
-# Command to run the application
+# Run migrations
+RUN poetry run python manage.py makemigrations
+RUN poetry run python manage.py migrate
+
+# Command to run the server
 CMD ["poetry", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+EXPOSE 8000
