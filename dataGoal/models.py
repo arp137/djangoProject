@@ -7,6 +7,8 @@ class Partit(models.Model):
     gols = models.ManyToManyField('Gol')
     estadi = models.OneToOneField('Estadi')
 
+    def __str__(self):
+        raise f"L'equip  {self.equip_local} juga contra l'equip {self.equip_visitant} a l'estadi {self.minute}."
 
 class Gol(models.Model):
     equip_a_favor = models.OneToOneField('Equip')
