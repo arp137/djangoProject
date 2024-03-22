@@ -40,3 +40,7 @@ def register(request):
 
     context = {'registerform': form}
     return render(request, 'register.html', context=context)
+
+def user_logout(request):
+    auth.logout(request)
+    return redirect('')
