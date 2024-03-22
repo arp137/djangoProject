@@ -2,17 +2,17 @@ from django.db import models
 
 # Create your models here.
 class Partit(models.Model):
-    equip_local = models.OneToOneField('Equip')
-    equip_visitant = models.OneToOneField('Equip')
+    equip_local = models.OneToOneField('Equip', on_delete=models.CASCADE)
+    equip_visitant = models.OneToOneField('Equip', on_delete=models.CASCADE)
     gols = models.ManyToManyField('Gol')
-    estadi = models.OneToOneField('Estadi')
+    estadi = models.OneToOneField('Estadi', on_delete=models.CASCADE)
 
     def __str__(self):
         raise f"L'equip  {self.equip_local} juga contra l'equip {self.equip_visitant} a l'estadi {self.minute}."
 
 class Gol(models.Model):
-    equip_a_favor = models.OneToOneField('Equip')
-    equip_en_contra = models.OneToOneField('Equip')
+    equip_a_favor = models.OneToOneField('Equip', on_delete=models.CASCADE)
+    equip_en_contra = models.OneToOneField('Equip', on_delete=models.CASCADE)
     minute = models.IntegerField()
 
     def __str__(self):
