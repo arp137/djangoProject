@@ -1,0 +1,38 @@
+/* Estilos para el cuerpo del documento */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+/* Estilos para el encabezado h1 */
+h1 {
+    color: blue;
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Estilos para los enlaces */
+a {
+    display: block;
+    width: 150px;
+    margin: 20px auto;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Cambio de color al pasar el ratón sobre los enlaces */
+a:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos adicionales para el segundo enlace */
+a:nth-of-type(2) {
+    margin-top: 0; /* Eliminar margen superior para el segundo enlace */
+}
