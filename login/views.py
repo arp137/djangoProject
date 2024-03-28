@@ -4,11 +4,12 @@ from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
+
 def homepage(request):
     return render(request, 'index.html')
 
-def my_login(request):
 
+def my_login(request):
     form = LoginForm()
 
     if request.method == 'POST':
@@ -27,9 +28,11 @@ def my_login(request):
 
     return render(request, 'login.html', context=context)
 
+
 @login_required(login_url="login")
 def dashboard(request):
     return render(request, 'dashboard.html')
+
 
 def register(request):
     form = CreateUserForm()
@@ -42,6 +45,7 @@ def register(request):
 
     context = {'registerform': form}
     return render(request, 'register.html', context=context)
+
 
 def user_logout(request):
     auth.logout(request)
