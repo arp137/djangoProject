@@ -4,7 +4,7 @@
       height: 100vh;
       overflow: hidden;
       font-family: "Poppins";
-    background: #234666;
+      background: #234666;
   }
   .login-page {
     width: 400px;
@@ -36,11 +36,19 @@
 
   }
 
-  h3{
+  h2{
     font-family: "Poppins", sans-serif;
     color: #f0f0f0;
-
+    font-size: 25px;
   }
+
+  h3 {
+    font-family: "Poppins", sans-serif;
+    color: #f0f0f0;
+    text-align: left;
+    font-size: 15px;
+  }
+
   .form button {
     font-family: "Poppins", sans-serif;
     text-transform: uppercase;
@@ -63,8 +71,8 @@
     font-size: 12px;
   }
   .form .message a {
-    color: #234666;
-    text-decoration: none;
+    color: white;
+    text-underline: #FFFFFF;
   }
   .form .register-form {
     display: none;
