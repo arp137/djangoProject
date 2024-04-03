@@ -1,28 +1,35 @@
-{%  load static %}
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
+    <link href="../static/stylesLog.css" rel="stylesheet" />
     <title>Data Goal</title>
-    <link rel="stylesheet" href="../static/stylesLog.css">
 </head>
+<body>
+    <div class="v11_42">
+        <div class="v11_44"></div>
+        <div class="v11_45"></div>
+        <span class="v11_46">© Copyright 2024 Data Goal</span>
+        <div class="v16_5">
+            <div class="v11_43"></div>
+            <span class="v11_47">Data Goal</span>
+            <div class="v11_48"></div>
+            <div class="v11_49"></div>
+            <div class="v11_50"></div>
+            <span class="v11_51">LOGIN</span>
+            <div class="login-page">
+                <form method="Post" autocomplete="off">
+                    {% csrf_token %}
 
-<body style="display:flex; align-items:center; justify-content:center;">
-    <div class="login-page">
-        <div class="form">
-            <form class="login-form" method="post">
-                {% csrf_token %}
-                <h2>Log in</h2>
-                <h3>{{ loginform.as_p }}</h3>
-                <button type="submit" name="send2">login</button>
-                <p class="message">Not registered? <a href="/register/">Create an account</a></p>
-            </form>
+                    {{loginform.as_p}}
+
+                    <input type="submit" value="Register">
+                </form>
+            </div>
+            <span class="v11_54">Don’t have an account? <a href="{% url 'register' %}">Sign up</a></span>
+            <div class="v11_55"></div>
+            <div class="v16_2"></div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/js/main.js"></script>
 </body>
 </html>
