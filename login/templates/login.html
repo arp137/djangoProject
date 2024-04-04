@@ -13,14 +13,11 @@
             <span class="tituloDataGoal">Data Goal</span>
             <form method="Post" autocomplete="off">
                 {% csrf_token %}
-                <label>
-                    <input type="text" name="username" placeholder="Username" class="email_box" value="{{ loginform.username }}">
-                </label>
-                <label>
-                    <input type="password" name="password" placeholder="Password" class="password_box" value="{{ loginform.password }}">
-                </label>
 
-                <input type="submit" class="login_box" value="Login">
+                <input type="text" name="username" placeholder="Username" class="email_box" value="">
+                <input type="password" name="password" placeholder="Password" class="password_box" value="">
+                <input type="submit" class="login_botton" value="LOGIN">
+
             </form>
 
             <span class="dhaa">Don’t have an account? <a href="{% url 'register' %}">Sign up</a></span>
