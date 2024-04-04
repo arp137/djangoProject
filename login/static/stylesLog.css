@@ -1,213 +1,174 @@
 * {
   box-sizing: border-box;
 }
+
 body {
-  font-size: 14px;
+  background: url("images/camp_nou_dif.jpg") fixed center;
+  background-size: cover;
+  min-width: 100%;
+  min-height: 100%;
 }
 
 a {
   text-underline: auto;
 }
-.v11_42 {
-  width: 1920px;
-  height: 1080px;
-  background: url("images/cn.jpg");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: relative;
-  top: 0px;
-  left: 0px;
-}
-.v11_44 {
-  width: 100%;
-  height: 108px;
-  background: rgba(0,9,22,1);
-  opacity: 1;
-  position: absolute;
-  top: 916px;
-  left: 0px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  overflow: hidden;
-}
-.v11_45 {
-  width: 60px;
-  height: 66px;
-  background: url("images/logo.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 938px;
-  left: 58px;
-  overflow: hidden;
-}
-.v11_46 {
-  width: 162px;
-  color: rgba(255,255,255,1);
-  position: absolute;
-  top: 962px;
-  left: 138px;
-  font-family: Inter;
-  font-weight: Regular;
-  font-size: 12px;
-  opacity: 1;
-  text-align: left;
-}
-.v16_5 {
-  width: 701px;
-  height: 532px;
-  background: url("images/la_liga.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 246px;
-  left: 369px;
-  overflow: hidden;
-}
-.v11_43 {
-  width: 701px;
-  height: 532px;
-  background: rgba(230,230,230,1);
-  opacity: 1;
-  position: relative;
-  top: 0px;
-  left: 0px;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
-  overflow: hidden;
-}
-.v11_47 {
-  width: 193px;
-  color: rgba(236,16,16,1);
-  position: absolute;
-  top: 40px;
-  left: 375px;
-  font-family: Inter;
-  font-weight: #000000;
-  font-size: 40px;
-  opacity: 1;
-  text-align: left;
-}
-.v11_48 {
-  width: 340px;
-  height: 60px;
-  background: rgba(193,193,193,1);
-  opacity: 1;
-  position: absolute;
-  top: 129px;
-  left: 305px;
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px;
-  overflow: hidden;
-}
-.v11_49 {
-  width: 340px;
-  height: 60px;
-  background: rgba(193,193,193,1);
-  opacity: 1;
-  position: absolute;
-  top: 243px;
-  left: 305px;
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px;
-  overflow: hidden;
-}
-.v11_50 {
-  width: 200px;
+
+
+.login_box {
+  width: 100px;
   height: 60px;
   background: rgba(235,15,15,1);
   opacity: 1;
   position: absolute;
-  top: 357px;
+  top: 300px;
   left: 375px;
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px;
+  border-radius: 25px;
   overflow: hidden;
 }
-.v11_51 {
+
+.gray_box {
+  width: 601px;
+  height: 532px;
+  background: rgba(230,230,230,1);
+  opacity: 1;
+  position: relative;
+  top: 0;
+  left: 0;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.tituloDataGoal {
+  width: 200px;
+  color: rgba(236,16,16,1);
+  position: absolute;
+  top: 30px;
+  left: 345px;
+  font-weight: bold;
+  font-family: Inter, serif;
+  font-size: 35px;
+  text-decoration: underline;
+  text-underline-color: auto;
+  text-align: left;
+}
+
+.email_box {
+  width: 240px;
+  height: 60px;
+  background: rgba(193,193,193,1);
+  opacity: 1;
+  font-family: Inter, serif;
+  position: absolute;
+  top: 100px;
+  left: 305px;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.password_box {
+  width: 240px;
+  height: 60px;
+  background: rgba(193,193,193,1);
+  opacity: 1;
+  font-family: Inter, serif;
+  position: absolute;
+  top: 200px;
+  left: 305px;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.login_div {
+  width: 601px;
+  height: 432px;
+  background-position: center center;
+  opacity: 1;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border-radius: 25px;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+}
+
+.bottom_panel {
+  width: 100%;
+  height: 70px;
+  min-width: 100%;
+  min-height: 70px;
+  background: rgba(0,9,22,1);
+  opacity: 1;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  overflow: hidden;
+}
+
+.logo {
+  width: 60px;
+  height: 66px;
+  background: url("images/logo.png") no-repeat center center;
+  background-size: cover;
+  opacity: 1;
+  position: relative;
+  top: 5%;
+  left: 3%;
+  overflow: hidden;
+}
+
+.copyright {
+  width: 162px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 45%;
+  left: 9%;
+  font-family: Inter, serif;
+  font-size: 12px;
+  opacity: 1;
+  text-align: left
+}
+
+
+
+.text_login {
   width: 79px;
   color: rgba(255,255,255,1);
   position: absolute;
-  top: 372px;
-  left: 436px;
-  font-family: Inter;
-  font-weight: Black;
-  font-size: 25px;
+  top: 317px;
+  left: 396px;
+  font-family: Inter, serif;
+  font-size: 20px;
   opacity: 3;
   text-align: left;
 }
-.v11_52 {
-  width: 53px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 149px;
-  left: 332px;
-  font-family: Inter;
-  font-weight: Bold;
-  font-size: 20px;
-  opacity: 1;
-  text-align: left;
-}
-.v11_53 {
-  width: 97px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 261px;
-  left: 332px;
-  font-family: Inter;
-  font-weight: Bold;
-  font-size: 20px;
-  opacity: 1;
-  text-align: left;
-}
-.v11_54 {
+
+.dhaa {
   width: 300px;
   color: rgba(0,0,0,1);
   position: absolute;
-  top: 443px;
-  left: 351px;
-  font-family: Inter;
+  top: 370px;
+  left: 305px;
+  font-family: Inter, serif;
   font-weight: Bold;
   font-size: 17px;
   opacity: 1;
   text-align: left;
 }
-.v11_55 {
-  width: 50px;
-  height: 50px;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 11px;
-  left: 601px;
-  overflow: hidden;
-}
-.v16_2 {
+
+.laliga {
   width: 259px;
   height: 263px;
-  background: url("images/la_liga.png");
-  background-repeat: no-repeat;
-  background-position: center center;
+  background: url("images/la_liga.png") no-repeat center center;
   background-size: cover;
   opacity: 1;
   position: absolute;
-  top: 129px;
+  top: 70px;
   left: 31px;
   overflow: hidden;
+}
+
+label {
+  right: 10%;
 }

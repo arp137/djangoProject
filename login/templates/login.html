@@ -1,35 +1,35 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
     <link href="../static/stylesLog.css" rel="stylesheet" />
     <title>Data Goal</title>
 </head>
 <body>
-    <div class="v11_42">
-        <div class="v11_44"></div>
-        <div class="v11_45"></div>
-        <span class="v11_46">© Copyright 2024 Data Goal</span>
-        <div class="v16_5">
-            <div class="v11_43"></div>
-            <span class="v11_47">Data Goal</span>
-            <div class="v11_48"></div>
-            <div class="v11_49"></div>
-            <div class="v11_50"></div>
-            <span class="v11_51">LOGIN</span>
-            <div class="login-page">
-                <form method="Post" autocomplete="off">
-                    {% csrf_token %}
+    <div class="login_div">
+            <div class="gray_box"></div>
+            <span class="tituloDataGoal">Data Goal</span>
+            <form method="Post" autocomplete="off">
+                {% csrf_token %}
+                <label>
+                    <input type="text" name="username" placeholder="Username" class="email_box" value="{{ loginform.username }}">
+                </label>
+                <label>
+                    <input type="password" name="password" placeholder="Password" class="password_box" value="{{ loginform.password }}">
+                </label>
 
-                    {{loginform.as_p}}
+                <input type="submit" class="login_box" value="Login">
+            </form>
 
-                    <input type="submit" value="Register">
-                </form>
-            </div>
-            <span class="v11_54">Don’t have an account? <a href="{% url 'register' %}">Sign up</a></span>
-            <div class="v11_55"></div>
-            <div class="v16_2"></div>
-        </div>
+            <span class="dhaa">Don’t have an account? <a href="{% url 'register' %}">Sign up</a></span>
+            <div class="laliga"></div>
+    </div>
+
+    <div class="bottom_panel">
+            <div class="logo"></div>
+            <span class="copyright">© Copyright 2024 Data Goal</span>
     </div>
 </body>
 </html>
