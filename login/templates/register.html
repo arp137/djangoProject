@@ -1,12 +1,32 @@
+<!DOCTYPE html>
 <html lang="en">
-    <h1>Register now!</h1>
+<head>
+    <link href="../static/stylesRegister.css" rel="stylesheet" />
+    <link href="../static/images/logo.png" rel="icon" />
+    <title>Data Goal - Register</title>
+</head>
+<body>
+    <div class="login_div">
+            <div class="gray_box"></div>
+            <span class="tituloDataGoal">Data Goal</span>
+            <form method="Post" autocomplete="off">
+                {% csrf_token %}
 
-    <form method="Post" autocomplete="off">
-        {% csrf_token %}
+                <input type="text" name="username" placeholder="Username" class="username_box" value="">
+                <input type="text" name="email" placeholder="Email" class="email_box" value="">
+                <input type="password" name="password" placeholder="Password" class="password_box" value="">
+                <input type="password" name="password_repeat" placeholder="Repeat Password" class="repeat_password_box" value="">
+                <input type="submit" class="login_botton" value="REGISTER">
 
-        {{registerform.as_p}}
+            </form>
 
-        <input type="submit" value="Register">
-    </form>
+            <span class="ahaa">Already have an account? <a href="{% url 'login' %}">Login</a></span>
+            <div class="laliga"></div>
+    </div>
 
+    <div class="bottom_panel">
+            <div class="logo"></div>
+            <span class="copyright">© Copyright 2024 Data Goal</span>
+    </div>
+</body>
 </html>

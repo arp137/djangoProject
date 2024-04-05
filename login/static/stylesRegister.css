@@ -1,0 +1,210 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: url("images/camp_nou_dif.jpg") fixed center;
+  background-size: cover;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+a {
+  text-decoration: auto; /* Cambiado de 'text-underline' a 'text-decoration' */
+}
+
+.register_button {
+  width: 100px;
+  height: 60px;
+  background: rgba(235,15,15,1);
+  opacity: 1;
+  position: absolute;
+  top: 370px; /* Ajustado para el nuevo botón */
+  left: 375px;
+  border-radius: 25px;
+  border: none;
+  overflow: hidden;
+  color: #ffffff;
+  font-family: Inter;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+
+
+.gray_box {
+  width: 677px;
+  height: 600px;
+  background: rgba(230, 230, 230, 1);
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+
+
+.tituloDataGoal {
+  width: 200px;
+  color: rgba(236,16,16,1);
+  position: absolute;
+  top: 30px;
+  left: 345px;
+  font-weight: bold;
+  font-family: Inter, serif;
+  font-size: 35px;
+  text-decoration: underline;
+  text-align: left;
+}
+
+.username_box {
+  width: 240px;
+  height: 60px;
+  background: rgba(193,193,193,1);
+  font-family: Inter, serif;
+  position: absolute;
+  top: 90px;
+  left: 305px;
+  border-radius: 25px;
+  border: none;
+  overflow: hidden;
+  padding-left: 10px;
+}
+
+.email_box {
+  width: 240px;
+  height: 60px;
+  background: rgba(193,193,193,1);
+  font-family: Inter, serif;
+  position: absolute;
+  top: 150px;
+  left: 305px;
+  border-radius: 25px;
+  border: none;
+  overflow: hidden;
+  padding-left: 10px;
+}
+.password_box {
+  width: 240px;
+  height: 60px;
+  background: rgba(193,193,193,1);
+  font-family: Inter, serif;
+  position: absolute;
+  top: 225px;
+  left: 305px;
+  border-radius: 25px;
+  border: none;
+  overflow: hidden;
+  padding-left: 10px;
+}
+
+.repeat_password_box {
+  width: 240px;
+  height: 60px;
+  background: rgba(193,193,193,1);
+  font-family: Inter, serif;
+  position: absolute;
+  top: 300px;
+  left: 305px;
+  border-radius: 25px;
+  border: none;
+  overflow: hidden;
+  padding-left: 10px;
+}
+
+.login_div {
+  width: 695px;
+  height: 500px;
+  background-position: center center;
+  opacity: 1;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border-radius: 25px;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+}
+
+.bottom_panel {
+  width: 100%;
+  height: 70px;
+  min-width: 100%;
+  min-height: 70px;
+  background: rgba(0,9,22,1);
+  opacity: 1;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  overflow: hidden;
+}
+
+.logo {
+  width: 60px;
+  height: 66px;
+  background: url("images/logo.png") no-repeat center center;
+  background-size: cover;
+  opacity: 1;
+  position: relative;
+  top: 5%;
+  left: 3%;
+  overflow: hidden;
+}
+
+.copyright {
+  width: 162px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 45%;
+  left: 9%;
+  font-family: Inter, serif;
+  font-size: 12px;
+  opacity: 1;
+  text-align: left;
+}
+
+.text_login {
+  width: 79px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 317px;
+  left: 396px;
+  font-family: Inter, serif;
+  font-size: 20px;
+  opacity: 3;
+  text-align: left;
+}
+
+.ahaa {
+  width: 300px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  top: 390px;
+  left: 305px;
+  font-family: Inter, serif;
+  font-weight: bold;
+  font-size: 17px;
+  opacity: 1;
+  text-align: left;
+}
+
+.laliga {
+  width: 259px;
+  height: 263px;
+  background: url("images/la_liga.png") no-repeat center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  top: 70px;
+  left: 31px;
+  overflow: hidden;
+}
+
+.username_box {
+  top: 75px; /* Ajuste de posición */
+  left: 305px;
+}
