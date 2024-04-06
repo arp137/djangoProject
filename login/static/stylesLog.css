@@ -87,6 +87,16 @@ a {
   padding-left: 10px;
 }
 
+.error-notification {
+    color: red;
+    position: absolute; /* o 'fixed', dependiendo de tus necesidades */
+    top: 280px;
+    left: 305px;
+    background-color: #fff; /* Asegúrate de que el texto sea visible */
+    padding: 10px; /* Espaciado para que el texto no toque los bordes */
+    border: 1px solid red; /* Opcional: añade un borde */
+}
+
 .login_div {
   width: 601px;
   height: 432px;
@@ -114,6 +124,7 @@ a {
   border-top-right-radius: 10px;
   overflow: hidden;
 }
+
 
 .logo {
   width: 60px;
