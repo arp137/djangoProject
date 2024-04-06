@@ -9,13 +9,13 @@
     <div class="login_div">
             <div class="gray_box"></div>
             <span class="tituloDataGoal">Data Goal</span>
-            <form method="Post" autocomplete="off">
+            <form method="Post" action="{% url 'register' %}" autocomplete="off">
                 {% csrf_token %}
 
                 <input type="text" name="username" placeholder="Username" class="username_box" value="">
-                <input type="text" name="email" placeholder="Email" class="email_box" value="">
-                <input type="password" name="password" placeholder="Password" class="password_box" value="">
-                <input type="password" name="password_repeat" placeholder="Repeat Password" class="repeat_password_box" value="">
+                <input type="email" name="email" placeholder="Email" class="email_box" value="">
+                <input type="password" name="password1" placeholder="Password" class="password_box" value="">
+                <input type="password" name="password2" placeholder="Repeat Password" class="repeat_password_box" value="">
                 <input type="submit" class="register_button" value="REGISTER">
 
             </form>
