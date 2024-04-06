@@ -14,21 +14,24 @@ def homepage(request):
 
 # Vista de inicio de sesión personalizada
 def my_login(request):
-    form = LoginForm()
+    form = LoginForm(request.POST or None)
+    error_message = None
 
     if request.method == 'POST':
-        form = LoginForm(request=request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
+        if username and password:  # Procede solo si ambos campos no están vacíos
             user = authenticate(request, username=username, password=password)
-
             if user is not None:
                 auth_login(request, user)
                 return redirect("dashboard")
+            else:
+                error_message = "Your username or password is incorrect. Please try again."
+        else:
+            error_message = "Both username and password are required."
 
-    context = {'loginform': form}
+    context = {'loginform': form, 'error_message': error_message}
     return render(request, 'login.html', context=context)
 
 
