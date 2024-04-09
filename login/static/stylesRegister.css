@@ -13,13 +13,17 @@ a {
   text-underline: auto;
 }
 
+a {
+  text-underline: auto;
+}
+
 .register_button {
   width: 100px;
   height: 60px;
   background: rgba(235,15,15,1);
   opacity: 1;
   position: absolute;
-  top: 370px; /* Ajustado para el nuevo botón */
+  top: 390px; /* Ajustado para el nuevo botón */
   left: 375px;
   border-radius: 25px;
   border: none;
@@ -36,15 +40,14 @@ a {
 .gray_box {
   width: 677px;
   height: 600px;
-  background: rgba(230, 230, 230, 1);
+  background: rgba(230,230,230,1);
   opacity: 1;
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   border-radius: 30px;
   overflow: hidden;
 }
-
 
 
 .tituloDataGoal {
@@ -66,7 +69,7 @@ a {
   background: rgba(193,193,193,1);
   font-family: Inter, serif;
   position: absolute;
-  top: 90px;
+  top: 75px;
   left: 305px;
   border-radius: 25px;
   border: none;
@@ -87,6 +90,7 @@ a {
   overflow: hidden;
   padding-left: 10px;
 }
+
 .password_box {
   width: 240px;
   height: 60px;
@@ -116,7 +120,7 @@ a {
 }
 
 .login_div {
-  width: 695px;
+  width: 610px;
   height: 500px;
   background-position: center center;
   opacity: 1;
@@ -183,7 +187,7 @@ a {
   width: 300px;
   color: rgba(0,0,0,1);
   position: absolute;
-  top: 390px;
+  top: 470px;
   left: 305px;
   font-family: Inter, serif;
   font-weight: bold;
@@ -199,12 +203,7 @@ a {
   background-size: cover;
   opacity: 1;
   position: absolute;
-  top: 70px;
+  top: 110px;
   left: 31px;
   overflow: hidden;
-}
-
-.username_box {
-  top: 75px; /* Ajuste de posición */
-  left: 305px;
 }

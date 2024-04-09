@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, login as auth_login
 
 
 def homepage(request):
-    return render(request, 'index.html')
+    return render(request, 'homepage.html')
 
 
 # Vista de inicio de sesión personalizada
