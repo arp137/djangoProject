@@ -3,19 +3,26 @@
 <head>
     <link href="../static/stylesLog.css" rel="stylesheet" />
     <link href="../static/images/logo.png" rel="icon" />
-    <title>Data Goal</title>
+    <title>Data Goal - Login</title>
 </head>
 <body>
     <div class="login_div">
             <div class="gray_box"></div>
             <span class="tituloDataGoal">Data Goal</span>
-            <form method="Post" autocomplete="off">
+            <form method="POST" action="{% url 'login' %}" autocomplete="off">
+
                 {% csrf_token %}
 
                 <input type="text" name="username" placeholder="Username" class="email_box" value="">
                 <input type="password" name="password" placeholder="Password" class="password_box" value="">
                 <input type="submit" class="login_botton" value="LOGIN">
-
+                {% if error_message %}
+                <script>
+                    window.onload = function() {
+                        window.alert("{{ error_message }}");
+                    };
+                </script>
+                {% endif %}
             </form>
 
             <span class="dhaa">Don’t have an account? <a href="{% url 'register' %}">Sign up</a></span>
@@ -24,7 +31,7 @@
 
     <div class="bottom_panel">
             <div class="logo"></div>
-            <span class="copyright">© Copyright 2024 Data Goal</span>
+            <span class="copyright">© Copyright 2024 - Data Goal</span>
     </div>
 </body>
 </html>

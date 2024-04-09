@@ -10,7 +10,7 @@ body {
 }
 
 a {
-  text-decoration: auto; /* Cambiado de 'text-underline' a 'text-decoration' */
+  text-underline: auto;
 }
 
 a {
