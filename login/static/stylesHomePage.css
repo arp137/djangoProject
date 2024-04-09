@@ -2,7 +2,11 @@
 
 /* Estilos para el encabezado h1 */
 h1 {
+    width: 200px;
+    height: 40px;
+    background: white;
     position: absolute;
+    border-radius: 25px;
     top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
