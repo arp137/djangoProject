@@ -16,6 +16,7 @@
                 <input type="text" name="username" placeholder="Username" class="email_box" value="">
                 <input type="password" name="password" placeholder="Password" class="password_box" value="">
                 <input type="submit" class="login_botton" value="LOGIN">
+
                 {% if error_message %}
                 <script>
                     window.onload = function() {
@@ -23,6 +24,7 @@
                     };
                 </script>
                 {% endif %}
+
             </form>
 
             <span class="dhaa">Don’t have an account? <a href="{% url 'register' %}">Sign up</a></span>
