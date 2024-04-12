@@ -90,6 +90,18 @@ a:nth-of-type(2) {
   overflow: hidden;
 }
 
+.userIcon {
+    top: 40%;
+  left: 70.5%;
+    width: 20px;
+  height: 20px;
+  background: url("images/icon.png") no-repeat center center;
+  background-size: cover;
+    opacity: 1;
+  position: absolute;
+  overflow: hidden;
+}
+
 .logo {
   width: 60px;
   height: 66px;

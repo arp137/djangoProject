@@ -15,10 +15,13 @@
     </video>
 
     <div class="top_panel">
+        <div class="userIcon"></div>
+        <span class="titulo">Data Goal</span>
+        <a class="register_b" href="{% url 'register' %}">Register</a>
+        <a class="login_b" href="{% url 'login' %}">Login</a>
+        <a class="dashboard-link" href="{% url 'user_logout' %}" >
             <div class="logo"></div>
-            <span class="titulo">Data Goal</span>
-            <a class="register_b" href="{% url 'register' %}">Register</a>
-            <a class="login_b" href="{% url 'login' %}">Login</a>
+        </a>
     </div>
 
 </body>

@@ -20,13 +20,13 @@
             </form>
 
             <span class="ahaa">Already have an account? <a href="{% url 'login' %}">Login!</a></span>
-            <a href="{% url 'user_logout' %} ">
-                <div class="laliga"></div>
-            </a>
+            <div class="laliga"></div>
     </div>
 
     <div class="bottom_panel">
-            <div class="logo"></div>
+            <a href="{% url 'user_logout' %} ">
+                <div class="logo"></div>
+            </a>
             <span class="copyright">© Copyright 2024 - Data Goal</span>
     </div>
 </body>
