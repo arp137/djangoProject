@@ -27,12 +27,15 @@
 
             </form>
 
-            <span class="dhaa">Don’t have an account? <a href="{% url 'register' %}">Sign up</a></span>
+            <span class="dhaa">Don’t have an account? <a href="{% url 'register' %}">Register!</a></span>
             <div class="laliga"></div>
+
     </div>
 
     <div class="bottom_panel">
+        <a href="{% url 'user_logout' %} ">
             <div class="logo"></div>
+        </a>
             <span class="copyright">© Copyright 2024 - Data Goal</span>
     </div>
 </body>

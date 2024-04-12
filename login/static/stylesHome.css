@@ -1,6 +1,3 @@
-/* Estilos para el cuerpo del documento */
-
-/* Estilos para el encabezado h1 */
 h1 {
     width: 200px;
     height: 40px;
@@ -15,47 +12,58 @@ h1 {
     margin-top: 50px;
 }
 
-/* Estilos para los enlaces */
 .register_b {
     position: absolute;
     display: block;
-    top: 50%;
-    left: 42.5%;
-    width: 150px;
+    top: -7%;
+    left: 85%;
+    width: 100px;
     margin: 20px auto;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
-    color: #fff;
-    background-color: rgba(236,16,16,1);
-    border-radius: 5px;
+    color: black;
+    font-size: 20px;
+    font-family: Rockwell, serif;
+    background-color: white;
     transition: background-color 0.3s ease;
 }
 
 .login_b {
     position: absolute;
     display: block;
-    left: 42.5%;
-    top: 69%;
-    width: 150px;
+    left: 70%;
+    top: 15px;
+    width: 100px;
+    font-size: 20px;
     margin: 20px auto;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
-    background-color: rgba(236,16,16,1);
-    border-radius: 80px;
+    font-family: Rockwell, serif;
+    color: white;
+    background-color: transparent;
     transition: background-color 0.3s ease;
 }
 
-/* Cambio de color al pasar el ratón sobre los enlaces */
-a:hover {
-    background-color: #0056b3;
-    position: absolute;
+.login_b:hover {
+    background-color: rgba(110, 102, 106, 0.36);
 }
 
-/* Estilos adicionales para el segundo enlace */
+.register_b:hover {
+    background-color: rgba(178, 169, 174, 0.8);
+}
+
+a {
+    opacity: 50;
+    font-weight: bold;
+}
+a:hover {
+    opacity: 100;
+}
+
 a:nth-of-type(2) {
-    margin-top: 0; /* Eliminar margen superior para el segundo enlace */
+    margin-top: 0;
     position: absolute;
 
 }
@@ -69,7 +77,7 @@ a:nth-of-type(2) {
     opacity: 0.8;
 }
 
-.bottom_panel2 {
+.top_panel {
   width: 100%;
   height: 70px;
   min-width: 100%;
@@ -77,10 +85,20 @@ a:nth-of-type(2) {
   background: rgba(0,9,22,1);
   opacity: 1;
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  overflow: hidden;
+}
+
+.userIcon {
+    top: 40%;
+  left: 70.5%;
+    width: 20px;
+  height: 20px;
+  background: url("images/icon.png") no-repeat center center;
+  background-size: cover;
+    opacity: 1;
+  position: absolute;
   overflow: hidden;
 }
 
@@ -96,14 +114,15 @@ a:nth-of-type(2) {
   overflow: hidden;
 }
 
-.copyright {
+.titulo {
   width: 162px;
-  color: rgba(255,255,255,1);
+  color: white;
   position: absolute;
-  top: 45%;
+  top: 30%;
   left: 9%;
-  font-family: Inter, serif;
-  font-size: 12px;
+  font-weight: bold;
+    font-family: Rockwell, serif;
+  font-size: 25px;
   opacity: 1;
-  text-align: left
+  text-align: left;
 }

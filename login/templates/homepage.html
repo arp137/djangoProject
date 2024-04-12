@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Goal - Homepage</title>
-    <link rel="stylesheet" href="../static/stylesHomePage.css">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="../static/stylesHome.css">
     <link rel="icon" href="../static/images/logo.png"  />
 
 </head>
@@ -13,16 +13,15 @@
     <video autoplay muted loop id="myVideo">
         <source src="../static/intro.mp4" type="video/mp4">
     </video>
-    <h1>Data Goal</h1>
-    <a class="register_b" href="{% url 'register' %}">Register here!</a>
 
-    <br>  <br>
-
-    <a class="login_b" href="{% url 'login' %}">Login here!</a>
-
-    <div class="bottom_panel2">
+    <div class="top_panel">
+        <div class="userIcon"></div>
+        <span class="titulo">Data Goal</span>
+        <a class="register_b" href="{% url 'register' %}">Register</a>
+        <a class="login_b" href="{% url 'login' %}">Login</a>
+        <a class="dashboard-link" href="{% url 'user_logout' %}" >
             <div class="logo"></div>
-            <span class="copyright">© Copyright 2024 - Data Goal</span>
+        </a>
     </div>
 
 </body>
