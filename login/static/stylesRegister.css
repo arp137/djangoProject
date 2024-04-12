@@ -11,13 +11,11 @@ body {
 
 a {
   text-decoration: none;
-  background-color: transparent;
   transition: background-color 0.3s ease;
 }
 a:hover {
   text-decoration: underline;
   text-underline: auto;
-  background-color: rgba(95, 88, 92, 0.36);
 }
 
 .register_button {
