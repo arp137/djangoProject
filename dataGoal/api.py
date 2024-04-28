@@ -1,115 +1,93 @@
 import requests
 import time
 
-API_KEY = 'ae35a20f9c5e9701e61aae3c11a7aa82' #MINE
+API_KEYM = 'ae35a20f9c5e9701e61aae3c11a7aa82' #MINE
 
 APIKEY = 'c6196c01e7c1d93932590f42beec9ef8'
+APIKEY2= 'b3fcd6725e03f4e5d588f6624cac5522'
 
-url = f"https://apiclient.besoccerapps.com/scripts/api/api.php"
+API_KEY = 'c6196c01e7c1d93932590f42beec9ef8'  # Consolidated single API key
+BASE_URL = "https://apiclient.besoccerapps.com/scripts/api/api.php"
 
-class Equip:
+class TeamStats:
     def __init__(self, name):
         self.name = name
-        self.victories = [0, 0]
-        self.empats = [0, 0]
-        self.derrotes = [0, 0]
-        self.punts = [0, 0]
-        self.goalsFavor = [0, 0]
-        self.goalsEnContra = [0, 0]
+        self.stats = {
+            'local': {'victories': 0, 'draws': 0, 'defeats': 0, 'goals_for': 0, 'goals_against': 0},
+            'visitor': {'victories': 0, 'draws': 0, 'defeats': 0, 'goals_for': 0, 'goals_against': 0}
+        }
 
-    def set_punts_finals(self):
-        self.punts[0] = self.victories[0] * 3 + self.empats[0]
-        self.punts[1] = self.victories[1] * 3 + self.empats[1]
+    def update_match(self, is_home, result):
+        home_goals, away_goals = map(int, result.split('-'))
+        side = 'local' if is_home else 'visitor'
+        other_side = 'visitor' if is_home else 'local'
 
-    def trate_match(self, isLocal, result):
-        res1 = int(result[0])
-        res2 = int(result[2])
+        self.stats[side]['goals_for'] += home_goals
+        self.stats[side]['goals_against'] += away_goals
 
-        if isLocal:
-            self.goalsFavor[0] += res1
-            self.goalsEnContra[0] += res2
-
-            if res1 == res2:
-                self.empats[0] += 1
-            elif res1 > res2:
-                self.victories[0] += 1
+        if home_goals == away_goals:
+            self.stats[side]['draws'] += 1
+        elif home_goals > away_goals:
+            if is_home:
+                self.stats[side]['victories'] += 1
             else:
-                self.derrotes[0] += 1
-
+                self.stats[side]['defeats'] += 1
         else:
-            self.goalsFavor[1] += res2
-            self.goalsEnContra[1] += res1
-
-            if res1 == res2:
-                self.empats[1] += 1
-            elif res1 < res2:
-                self.victories[1] += 1
+            if is_home:
+                self.stats[side]['defeats'] += 1
             else:
-                self.derrotes[1] += 1
+                self.stats[side]['victories'] += 1
 
-    def print_data(self):
-        self.set_punts_finals()
+    def calculate_points(self, side):
+        return self.stats[side]['victories'] * 3 + self.stats[side]['draws']
 
-        print(f"\nEstadistiques de {self.name}:\n")
-        print("{:<16} {:>6} {:>9} {:>6}".format("", "Local", "Visitant", "Total"))
+    def print_stats(self):
+        print(f"\nStatistics for {self.name}:\n")
+        print("{:<16} {:>6} {:>9} {:>6}".format("", "Local", "Visitor", "Total"))
+        stats_fields = ['victories', 'draws', 'defeats', 'goals_for', 'goals_against']
+        for field in stats_fields:
+            local = self.stats['local'][field]
+            visitor = self.stats['visitor'][field]
+            total = local + visitor
+            print("{:<16} {:>6} {:>9} {:>6}".format(field.capitalize() + ":", local, visitor, total))
+        print("{:<16} {:>6} {:>9} {:>6}".format("Points:", self.calculate_points('local'), self.calculate_points('visitor'), self.calculate_points('local') + self.calculate_points('visitor')))
 
-        print("{:<16} {:>6} {:>9} {:>6}".format("Punts:", str(self.punts[0]), str(self.punts[1]), str(self.punts[0] + self.punts[1])))
-        print("{:<16} {:>6} {:>9} {:>6}".format("Victories:", str(self.victories[0]), str(self.victories[1]),str(self.victories[0] + self.victories[1])))
-        print("{:<16} {:>6} {:>9} {:>6}".format("Empats:", str(self.empats[0]), str(self.empats[1]), str(self.empats[0] + self.empats[1])))
-        print("{:<16} {:>6} {:>9} {:>6}".format("Derrotes:", str(self.derrotes[0]), str(self.derrotes[1]), str(self.derrotes[0] + self.derrotes[1])))
+def get_data(year, team1, team2):
+    team_stats1 = TeamStats(team1)
+    team_stats2 = TeamStats(team2)
 
-        print("\n{:<16} {:>6} {:>9} {:>6}".format("Gols a favor:", str(self.goalsFavor[0]), str(self.goalsFavor[1]), str(self.goalsFavor[0] + self.goalsFavor[1])))
-        print("{:<16} {:>6} {:>9} {:>6}".format("Gols en contra:", str(self.goalsEnContra[0]), str(self.goalsEnContra[1]), str(self.goalsEnContra[0] + self.goalsEnContra[1])))
-        print("{:<16} {:>6} {:>9} {:>6}".format("Diferencia gols:", str(self.goalsFavor[0]-self.goalsEnContra[0]), str(self.goalsFavor[1]-self.goalsEnContra[1]), str(self.goalsFavor[0]-self.goalsEnContra[0] + self.goalsFavor[1] - self.goalsEnContra[1])))
-
-
-
-def get_data(year, nom1, nom2):
-    equip1 = Equip(nom1)
-    equip2 = Equip(nom2)
-
-    for jornada in range(1, 39):
+    session = requests.Session()  # Use session for connection pooling
+    for round_num in range(1, 39):
         params = {
-            'key': APIKEY,
+            'key': API_KEY,
             'format': 'json',
             'req': 'matchs',
             'league': '1',
             'tz': 'Europe/Madrid',
             'year': year,
-            'round': jornada
+            'round': round_num
         }
 
-        payload={}
-        headers = {}
+        response = session.get(BASE_URL, params=params)
+        matches = response.json()['match']
 
-        response = requests.request("GET", url, headers=headers, data=payload, params=params)
-        data = response.json()
+        for match in matches:
+            if match['local'] in (team1, team2) or match['visitor'] in (team1, team2):
+                if match['local'] == team1:
+                    team_stats1.update_match(True, match['result'])
+                elif match['local'] == team2:
+                    team_stats2.update_match(True, match['result'])
+                if match['visitor'] == team1:
+                    team_stats1.update_match(False, match['result'])
+                elif match['visitor'] == team2:
+                    team_stats2.update_match(False, match['result'])
 
-        partidos = data['match']
+                if (match['local'], match['visitor']) in [(team1, team2), (team2, team1)]:
+                    print(f"Round {round_num}: {match['local']} vs {match['visitor']} - Result: {match['result']} - Stadium: {match['stadium']}")
 
-
-        for partido in partidos:
-            local = partido['local']
-            visitor = partido['visitor']
-            result = partido['result']
-
-            if local == nom1:
-                equip1.trate_match(True, result)
-            elif local == nom2:
-                equip2.trate_match(True, result)
-
-            if visitor == nom1:
-                equip1.trate_match(False, result)
-            elif visitor == nom2:
-                equip2.trate_match(False, result)
-
-            if local == nom1 and visitor == nom2 or local == nom2 and visitor == nom1:
-                estadio = partido['stadium']
-                print(f"Jornada {jornada}: {local} vs {visitor} - Resultado: {result} - Estadio: {estadio}")
-
-    equip1.print_data()
-    equip2.print_data()
-
+    team_stats1.print_stats()
+    team_stats2.print_stats()
+    session.close()
 
 if __name__ == '__main__':
     inicio = time.time()
