@@ -176,7 +176,7 @@ def get_data(league_id, year,  team1, team2):
             'key': API_KEY,
             'format': 'json',
             'req': 'matchs',
-            'league': '1',
+            'league': league_id,
             'tz': 'Europe/Madrid',
             'year': year,
             'round': round_num
