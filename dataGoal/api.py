@@ -12,10 +12,11 @@ BASE_URL = "https://apiclient.besoccerapps.com/scripts/api/api.php"
 
 
 class Category:
-    def __init__(self, id, league_id, name):
+    def __init__(self, id, league_id, name, num_rounds):
         self.id = id
         self.league_id = league_id
         self.name = name
+        self.num_rounds = num_rounds
 
 class Year:
     def __init__(self, title, year):
@@ -113,7 +114,7 @@ def get_categories():
     ligas = top['ligas']
 
     for i in range(0, 6):
-        categories.append(Category(ligas[i]['id'],ligas[i]['league_id'], ligas[i]['shortName']))
+        categories.append(Category(ligas[i]['id'],ligas[i]['league_id'], ligas[i]['shortName'], ligas[i]['total_rounds']))
 
     for category in categories:
         print(f"ID: {category.league_id} \t NAME: {category.name}")
@@ -167,11 +168,11 @@ def get_teams(league_id, year):
     return result
 
 
-def get_data(league_id, year,  team1, team2):
+def get_data(league_id, year, num_rounds,  team1, team2):
     team_stats1 = TeamStats(team1)
     team_stats2 = TeamStats(team2)
 
-    for round_num in range(1, 39):
+    for round_num in range(1, num_rounds):
         params = {
             'key': API_KEY,
             'format': 'json',
@@ -258,7 +259,7 @@ if __name__ == '__main__':
 
     print("Nom equip 2: \t"+noms_equips[numero_aleatorio4])
 
-    get_data(category.id, year.year, noms_equips[numero_aleatorio3], noms_equips[numero_aleatorio4])
+    get_data(category.id, year.year, int(category.num_rounds), noms_equips[numero_aleatorio3], noms_equips[numero_aleatorio4])
 
     fin = time.time()
     duracion = fin - inicio
