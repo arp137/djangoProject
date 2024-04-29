@@ -1,14 +1,27 @@
 import requests
 import time
 import matplotlib.pyplot as plt
+import random
 
 API_KEYM = 'ae35a20f9c5e9701e61aae3c11a7aa82' #MINE
 
-APIKEY = 'c6196c01e7c1d93932590f42beec9ef8'
 APIKEY2= 'b3fcd6725e03f4e5d588f6624cac5522'
 
 API_KEY = 'c6196c01e7c1d93932590f42beec9ef8'  # Consolidated single API key
 BASE_URL = "https://apiclient.besoccerapps.com/scripts/api/api.php"
+
+
+class Category:
+    def __init__(self, id, league_id, name):
+        self.id = id
+        self.league_id = league_id
+        self.name = name
+
+class Year:
+    def __init__(self, title, year):
+        self.title = title
+        self.year = year
+
 
 class TeamStats:
     def __init__(self, name):
@@ -84,12 +97,80 @@ class TeamStats:
 
         plt.show()
 
+def get_categories():
+    categories = []
+    params = {
+        'key': API_KEY,
+        'format': 'json',
+        'req': 'categories',
+        'tz': 'Europe/Madrid',
+    }
 
-def get_data(year, team1, team2):
+    response = session.get(BASE_URL, params=params)
+    categories_api = response.json()['category']
+
+    top = categories_api['top']
+    ligas = top['ligas']
+
+    for i in range(0, 6):
+        categories.append(Category(ligas[i]['id'],ligas[i]['league_id'], ligas[i]['shortName']))
+
+    for category in categories:
+        print(f"ID: {category.league_id} \t NAME: {category.name}")
+
+    return categories
+
+
+def get_years(league_id):
+    years = []
+    params = {
+        'key': API_KEY,
+        'format': 'json',
+        'req': 'seasons',
+        'tz': 'Europe/Madrid',
+        'id': league_id
+    }
+
+    response = session.get(BASE_URL, params=params)
+    print(response.json())
+    seasons = response.json()['seasons']
+
+    print(seasons)
+
+    for index, season in enumerate(seasons):
+        if index >= 5:
+            break
+        cur_year = Year(season['title'], season['year'])
+        years.append(cur_year)
+
+    return years
+
+def get_teams(league_id, year):
+    result = []
+    params = {
+        'key': APIKEY2,
+        'format': 'json',
+        'req': 'matchs',
+        'league': league_id,
+        'tz': 'Europe/Madrid',
+        'year': year,
+        'round': 1
+    }
+
+    response = session.get(BASE_URL, params=params)
+    matches = response.json()['match']
+    for match in matches:
+        result.append(match['local'])
+        result.append(match['visitor'])
+
+    print(f"Teams: {result}")
+    return result
+
+
+def get_data(league_id, year,  team1, team2):
     team_stats1 = TeamStats(team1)
     team_stats2 = TeamStats(team2)
 
-    session = requests.Session()  # Use session for connection pooling
     for round_num in range(1, 39):
         params = {
             'key': API_KEY,
@@ -127,16 +208,47 @@ def get_data(year, team1, team2):
     team_stats2.plot_stats()
     session.close()
 
-if __name__ == '__main__':
-    inicio = time.time()
-    #year = input("Year: ")
-    #nom_equip1 = input("Nombre del equipo 1: ")
-    #nom_equip2 = input("Nombre del equipo 2: ")
+def get_example():
+    round_num = 1
+    year = 2023
+    params = {
+        'key': API_KEY,
+        'format': 'json',
+        'req': 'matchs',
+        'league': '1',
+        'tz': 'Europe/Madrid',
+        'year': year,
+        'round': round_num
+    }
 
-    year = '2023'
-    nom_equip1 = 'Barcelona'
-    nom_equip2 = 'Real Valladolid'
-    get_data(year, nom_equip1, nom_equip2)
+    response = session.get(BASE_URL, params=params)
+    matches = response.json()['match']
+    return matches
+
+if __name__ == '__main__':
+    global session
+
+    inicio = time.time()
+
+    session = requests.Session()  # Use session for connection pooling
+
+    categories = get_categories()
+
+    numero_aleatorio1 = random.randint(0, len(categories)-1)
+    category = categories[numero_aleatorio1]
+
+    print(f"\n\nID: {category.league_id} \t NAME: {category.name}")
+
+    years = get_years(category.id)
+
+    numero_aleatorio2 = random.randint(0, len(years) - 1)
+    year = years[numero_aleatorio2]
+
+    print(f"\n\nTitle: {year.title} \t YEAR: {year.year}")
+
+    noms_equips = get_teams(category.id, year.year)
+
+    #get_data(league_id, year, nom_equip1, nom_equip2)
 
     fin = time.time()
     duracion = fin - inicio
