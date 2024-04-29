@@ -2,13 +2,14 @@ import requests
 import time
 import matplotlib.pyplot as plt
 
-API_KEYM = 'ae35a20f9c5e9701e61aae3c11a7aa82' #MINE
+API_KEYM = 'ae35a20f9c5e9701e61aae3c11a7aa82'  # MINE
 
 APIKEY = 'c6196c01e7c1d93932590f42beec9ef8'
-APIKEY2= 'b3fcd6725e03f4e5d588f6624cac5522'
+APIKEY2 = 'b3fcd6725e03f4e5d588f6624cac5522'
 
 API_KEY = 'c6196c01e7c1d93932590f42beec9ef8'  # Consolidated single API key
 BASE_URL = "https://apiclient.besoccerapps.com/scripts/api/api.php"
+
 
 class TeamStats:
     def __init__(self, name):
@@ -59,7 +60,9 @@ class TeamStats:
         visitor_diff = self.calculate_goal_difference('visitor')
         total_diff = local_diff + visitor_diff
         print("{:<16} {:>6} {:>9} {:>6}".format("Goal Difference:", local_diff, visitor_diff, total_diff))
-        print("{:<16} {:>6} {:>9} {:>6}".format("Points:", self.calculate_points('local'), self.calculate_points('visitor'), self.calculate_points('local') + self.calculate_points('visitor')))
+        print("{:<16} {:>6} {:>9} {:>6}".format("Points:", self.calculate_points('local'),
+                                                self.calculate_points('visitor'),
+                                                self.calculate_points('local') + self.calculate_points('visitor')))
 
     def plot_stats(self):
         categories = ['victories', 'draws', 'defeats', 'goals_for', 'goals_against']
@@ -107,7 +110,8 @@ def get_data(year, team1, team2):
         for match in matches:
             if match['local'] in (team1, team2) or match['visitor'] in (team1, team2):
                 if (match['local'], match['visitor']) in [(team1, team2), (team2, team1)]:
-                    print(f"Round {round_num}: {match['local']} vs {match['visitor']} - Result: {match['result']} - Stadium: {match['stadium']}")
+                    print(
+                        f"Round {round_num}: {match['local']} vs {match['visitor']} - Result: {match['result']} - Stadium: {match['stadium']}")
 
                 if match['local'] == team1:
                     team_stats1.update_match(True, match['result'])
@@ -119,19 +123,18 @@ def get_data(year, team1, team2):
                 elif match['visitor'] == team2:
                     team_stats2.update_match(False, match['result'])
 
-
-
     team_stats1.print_stats()
     team_stats2.print_stats()
     team_stats1.plot_stats()
     team_stats2.plot_stats()
     session.close()
 
+
 if __name__ == '__main__':
     inicio = time.time()
-    #year = input("Year: ")
-    #nom_equip1 = input("Nombre del equipo 1: ")
-    #nom_equip2 = input("Nombre del equipo 2: ")
+    # year = input("Year: ")
+    # nom_equip1 = input("Nombre del equipo 1: ")
+    # nom_equip2 = input("Nombre del equipo 2: ")
 
     year = '2023'
     nom_equip1 = 'Barcelona'
@@ -141,3 +144,22 @@ if __name__ == '__main__':
     fin = time.time()
     duracion = fin - inicio
     print(f"\nEl tiempo de ejecución fue de {duracion} segundos")
+
+
+def get_example():
+    session = requests.Session()
+    round_num = 1
+    year = 2023
+    params = {
+        'key': API_KEY,
+        'format': 'json',
+        'req': 'matchs',
+        'league': '1',
+        'tz': 'Europe/Madrid',
+        'year': year,
+        'round': round_num
+    }
+
+    response = session.get(BASE_URL, params=params)
+    matches = response.json()['match']
+    return matches
