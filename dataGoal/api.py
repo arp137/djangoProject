@@ -25,8 +25,9 @@ class Year:
 
 
 class TeamStats:
-    def __init__(self, name):
+    def __init__(self, name, position):
         self.name = name
+        self.position = position
         self.stats = {
             'local': {'victories': 0, 'draws': 0, 'defeats': 0, 'goals_for': 0, 'goals_against': 0},
             'visitor': {'victories': 0, 'draws': 0, 'defeats': 0, 'goals_for': 0, 'goals_against': 0}
@@ -60,7 +61,7 @@ class TeamStats:
         return self.stats[side]['goals_for'] - self.stats[side]['goals_against']
 
     def print_stats(self):
-        print(f"\nStatistics for {self.name}:\n")
+        print(f"\nStatistics for {self.name} (Position {self.position}):\n")
         print("{:<16} {:>6} {:>9} {:>6}".format("", "Local", "Visitor", "Total"))
         stats_fields = ['victories', 'draws', 'defeats', 'goals_for', 'goals_against', 'goal_difference']
         for field in stats_fields[:-1]:
@@ -148,31 +149,32 @@ def get_years(league_id):
 
 def get_teams(league_id, year):
     result = []
+    positions = []
     params = {
-        'key': APIKEY2,
+        'key': API_KEY,
         'format': 'json',
-        'req': 'matchs',
+        'req': 'tables',
         'league': league_id,
         'tz': 'Europe/Madrid',
-        'year': year,
-        'round': 1
+        'year': year
     }
 
     response = session.get(BASE_URL, params=params)
-    matches = response.json()['match']
-    for match in matches:
-        result.append(match['local'])
-        result.append(match['visitor'])
+    teams = response.json()['table']
+    print(teams)
+    for team in teams:
+        result.append(team['team'])
+        positions.append(team['pos'])
 
     print(f"Teams: {result}")
-    return result
+    return result, positions
 
 
-def get_data(league_id, year, num_rounds,  team1, team2):
-    team_stats1 = TeamStats(team1)
-    team_stats2 = TeamStats(team2)
+def get_data(league_id, year, num_rounds,  team1, team2, pos1, pos2):
+    team_stats1 = TeamStats(team1, pos1)
+    team_stats2 = TeamStats(team2, pos2)
 
-    for round_num in range(1, num_rounds):
+    for round_num in range(1, num_rounds+1):
         params = {
             'key': API_KEY,
             'format': 'json',
@@ -187,6 +189,8 @@ def get_data(league_id, year, num_rounds,  team1, team2):
         matches = response.json()['match']
 
         for match in matches:
+            if match['result'] == "x-x": # Partit no jugat
+                break
             if match['local'] in (team1, team2) or match['visitor'] in (team1, team2):
                 if (match['local'], match['visitor']) in [(team1, team2), (team2, team1)]:
                     print(f"Round {round_num}: {match['local']} vs {match['visitor']} - Result: {match['result']} - Stadium: {match['stadium']}")
@@ -247,7 +251,7 @@ if __name__ == '__main__':
 
     print(f"\n\nTitle: {year.title} \t YEAR: {year.year}")
 
-    noms_equips = get_teams(category.id, year.year)
+    noms_equips, positions = get_teams(category.id, year.year)
 
     numero_aleatorio3 = random.randint(0, len(noms_equips) - 1)
     print("Nom equip 1: \t"+noms_equips[numero_aleatorio3])
@@ -259,7 +263,7 @@ if __name__ == '__main__':
 
     print("Nom equip 2: \t"+noms_equips[numero_aleatorio4])
 
-    get_data(category.id, year.year, int(category.num_rounds), noms_equips[numero_aleatorio3], noms_equips[numero_aleatorio4])
+    get_data(category.id, year.year, int(category.num_rounds), noms_equips[numero_aleatorio3], noms_equips[numero_aleatorio4], positions[numero_aleatorio3], positions[numero_aleatorio4])
 
     fin = time.time()
     duracion = fin - inicio
