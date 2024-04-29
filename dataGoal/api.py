@@ -248,7 +248,17 @@ if __name__ == '__main__':
 
     noms_equips = get_teams(category.id, year.year)
 
-    #get_data(league_id, year, nom_equip1, nom_equip2)
+    numero_aleatorio3 = random.randint(0, len(noms_equips) - 1)
+    print("Nom equip 1: \t"+noms_equips[numero_aleatorio3])
+
+    numero_aleatorio4 = numero_aleatorio3
+
+    while(numero_aleatorio4 == numero_aleatorio3):
+        numero_aleatorio4 = random.randint(0, len(noms_equips)-1)
+
+    print("Nom equip 2: \t"+noms_equips[numero_aleatorio4])
+
+    get_data(category.id, year.year, noms_equips[numero_aleatorio3], noms_equips[numero_aleatorio4])
 
     fin = time.time()
     duracion = fin - inicio
