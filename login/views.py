@@ -9,7 +9,6 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login
 
 
-
 def homepage(request):
     return render(request, 'homepage.html')
 
@@ -35,11 +34,6 @@ def my_login(request):
 
     context = {'loginform': form, 'error_message': error_message}
     return render(request, 'login.html', context=context)
-
-
-@login_required(login_url="login")
-def dashboard(request):
-    return render(request, 'dashboard.html')
 
 
 def register(request):

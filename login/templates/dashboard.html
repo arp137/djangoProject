@@ -1,6 +1,19 @@
+<!DOCTYPE html>
 <html lang="en">
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
     <h1>This is my dashboard!</h1>
-
+    {% for match in data %}
+        <p>Match ID: {{ match.id }}</p>
+        <p>Local: {{ match.local }}</p>
+        <p>Visitant: {{ match.visitor }}</p>
+        <p>Resultat: {{ match.result }}</p>
+        <!-- Agrega más campos aquí según sea necesario -->
+    {% endfor %}
     <a href="{% url 'user_logout' %}">Logout here!</a>
+</body>
 </html>
