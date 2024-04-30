@@ -190,7 +190,7 @@ def get_data(league_id, year, num_rounds,  team1, team2, pos1, pos2):
 
         for match in matches:
             if match['result'] == "x-x": # Partit no jugat
-                break
+                continue
             if match['local'] in (team1, team2) or match['visitor'] in (team1, team2):
                 if (match['local'], match['visitor']) in [(team1, team2), (team2, team1)]:
                     print(f"Round {round_num}: {match['local']} vs {match['visitor']} - Result: {match['result']} - Stadium: {match['stadium']}")
