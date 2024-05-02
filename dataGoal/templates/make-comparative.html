@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="../static/stylesMakeComp.css" rel="stylesheet" />
+    <link href="../static/images/logo.png" rel="icon" />
+    <title>Data Goal - Make a comparative</title>
+</head>
+<body>
+    <div class="make_a_comparative">
+        <h1 class="title1">
+            MAKE A COMPARATIVE
+        </h1>
+
+        <form>
+            {% csrf_token %}
+            <select name="Seasons" id="temporades-select" onchange="this.form.submit()">
+                <option value="">-- Choose a season --</option>
+                {% for year in years %}
+                    <option value="{{ year.year }}" {% if selected_year == year.year %}selected{% endif %}>Season 20{{ year.title }}</option>
+                {% endfor %}
+            </select>
+            {% if teams %}
+                <select name="Team1" id="equip1-select" onchange="this.form.submit()">
+                    <option value="">-- Choose a team --</option>
+                    {% for team in teams %}
+                        <option value="{{ team }}" {% if selected_team1 == team %}selected{% endif %}>{{ team }}</option>
+                    {% endfor %}
+                </select>
+            {% endif %}
+
+            {% if teams_without %}
+                <select name="Team2" id="equip2-select">
+                    <option value="">-- Choose another team --</option>
+                    {% for team in teams_without %}
+                        <option value="{{ team }}" {% if selected_team2 == team %}selected{% endif %}>{{ team }}</option>
+                    {% endfor %}
+                </select>
+            {% endif %}
+
+             <button type="button" class="cancel" id="cancel-button" onclick="cancelAction()">Cancel</button>
+        <button type="button" class="accept" id="accept-button" onclick="validateForm()">Accept</button>
+    </form>
+
+    <script>
+    function validateForm() {
+        var season = document.getElementById('temporades-select').value;
+        var team1 = document.getElementById('equip1-select').value;
+        var team2 = document.getElementById('equip2-select').value;
+
+        if (!season || !team1 || !team2) {
+            alert('Please select all options before submitting.');
+        } else {
+            document.getElementById('comparison-form').submit();
+        }
+    }
+
+    function cancelAction() {
+        window.location.href = "{% url 'dashboard' %}";
+    }
+    </script>
+
+
+    </div>
+
+    <div class="bottom_panel">
+                <div class="logo"></div>
+            <span class="copyright">© Copyright 2024 - Data Goal</span>
+    </div>
+</body>
+</html>

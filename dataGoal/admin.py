@@ -4,6 +4,5 @@ from .models import *
 
 
 admin.site.register(Partit)
-admin.site.register(Equip)
-admin.site.register(Gol)
-admin.site.register(Estadi)
+admin.site.register(EstadistiquesEquip)
+admin.site.register(Comparacio)

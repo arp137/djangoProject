@@ -4,25 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="../static/stylesDashboard.css">
 </head>
 <body>
-    <h1>This is my dashboard!</h1>
-    {% if years %}
-        <ul>
-            <select name="Seasons" id="temporades-select">
-                <option value="">Choose a season</option>
-                {% for year in years %}
-                    <li>
-                        <option value="{{ year.year }}">
-                            {{ year.title }}
-                        </option>
-                    </li>
-                {% endfor %}
-            </select>
-        </ul>
-    {% else %}
-        <p>No hay partidos disponibles.</p>
-    {% endif %}
-    <a href="{% url 'user_logout' %}">Logout here!</a>
+    <div class="top_panel">
+        <span class="titulo">Data Goal</span>
+        <a class="logout_b" href="{% url 'user_logout' %}">Log out</a>
+        <div class="logo"></div>
+    </div>
+
+    <main>
+        <div class="league" id="add-league">
+            <a href="{% url 'make-comp' %}" class="full-link">
+                <span>+</span>
+            </a>
+        </div>
+
+
+        <div class="league" id="la-liga">
+            <img alt="Barcelona">
+            <span>vs</span>
+            <img alt="Real Madrid">
+            <span>2022/23</span>
+        </div>
+
+        <div class="league" id="premier-league">
+            <img alt="Manchester City">
+            <span>vs</span>
+            <img alt="Liverpool">
+            <span>2019/20</span>
+        </div>
+
+        <div class="league" id="serie-a">
+            <img alt="Inter Milan">
+            <span>vs</span>
+            <img alt="Napoli">
+            <span>2020/21</span>
+        </div>
+
+        <div class="league" id="segunda">
+            <img alt="Team 1">
+            <span>vs</span>
+            <img alt="Team 2">
+            <span>2023/24</span>
+        </div>
+
+        <div class="league" id="ligue1">
+            <img alt="Paris Saint Germain">
+            <span>vs</span>
+            <img alt="Marseille">
+            <span>2021/22</span>
+        </div>
+    </main>
+
+   <div class="bottom_panel">
+        <div class="logo"></div>
+        <span class="copyright">© Copyright 2024 - Data Goal</span>
+    </div>
 </body>
 </html>

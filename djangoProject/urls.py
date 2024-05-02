@@ -24,4 +24,5 @@ urlpatterns = [
     path('equip/<int:equip_id>/', views.equip, name="info"),
     path('admin/', admin.site.urls),
     path('', include('login.urls')),
+    path('', include('dataGoal.urls'))
 ]
