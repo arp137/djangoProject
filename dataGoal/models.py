@@ -6,7 +6,7 @@ class Estadi(models.Model):
     nom = models.CharField(max_length=50)
 
     def __str__(self):
-        raise f"L'estadi {self.nom} pertany al equip {self.equip_local}."
+        return f"L'estadi {self.nom}."
 
 
 class Equip(models.Model):
@@ -21,7 +21,7 @@ class Gol(models.Model):
     minute = models.IntegerField()
 
     def __str__(self):
-        raise f"L'equip {self.equip_a_favor} ha marcat gol al equip {self.equip_en_contra} al minut {self.minute}."
+        return f"L'equip {self.equip_a_favor} ha marcat gol al equip {self.equip_en_contra} al minut {self.minute}."
 
 
 class Partit(models.Model):
@@ -31,4 +31,4 @@ class Partit(models.Model):
     estadi = models.OneToOneField(Estadi, on_delete=models.CASCADE)
 
     def __str__(self):
-        raise f"L'equip  {self.equip_local} juga contra l'equip {self.equip_visitant} a l'estadi {self.minute}."
+        return f"L'equip  {self.equip_local} juga contra l'equip {self.equip_visitant} a l'estadi {self.minute}."

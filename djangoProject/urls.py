@@ -19,7 +19,9 @@ from django.urls import path, include
 from dataGoal import views
 
 urlpatterns = [
-    path('dashboard/', views.dashboard, name='dashboard'),
+    path('dashboard/', views.dashboardClass.as_view(), name='dashboard'),
+    path("equip/", views.equips, name="teams"),
+    path('equip/<int:equip_id>/', views.equip, name="info"),
     path('admin/', admin.site.urls),
     path('', include('login.urls')),
 ]

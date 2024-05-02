@@ -7,13 +7,22 @@
 </head>
 <body>
     <h1>This is my dashboard!</h1>
-    {% for match in data %}
-        <p>Match ID: {{ match.id }}</p>
-        <p>Local: {{ match.local }}</p>
-        <p>Visitant: {{ match.visitor }}</p>
-        <p>Resultat: {{ match.result }}</p>
-        <!-- Agrega más campos aquí según sea necesario -->
-    {% endfor %}
+    {% if years %}
+        <ul>
+            <select name="Seasons" id="temporades-select">
+                <option value="">Choose a season</option>
+                {% for year in years %}
+                    <li>
+                        <option value="{{ year.year }}">
+                            {{ year.title }}
+                        </option>
+                    </li>
+                {% endfor %}
+            </select>
+        </ul>
+    {% else %}
+        <p>No hay partidos disponibles.</p>
+    {% endif %}
     <a href="{% url 'user_logout' %}">Logout here!</a>
 </body>
 </html>
