@@ -50,7 +50,8 @@
         if (!season || !team1 || !team2) {
             alert('Please select all options before submitting.');
         } else {
-            document.getElementById('comparison-form').submit();
+            var url = "/make-comp/" + season + "/" + team1 + "/" + team2 + "/";
+            window.location.href = url;       s
         }
     }
 

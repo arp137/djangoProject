@@ -22,8 +22,8 @@ class TeamStats:
         self.name = name
         self.position = position
         self.stats = {
-            'local': {'victories': 0, 'draws': 0, 'defeats': 0, 'goals_for': 0, 'goals_against': 0},
-            'visitor': {'victories': 0, 'draws': 0, 'defeats': 0, 'goals_for': 0, 'goals_against': 0}
+            'local': {'victories': 0, 'draws': 0, 'defeats': 0, 'goals_for': 0, 'goals_against': 0, 'diferences': 0, 'points': 0},
+            'visitor': {'victories': 0, 'draws': 0, 'defeats': 0, 'goals_for': 0, 'goals_against': 0, 'diferences': 0, 'points': 0}
         }
 
     def update_match(self, is_home, result):
@@ -173,11 +173,7 @@ def get_data(year, team1, team2, pos1, pos2):
                 elif match['visitor'] == team2:
                     team_stats2.update_match(False, match['result'])
 
-    team_stats1.print_stats()
-    team_stats2.print_stats()
-    team_stats1.plot_stats()
-    team_stats2.plot_stats()
-    session.close()
+    return team_stats1, team_stats2
 
 
 def get_example():

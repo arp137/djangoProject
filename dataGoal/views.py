@@ -46,3 +46,14 @@ def make_comparative(request):
     }
     template = '../../dataGoal/templates/make-comparative.html'
     return render(request, template, context)
+
+def make_comparative_selection(request, season, equip1_name, equip2_name):
+    context = {
+        "season": season,
+        "equip1_name": equip1_name,
+        "equip2_name": equip2_name
+    }
+    template = '../../dataGoal/templates/make-comparative-selection.html'
+    return render(request, template, context)
+
+
