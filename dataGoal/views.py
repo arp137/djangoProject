@@ -6,6 +6,7 @@ from . import api
 from django.http import JsonResponse, HttpResponse
 from django.views import generic
 
+
 class dashboardClass(generic.TemplateView):
     template_name = 'dashboard.html'
 
@@ -14,22 +15,6 @@ class dashboardClass(generic.TemplateView):
         years = api.get_years()
         context['years'] = years
         return context
-
-
-def equips(request):
-    equip_list = api.get_teams2()
-    template = '../../dataGoal/templates/equips.html'
-    context = {'equip_list': []}
-    for team in equip_list['teams']:
-        context['equip_list'].append(team)
-    return render(request, template, context)
-
-
-def equip(request, equip_id):
-    equip_info = api.get_equip_info(equip_id)
-    template = '../../dataGoal/templates/equip.html'
-    context = {'equip_info': equip_info}
-    return render(request, template, context)
 
 def make_comparative(request):
     selected_year = request.GET.get('Seasons')
@@ -47,6 +32,7 @@ def make_comparative(request):
     template = '../../dataGoal/templates/make-comparative.html'
     return render(request, template, context)
 
+
 def make_comparative_selection(request, season, equip1_name, equip2_name):
     team1, team2 = api.get_data(season, equip1_name, equip2_name)
     context = {
@@ -55,5 +41,3 @@ def make_comparative_selection(request, season, equip1_name, equip2_name):
     }
     template = '../../dataGoal/templates/make-comparative-selection.html'
     return render(request, template, context)
-
-

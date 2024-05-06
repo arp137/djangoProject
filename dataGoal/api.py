@@ -243,20 +243,3 @@ if __name__ == '__main__':
     fin = time.time()
     duracion = fin - inicio
     print(f"\nEl tiempo de ejecución fue de {duracion} segundos")
-
-API_KEY_DAVID = "fc4c9ad17ff8445f98d75b0653762d6e"
-
-
-def get_teams2():
-    url = f'https://api.football-data.org/v4/competitions/PD/teams'
-    headers = {'X-Auth-Token': API_KEY_DAVID}
-    response = requests.get(url, headers=headers)
-    return response.json()
-
-
-def get_equip_info(equip_id):
-    base_url = 'https://api.football-data.org/v4/'
-    end_point = f'teams/{equip_id}'
-    headers = {'X-Auth-Token': API_KEY_DAVID}
-    response = requests.get(base_url + end_point, headers=headers)
-    return response.json()
