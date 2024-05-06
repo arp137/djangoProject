@@ -1,57 +1,58 @@
-from django.shortcuts import render, redirect
+from django import forms
 from .forms import CreateUserForm, LoginForm
 from django.contrib.auth.models import auth
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.hashers import make_password
-from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login
+from django.views import generic
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import redirect, render
+from django.views.generic import CreateView
 
 
-def homepage(request):
-    return render(request, 'homepage.html')
+class HomePageView(generic.TemplateView):
+    template_name = 'homepage.html'
 
 
 # Vista de inicio de sesión personalizada
-def my_login(request):
-    form = LoginForm(request.POST or None)
-    error_message = None
 
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        if username and password:  # Procede solo si ambos campos no están vacíos
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                auth_login(request, user)
-                return redirect("dashboard")
-            else:
-                error_message = "Your username or password is incorrect. Please try again."
-        else:
-            error_message = "Both username and password are required."
-
-    context = {'loginform': form, 'error_message': error_message}
-    return render(request, 'login.html', context=context)
+class LoginFormLogin(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
 
 
-def register(request):
-    error_message = ''
+class MyLoginView(generic.TemplateView):
+    template_name = 'login.html'
+    form_class = LoginFormLogin
+    success_url = '/dashboard/'
 
-    if request.method == 'POST':
-        form = CreateUserForm(request.POST)
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect("login")
-        else:
-            error_message = form.errors.as_text()
-            error_message = error_message.replace('password2', 'password')
-    else:
-        form = CreateUserForm()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
 
-    context = {'registerform': form, 'error_message': error_message}
-    return render(request, 'register.html', context=context)
+            if user is not None:
+                login(request, user)
+                return redirect(self.success_url)
+            else:
+                form.add_error(None, "Your username or password is incorrect. Please try again.")
+
+        return render(request, self.template_name, {'form': form})
+
+
+class RegisterView(CreateView):
+    template_name = 'register.html'
+    form_class = UserCreationForm
+    success_url = '/login/'
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        return response
+
+    def form_invalid(self, form):
+        error_message = form.errors.as_text().replace('password2', 'password')
+        return self.render_to_response(self.get_context_data(form=form, error_message=error_message))
 
 
 def user_logout(request):

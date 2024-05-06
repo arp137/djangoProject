@@ -78,5 +78,6 @@ class Partit(models.Model):
     gols_local = models.IntegerField()
     gols_visitant = models.IntegerField()
 
+
     def __str__(self):
         return f"L'equip  {self.equip_local} juga contra l'equip {self.equip_visitant} a l'estadi {self.equip_local.estadi}."

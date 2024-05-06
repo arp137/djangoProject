@@ -23,9 +23,15 @@ class TeamStats:
         self.stats = {
             'local': {'victories': 0, 'draws': 0, 'defeats': 0, 'goals_for': 0, 'goals_against': 0, 'goal_diff': 0, 'points': 0},
             'visitor': {'victories': 0, 'draws': 0, 'defeats': 0, 'goals_for': 0, 'goals_against': 0, 'goal_diff': 0, 'points': 0},
-            'total': {'victories': 0, 'draws': 0, 'defeats': 0, 'goals_for': 0, 'goals_against': 0, 'goal_diff': 0, 'points': 0}
         }
+        self.abreviation = ""
+        self.estadi = ""
+        self.escut_url = ""
 
+    def update_info(self, abr, est, url):
+        self.abreviation = abr
+        self.estadi = est
+        self.escut_url = url
     def update_match(self, is_home, result):
         home_goals, away_goals = map(int, result.split('-'))
         if is_home:
@@ -54,51 +60,6 @@ class TeamStats:
     def calculate_goal_difference(self):
         self.stats['local']['goal_diff'] = self.stats['local']['goals_for'] - self.stats['local']['goals_against']
         self.stats['visitor']['goal_diff'] = self.stats['visitor']['goals_for'] - self.stats['visitor']['goals_against']
-
-    def calculate_total(self):
-        for stat in self.stats['local']:
-            self.stats['total'][stat] = self.stats['local'][stat] + self.stats['visitor'][stat]
-
-    def print_stats(self):
-        print(f"\nStatistics for {self.name}\n")
-        print("{:<16} {:>6} {:>9} {:>6}".format("", "Local", "Visitor", "Total"))
-        stats_fields = ['victories', 'draws', 'defeats', 'goals_for', 'goals_against', 'goal_difference']
-        for field in stats_fields[:-1]:
-            local = self.stats['local'][field]
-            visitor = self.stats['visitor'][field]
-            total = local + visitor
-            print("{:<16} {:>6} {:>9} {:>6}".format(field.capitalize() + ":", local, visitor, total))
-        # Print goal differences separately
-        local_diff = self.calculate_goal_difference('local')
-        visitor_diff = self.calculate_goal_difference('visitor')
-        total_diff = local_diff + visitor_diff
-        print("{:<16} {:>6} {:>9} {:>6}".format("Goal Difference:", local_diff, visitor_diff, total_diff))
-        print("{:<16} {:>6} {:>9} {:>6}".format("Points:", self.calculate_points('local'),
-                                                self.calculate_points('visitor'),
-                                                self.calculate_points('local') + self.calculate_points('visitor')))
-
-    def plot_stats(self):
-        categories = ['victories', 'draws', 'defeats', 'goals_for', 'goals_against']
-        local_values = [self.stats['local'][key] for key in categories]
-        visitor_values = [self.stats['visitor'][key] for key in categories]
-
-        x = list(range(len(categories)))  # the label locations
-        width = 0.35  # the width of the bars
-
-        fig, ax = plt.subplots()
-        rects1 = ax.bar([xi - width / 2 for xi in x], local_values, width, label='Local')
-        rects2 = ax.bar([xi + width / 2 for xi in x], visitor_values, width, label='Visitor')
-
-        ax.set_ylabel('Count')
-        ax.set_title(f'Stats by category for {self.name}')
-        ax.set_xticks(x)
-        ax.set_xticklabels(['Victories', 'Draws', 'Defeats', 'Goals For', 'Goals Against'])
-        ax.legend()
-
-        ax.bar_label(rects1, padding=3)
-        ax.bar_label(rects2, padding=3)
-
-        plt.show()
 
 
 def get_years():
@@ -161,8 +122,12 @@ def get_data(year, team1, team2):
 
         response = session.get(BASE_URL, params=params)
         matches = response.json()['match']
+        inicial1 = True
+        inicial2 = True
+
 
         for match in matches:
+
             if match['result'] == "x-x":  # Partit no jugat
                 continue
             if match['local'] in (team1, team2) or match['visitor'] in (team1, team2):
@@ -171,8 +136,15 @@ def get_data(year, team1, team2):
                         f"Round {round_num}: {match['local']} vs {match['visitor']} - Result: {match['result']} - Stadium: {match['stadium']}")
 
                 if match['local'] == team1:
+                    if inicial1 == True:
+                        team_stats1.update_info(match['local_abbr'], match['stadium'], match['local_shield'])
+                        inicial1 = False
                     team_stats1.update_match(True, match['result'])
+
                 elif match['local'] == team2:
+                    if inicial2 == True:
+                        team_stats2.update_info(match['local_abbr'], match['stadium'], match['local_shield'])
+                        inicial2 = False
                     team_stats2.update_match(True, match['result'])
 
                 if match['visitor'] == team1:
@@ -186,8 +158,6 @@ def get_data(year, team1, team2):
     team_stats1.calculate_goal_difference()
     team_stats2.calculate_goal_difference()
 
-    team_stats1.calculate_total()
-    team_stats2.calculate_total()
 
     return team_stats1, team_stats2
 
