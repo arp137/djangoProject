@@ -11,14 +11,6 @@ API_KEY = 'c6196c01e7c1d93932590f42beec9ef8'  # Consolidated single API key
 BASE_URL = "https://apiclient.besoccerapps.com/scripts/api/api.php"
 
 
-class Category:
-    def __init__(self, id, league_id, name, num_rounds):
-        self.id = id
-        self.league_id = league_id
-        self.name = name
-        self.num_rounds = num_rounds
-
-
 class Year:
     def __init__(self, title, year):
         self.title = title
@@ -103,30 +95,30 @@ class TeamStats:
         plt.show()
 
 
-
-def get_years(league_id):
+def get_years():
+    session = requests.Session()
     years = []
     params = {
         'key': API_KEY,
         'format': 'json',
         'req': 'seasons',
         'tz': 'Europe/Madrid',
-        'id': league_id
+        'id': '1'
     }
 
     response = session.get(BASE_URL, params=params)
-    print(response.json())
     seasons = response.json()['seasons']
 
-    print(seasons)
-
+    return seasons[0:5]
+    '''
     for index, season in enumerate(seasons):
         if index >= 5:
             break
         cur_year = Year(season['title'], season['year'])
-        years.append(cur_year)
+        years.append(season['title'])
 
     return years
+    '''
 
 
 def get_teams(year):
@@ -137,7 +129,7 @@ def get_teams(year):
         'key': API_KEY,
         'format': 'json',
         'req': 'tables',
-        'league': league_id,
+        'league': '1',
         'tz': 'Europe/Madrid',
         'year': year
     }
@@ -160,7 +152,7 @@ def get_data(year, team1, team2, pos1, pos2):
             'key': API_KEY,
             'format': 'json',
             'req': 'matchs',
-            'league': league_id,
+            'league': '1',
             'tz': 'Europe/Madrid',
             'year': year,
             'round': round_num
@@ -195,6 +187,7 @@ def get_data(year, team1, team2, pos1, pos2):
 
 
 def get_example():
+    session = requests.Session()
     round_num = 1
     year = 2023
     params = {
@@ -219,14 +212,14 @@ if __name__ == '__main__':
 
     session = requests.Session()  # Use session for connection pooling
 
-    years = get_years(category.id)
+    years = get_years()
 
     numero_aleatorio2 = random.randint(0, len(years) - 1)
     year = years[numero_aleatorio2]
 
     print(f"\n\nTitle: {year.title} \t YEAR: {year.year}")
 
-    noms_equips, positions = get_teams(category.id, year.year)
+    noms_equips, positions = get_teams(year.year)
 
     numero_aleatorio3 = random.randint(0, len(noms_equips) - 1)
     print("Nom equip 1: \t" + noms_equips[numero_aleatorio3])
