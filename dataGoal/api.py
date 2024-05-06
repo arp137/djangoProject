@@ -18,12 +18,12 @@ class Year:
 
 
 class TeamStats:
-    def __init__(self, name, position):
+    def __init__(self, name):
         self.name = name
-        self.position = position
         self.stats = {
-            'local': {'victories': 0, 'draws': 0, 'defeats': 0, 'goals_for': 0, 'goals_against': 0, 'diferences': 0, 'points': 0},
-            'visitor': {'victories': 0, 'draws': 0, 'defeats': 0, 'goals_for': 0, 'goals_against': 0, 'diferences': 0, 'points': 0}
+            'local': {'victories': 0, 'draws': 0, 'defeats': 0, 'goals_for': 0, 'goals_against': 0, 'goal_diff': 0, 'points': 0},
+            'visitor': {'victories': 0, 'draws': 0, 'defeats': 0, 'goals_for': 0, 'goals_against': 0, 'goal_diff': 0, 'points': 0},
+            'total': {'victories': 0, 'draws': 0, 'defeats': 0, 'goals_for': 0, 'goals_against': 0, 'goal_diff': 0, 'points': 0}
         }
 
     def update_match(self, is_home, result):
@@ -47,14 +47,20 @@ class TeamStats:
             else:
                 self.stats['visitor']['defeats'] += 1
 
-    def calculate_points(self, side):
-        return self.stats[side]['victories'] * 3 + self.stats[side]['draws']
+    def calculate_points(self):
+        self.stats['local']['points'] = self.stats['local']['victories']*3 + self.stats['local']['draws']
+        self.stats['visitor']['points'] = self.stats['visitor']['victories']*3 + self.stats['visitor']['draws']
 
-    def calculate_goal_difference(self, side):
-        return self.stats[side]['goals_for'] - self.stats[side]['goals_against']
+    def calculate_goal_difference(self):
+        self.stats['local']['goal_diff'] = self.stats['local']['goals_for'] - self.stats['local']['goals_against']
+        self.stats['visitor']['goal_diff'] = self.stats['visitor']['goals_for'] - self.stats['visitor']['goals_against']
+
+    def calculate_total(self):
+        for stat in self.stats['local']:
+            self.stats['total'][stat] = self.stats['local'][stat] + self.stats['visitor'][stat]
 
     def print_stats(self):
-        print(f"\nStatistics for {self.name} (Position {self.position}):\n")
+        print(f"\nStatistics for {self.name}\n")
         print("{:<16} {:>6} {:>9} {:>6}".format("", "Local", "Visitor", "Total"))
         stats_fields = ['victories', 'draws', 'defeats', 'goals_for', 'goals_against', 'goal_difference']
         for field in stats_fields[:-1]:
@@ -108,7 +114,7 @@ def get_years():
     response = session.get(BASE_URL, params=params)
     seasons = response.json()['seasons']
 
-    return seasons[0:10]
+    return seasons[0:5]
 
 
 def get_teams(year):
@@ -137,9 +143,10 @@ def get_teams_without_selected(teams, selected_team):
     return sorted_teams
 
 
-def get_data(year, team1, team2, pos1, pos2):
-    team_stats1 = TeamStats(team1, pos1)
-    team_stats2 = TeamStats(team2, pos2)
+def get_data(year, team1, team2):
+    session = requests.Session()
+    team_stats1 = TeamStats(team1)
+    team_stats2 = TeamStats(team2)
 
     for round_num in range(1, 39):
         params = {
@@ -172,6 +179,15 @@ def get_data(year, team1, team2, pos1, pos2):
                     team_stats1.update_match(False, match['result'])
                 elif match['visitor'] == team2:
                     team_stats2.update_match(False, match['result'])
+
+    team_stats1.calculate_points()
+    team_stats2.calculate_points()
+
+    team_stats1.calculate_goal_difference()
+    team_stats2.calculate_goal_difference()
+
+    team_stats1.calculate_total()
+    team_stats2.calculate_total()
 
     return team_stats1, team_stats2
 

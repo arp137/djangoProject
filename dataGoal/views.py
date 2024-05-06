@@ -48,10 +48,10 @@ def make_comparative(request):
     return render(request, template, context)
 
 def make_comparative_selection(request, season, equip1_name, equip2_name):
+    team1, team2 = api.get_data(season, equip1_name, equip2_name)
     context = {
-        "season": season,
-        "equip1_name": equip1_name,
-        "equip2_name": equip2_name
+        "team1": team1,
+        "team2": team2
     }
     template = '../../dataGoal/templates/make-comparative-selection.html'
     return render(request, template, context)
