@@ -5,17 +5,26 @@ from django.template import loader
 from . import api
 from django.http import JsonResponse, HttpResponse
 from django.views import generic
-from dataGoal.models import EstadistiquesEquip, Comparacio, Partit
+from dataGoal.models import EstadistiquesEquip, Comparacio, Temporada
 
 
 
-class DashboardClass(generic.TemplateView):
+class dashboardClass (generic.TemplateView):
     template_name = 'dashboard.html'
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        years = api.get_years()
-        context['years'] = years
+        if Comparacio.objects.order_by('estadistiquesEquip1').exists():
+            latest_comp = Comparacio.objects.order_by('estadistiquesEquip1')
+            latest_comp = latest_comp[0]
+
+        context = {
+            'latest_comp': latest_comp,
+            'temp': latest_comp.temporada.titul,
+            'nom1': latest_comp.estadistiquesEquip1.nom,
+            'escut1_url': latest_comp.estadistiquesEquip1.escut.url,
+            'nom2': latest_comp.estadistiquesEquip2.nom,
+            'escut2_url': latest_comp.estadistiquesEquip2.escut.url
+        }
         return context
 
 

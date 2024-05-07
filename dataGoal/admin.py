@@ -3,6 +3,6 @@ from .models import *
 # Register your models here.
 
 
-admin.site.register(Partit)
+admin.site.register(Temporada)
 admin.site.register(EstadistiquesEquip)
 admin.site.register(Comparacio)

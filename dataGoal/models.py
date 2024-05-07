@@ -2,7 +2,12 @@ from django.db import models
 
 
 # Create your models here.
+class Temporada (models.Model):
+    any = models.CharField(max_length=50)
+    titul = models.CharField(max_length=50)
+
 class EstadistiquesEquip(models.Model):
+    temporada = models.ForeignKey(Temporada, on_delete=models.CASCADE)
     nom = models.CharField(max_length=50)
     abreviacio = models.CharField(max_length=3)
     estadi = models.CharField(max_length=50)
@@ -68,16 +73,14 @@ class EstadistiquesEquip(models.Model):
         return self.puntos_local + self.puntos_visitant
 
 class Comparacio(models.Model):
+    temporada = models.ForeignKey(Temporada, on_delete=models.CASCADE)
     estadistiquesEquip1 = models.ForeignKey(EstadistiquesEquip, on_delete=models.CASCADE, related_name='equip1')
     estadistiquesEquip2 = models.ForeignKey(EstadistiquesEquip, on_delete=models.CASCADE, related_name='equip2')
 
-
-class Partit(models.Model):
-    equip_local = models.ForeignKey(EstadistiquesEquip, on_delete=models.CASCADE, related_name='equip_local')
-    equip_visitant = models.ForeignKey(EstadistiquesEquip, on_delete=models.CASCADE, related_name='equip_visitant')
-    gols_local = models.IntegerField()
-    gols_visitant = models.IntegerField()
-
-
-    def __str__(self):
-        return f"L'equip  {self.equip_local} juga contra l'equip {self.equip_visitant} a l'estadi {self.equip_local.estadi}."
+    def set_up_season(self, *args, **kwargs):
+        # Almacenar la temporada seleccionada en las instancias de EstadistiquesEquip
+        self.estadistiquesEquip1.temporada = self.temporada
+        self.estadistiquesEquip1.save()
+        self.estadistiquesEquip2.temporada = self.temporada
+        self.estadistiquesEquip2.save()
+        super().save(*args, **kwargs)

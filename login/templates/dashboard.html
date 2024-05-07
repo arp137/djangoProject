@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="../static/stylesDashboard.css">
+    <link rel="icon" href="../static/images/logo.png">
 </head>
 <body>
     <div class="top_panel">
@@ -20,13 +21,16 @@
             </a>
         </div>
 
-
-        <div class="league" id="la-liga">
-            <img alt="Barcelona">
-            <span>vs</span>
-            <img alt="Real Madrid">
-            <span>2022/23</span>
-        </div>
+            <div class="league" id="la-liga">
+                {% if escut1_url %}
+                    <img src="{{ escut1_url }}" alt="{{nom1}}">
+                {% endif %}
+                <span>{{nom1}}</span>
+                <span>{{escut1_url}}</span>
+                <span>vs</span>
+                <span>{{nom2}}</span>
+                <span>{{temp}}</span>
+            </div>
 
         <div class="league" id="premier-league">
             <img alt="Manchester City">
@@ -58,8 +62,8 @@
     </main>
 
    <div class="bottom_panel">
-        <div class="logo"></div>
-        <span class="copyright">© Copyright 2024 - Data Goal</span>
+       <div class="logo"></div>
+       <span class="copyright">© Copyright 2024 - Data Goal</span>
    </div>
 </body>
 </html>
