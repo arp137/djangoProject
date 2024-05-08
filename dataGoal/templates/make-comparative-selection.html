@@ -12,76 +12,80 @@
             <a class="back_b" href="{% url 'dashboard' %}">Back</a>
         </div>
 
-        <h1 class="title1">
-            GET COMPARATIVE
-        </h1>
-        <div class="stats1">
-            <h3>{{team1.name}}</h3>
+        <div class="gray_box">
 
-            <div class="puntos">
-                <h4>Puntos</h4>
-                <ul>
-                    <li>Local: {{ team1.stats.local.points }}</li>
-                    <li>Visitante: {{ team1.stats.visitor.points }}</li>
-                    <li>Total: {{ team1.stats.total.points }}</li>
-                </ul>
-            </div>
+             <div class="stats1">
+                 <h3>{{team1.name}}</h3>
+                 <div class="puntos">
+                     <h4>Puntos</h4>
+                     <ul>
+                         <li>Local: {{ team1.stats.local.points }}</li>
+                         <li>Visitante: {{ team1.stats.visitor.points }}</li>
+                         <li>Total: {{ team1.stats.total.points }}</li>
+                     </ul>
+                </div>
 
-            <div class="victories">
-                <h4>Victories</h4>
-                <ul>
+                <div class="victories">
+                    <h4>Victories</h4>
+                    <ul>
                     <li>Local: {{ team1.stats.local.victories }}</li>
                     <li>Visitante: {{ team1.stats.visitor.victories }}</li>
                     <li>Total: {{ team1.stats.total.victories }}</li>
-                </ul>
-            </div>
+                    </ul>
+                </div>
 
-            <div class="draws">
-                <h4>Draws</h4>
-                <ul>
-                    <li>Local: {{ team1.stats.local.draws }}</li>
-                    <li>Visitante: {{ team1.stats.visitor.draws }}</li>
-                    <li>Total: {{ team1.stats.total.draws }}</li>
-                </ul>
-            </div>
+                 <div class="draws">
+                     <h4>Draws</h4>
+                     <ul>
+                         <li>Local: {{ team1.stats.local.draws }}</li>
+                         <li>Visitante: {{ team1.stats.visitor.draws }}</li>
+                         <li>Total: {{ team1.stats.total.draws }}</li>
+                     </ul>
+                 </div>
 
-            <div class="defeats">
-                <h4>Defeats</h4>
-                <ul>
-                    <li>Local: {{ team1.stats.local.defeats }}</li>
-                    <li>Visitante: {{ team1.stats.visitor.defeats }}</li>
-                    <li>Total: {{ team1.stats.total.defeats }}</li>
-                </ul>
-            </div>
+                 <div class="defeats">
+                     <h4>Defeats</h4>
+                     <ul>
+                         <li>Local: {{ team1.stats.local.defeats }}</li>
+                         <li>Visitante: {{ team1.stats.visitor.defeats }}</li>
+                         <li>Total: {{ team1.stats.total.defeats }}</li>
+                     </ul>
+                 </div>
 
-            <div class="goles_a_favor">
-                <h4>Goles a favor</h4>
-                <ul>
-                    <li>Local: {{ team1.stats.local.goals_for }}</li>
-                    <li>Visitante: {{ team1.stats.visitor.goals_for }}</li>
-                    <li>Total: {{ team1.stats.total.goals_for }}</li>
-                </ul>
-            </div>
+                 <div class="goles_a_favor">
+                     <h4>Goles a favor</h4>
+                     <ul>
+                         <li>Local: {{ team1.stats.local.goals_for }}</li>
+                         <li>Visitante: {{ team1.stats.visitor.goals_for }}</li>
+                         <li>Total: {{ team1.stats.total.goals_for }}</li>
+                     </ul>
+                 </div>
 
-            <div class="goles_en_contra">
-                <h4>Goles en contra</h4>
-                <ul>
-                    <li>Local: {{ team1.stats.local.goals_against }}</li>
-                    <li>Visitante: {{ team1.stats.visitor.goals_against }}</li>
-                    <li>Total: {{ team1.stats.total.goals_against }}</li>
-                </ul>
-            </div>
+                 <div class="goles_en_contra">
+                     <h4>Goles en contra</h4>
+                     <ul>
+                         <li>Local: {{ team1.stats.local.goals_against }}</li>
+                         <li>Visitante: {{ team1.stats.visitor.goals_against }}</li>
+                         <li>Total: {{ team1.stats.total.goals_against }}</li>
+                     </ul>
+                 </div>
 
-            <div class="diferencia_goles">
-                <h4>Diferencia de Goles</h4>
-                <ul>
-                    <li>Local: {{ team1.stats.local.goal_diff }}</li>
-                    <li>Visitante: {{ team1.stats.visitor.goal_diff }}</li>
-                    <li>Total: {{ team1.stats.total.goal_diff }}</li>
-                </ul>
-            </div>
-
+                 <div class="diferencia_goles">
+                     <h4>Diferencia de Goles</h4>
+                     <ul>
+                         <li>Local: {{ team1.stats.local.goal_diff }}</li>
+                         <li>Visitante: {{ team1.stats.visitor.goal_diff }}</li>
+                         <li>Total: {{ team1.stats.total.goal_diff }}</li>
+                     </ul>
+                 </div>
+             </div>
         </div>
+        <div class="second_gray_box"></div>
+
+        <h1 class="title1">
+            GET COMPARATIVE
+        </h1>
+
 
 
 
