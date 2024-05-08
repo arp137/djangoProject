@@ -12,7 +12,6 @@
         </h1>
 
         <form>
-            {% csrf_token %}
             <select name="Seasons" id="temporades-select" onchange="this.form.submit()">
                 <option value="">-- Choose a season --</option>
                 {% for year in years %}
@@ -43,6 +42,7 @@
 
     <script>
     function validateForm() {
+        var user_id = "{{ user_id }}";
         var season = document.getElementById('temporades-select').value;
         var team1 = document.getElementById('equip1-select').value;
         var team2 = document.getElementById('equip2-select').value;
@@ -50,7 +50,7 @@
         if (!season || !team1 || !team2) {
             alert('Please select all options before submitting.');
         } else {
-            var url = "/make-comp/" + season + "/" + team1 + "/" + team2 + "/";
+            var url = user_id + "/" + season + "/" + team1 + "/" + team2 + "/";
             window.location.href = url;
         }
     }
