@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils import timezone
 
 # Create your models here.
 class Temporada (models.Model):
@@ -11,7 +11,7 @@ class EstadistiquesEquip(models.Model):
     nom = models.CharField(max_length=50)
     abreviacio = models.CharField(max_length=3)
     estadi = models.CharField(max_length=50)
-    escut = models.ImageField()
+    escut_url = models.URLField(max_length=200, default='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCugpPDzvVCn-fLGeKlz8A772i7SvZJ8OyJA&usqp=CAU')
 
     gols_favor_local = models.IntegerField(default=0)
     gols_favor_visitant = models.IntegerField(default=0)
@@ -73,14 +73,8 @@ class EstadistiquesEquip(models.Model):
         return self.puntos_local + self.puntos_visitant
 
 class Comparacio(models.Model):
+    last_save_date = models.DateTimeField(default=timezone.now)
     temporada = models.ForeignKey(Temporada, on_delete=models.CASCADE)
     estadistiquesEquip1 = models.ForeignKey(EstadistiquesEquip, on_delete=models.CASCADE, related_name='equip1')
     estadistiquesEquip2 = models.ForeignKey(EstadistiquesEquip, on_delete=models.CASCADE, related_name='equip2')
 
-    def set_up_season(self, *args, **kwargs):
-        # Almacenar la temporada seleccionada en las instancias de EstadistiquesEquip
-        self.estadistiquesEquip1.temporada = self.temporada
-        self.estadistiquesEquip1.save()
-        self.estadistiquesEquip2.temporada = self.temporada
-        self.estadistiquesEquip2.save()
-        super().save(*args, **kwargs)

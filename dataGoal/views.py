@@ -13,18 +13,21 @@ class dashboardClass (generic.TemplateView):
     template_name = 'dashboard.html'
 
     def get_context_data(self, **kwargs):
-        if Comparacio.objects.order_by('estadistiquesEquip1').exists():
-            latest_comp = Comparacio.objects.order_by('estadistiquesEquip1')
+        if Comparacio.objects.order_by('-last_save_date').exists():
+            latest_comp = Comparacio.objects.order_by('-last_save_date')
             latest_comp = latest_comp[0]
 
-        context = {
-            'latest_comp': latest_comp,
-            'temp': latest_comp.temporada.titul,
-            'nom1': latest_comp.estadistiquesEquip1.nom,
-            'escut1_url': latest_comp.estadistiquesEquip1.escut.url,
-            'nom2': latest_comp.estadistiquesEquip2.nom,
-            'escut2_url': latest_comp.estadistiquesEquip2.escut.url
-        }
+            context = {
+                'latest_comp': latest_comp,
+                'temp': latest_comp.temporada.titul,
+                'nom1': latest_comp.estadistiquesEquip1.nom,
+                'escut1_url': latest_comp.estadistiquesEquip1.escut_url,
+                'nom2': latest_comp.estadistiquesEquip2.nom,
+                'escut2_url': latest_comp.estadistiquesEquip2.escut_url
+            }
+        else:
+            context = {}
+
         return context
 
 
@@ -50,10 +53,25 @@ def make_comparative_selection(request, season, equip1_name, equip2_name):
     equip1 = EstadistiquesEquip()
     equip2 = EstadistiquesEquip()
 
+    temporada = Temporada()
+
+    temporada.any = season
+    temporada.titul = f"Season {int(season)-1}/{season[-2:]}"
+
+    temporada.save()
+
+    equip1.temporada = temporada
+    equip2.temporada = temporada
+
     copy_all(equip1, team1)
     copy_all(equip2, team2)
 
+    equip1.save()
+    equip2.save()
+
+
     comp = Comparacio()
+    comp.temporada = temporada
     comp.estadistiquesEquip1 = equip1
     comp.estadistiquesEquip2 = equip2
 
@@ -68,9 +86,9 @@ def make_comparative_selection(request, season, equip1_name, equip2_name):
 
 def copy_all(equip, team):
     equip.nom = team.name
-    equip.abreviacio = team.abr
-    equip.estadi = team.abreviation
-    # equip.escut = image(f"{team.escut_url}")
+    equip.abreviacio = team.abreviation
+    equip.estadi = team.estadi
+    equip.escut_url = team.escut_url
 
     equip.gols_favor_local = team.stats['local']['goals_for']
     equip.gols_favor_visitant = team.stats['visitor']['goals_for']
