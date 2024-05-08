@@ -42,7 +42,12 @@ def make_comparative(request):
 
 
 @login_required
-def make_comparative_selection(request, user_id, season, equip1_name, equip2_name):
+def charging(request, user_id, season, equip1_name, equip2_name):
+
+    loading_template = 'loading.html'
+    loading_context = {}
+    return render(request, loading_template, loading_context)
+
     user = request.user
     team1, team2 = api.get_data(season, equip1_name, equip2_name)
     equip1 = EstadistiquesEquip()
@@ -50,10 +55,8 @@ def make_comparative_selection(request, user_id, season, equip1_name, equip2_nam
 
     temporada = Temporada()
     temporada.user = user
-
     temporada.any = season
     temporada.titul = f"Season {int(season)-1}/{season[-2:]}"
-
     temporada.save()
 
     equip1.temporada = temporada
@@ -61,27 +64,15 @@ def make_comparative_selection(request, user_id, season, equip1_name, equip2_nam
     equip2.temporada = temporada
     equip2.user = user
 
-    copy_all(equip1, team1)
-    copy_all(equip2, team2)
-
-    equip1.save()
-    equip2.save()
-
-
-    comp = Comparacio()
-    comp.user = user
-    comp.temporada = temporada
-    comp.estadistiquesEquip1 = equip1
-    comp.estadistiquesEquip2 = equip2
-
-    comp.save()
-
-    context = {
-        "team1": team1,
-        "team2": team2
+    final_template = 'loading.html'
+    final_context = {
+        'fin': "yes",
+        'user_id': user_id,
+        'season': season,
+        'team1': equip1_name,
+        'team2': equip2_name
     }
-    template = '../../dataGoal/templates/make-comparative-selection.html'
-    return render(request, template, context)
+    return render(request, final_template, final_context)
 
 def copy_all(equip, team):
     equip.nom = team.name
@@ -103,3 +94,18 @@ def copy_all(equip, team):
 
     equip.derrotas_local = team.stats['local']['defeats']
     equip.derrotas_visitant = team.stats['visitor']['defeats']
+
+
+@login_required
+def make_comparative_selection(request, user_id, season, equip1_name, equip2_name):
+    comps = Comparacio.objects.filter(user=user_id, season=season)
+    context = {}
+    for comp in comps:
+        nom1 = comp.estadistiquesEquip1.nom
+        nom2 = comp.estadistiquesEquip2.nom
+
+        if equip1_name == nom1 and equip2_name == nom2:
+            context['comp'] = comp
+
+    template = ''
+    return (request, template, context)

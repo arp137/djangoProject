@@ -3,7 +3,7 @@ body {
     padding: 0;
     width: 100%;
     height: 100%;
-    background: url('../../login/static/images/camp_nou_dif.jpg') no-repeat center center fixed;
+    background: url('./images/camp_nou_dif.jpg') no-repeat center center fixed;
     background-size: cover;
     font-family: Arial, sans-serif;
 }
@@ -103,22 +103,11 @@ main {
   overflow: hidden;
 }
 
-.userIcon {
-    top: 40%;
-    left: 70.5%;
-    width: 20px;
-  height: 20px;
-  background: url("../../login/static/images/icon.png") no-repeat center center;
-  background-size: cover;
-    opacity: 1;
-  position: absolute;
-  overflow: hidden;
-}
 
 .logo {
   width: 60px;
   height: 66px;
-  background: url("../../login/static/images/logo.png") no-repeat center center;
+  background: url("./images/logo.png") no-repeat center center;
   background-size: cover;
   opacity: 1;
   position: relative;

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Goal - Creating Comparative</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../../../../static/stylesLoading.css" rel="stylesheet" />
+    <link href="../../../../../../static/images/logo.png" rel="icon" />
+</head>
+<body>
+    <div class="spinner-border" role="status">
+      <span class="sr-only">
+          Creating the comparation...</span>
+    </div>
+    <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                if ("{{ fin }}" === "yes") {
+                    var user_id = "{{ user_id }}";
+                    var season = "{{season}}";
+                    var team1 = "{{team1}}";
+                    var team2 = "{{team2}}";
+                    var url = "../"+ user_id + "/" + season + "/" + team1 + "/" + team2 + "/";
+                    window.location.href = url;
+                }
+            });
+    </script>
+    <div class="bottom_panel">
+       <div class="logo"></div>
+       <span class="copyright">© Copyright 2024 - Data Goal</span>
+   </div>
+</body>
+</html>

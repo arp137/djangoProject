@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="../static/stylesDash.css">
-    <link rel="icon" href="../../login/static/images/logo.png">
+    <link rel="icon" href="../static/images/logo.png">
 </head>
 <body>
     <div class="top_panel">
@@ -23,7 +23,7 @@
 
         {% for comp in comps %}
             <div class="league" id="{{ comp.pk }}">
-                    <a href="{% url 'make-comp' user_id comp.temporada.any comp.estadistiquesEquip1.nom comp.estadistiquesEquip2.nom %}" class="full-link">
+                    <a href="{% url 'get-comp' user_id comp.temporada.any comp.estadistiquesEquip1.nom comp.estadistiquesEquip2.nom %}" class="full-link">
                     <img id="img1" src="{{ comp.estadistiquesEquip1.escut_url }}">
                     <span id="nom1">{{ comp.estadistiquesEquip1.nom }}</span>
                     <span>vs</span>
