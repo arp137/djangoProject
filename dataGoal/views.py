@@ -8,6 +8,8 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from dataGoal.models import EstadistiquesEquip, Comparacio, Temporada
 
+
+
 class dashboardClass(LoginRequiredMixin, generic.TemplateView):
     template_name = 'dashboard.html'
 
@@ -23,14 +25,13 @@ class dashboardClass(LoginRequiredMixin, generic.TemplateView):
 
 @login_required
 def make_comparative(request):
-    user = request.user
     selected_year = request.GET.get('Seasons')
     selected_team1 = request.GET.get('Team1')
     teams = api.get_teams(selected_year) if selected_year else None
     teams_without = api.get_teams_without_selected(teams, selected_team1) if selected_team1 and teams else None
 
     context = {
-        "user_id": user.id,
+        'user_id': request.user.id,
         "years": api.get_years(),
         "selected_year": selected_year,
         "teams": teams,
@@ -42,12 +43,7 @@ def make_comparative(request):
 
 
 @login_required
-def charging(request, user_id, season, equip1_name, equip2_name):
-
-    loading_template = 'loading.html'
-    loading_context = {}
-    return render(request, loading_template, loading_context)
-
+def make_comparative_selection(request, user_id, season, equip1_name, equip2_name):
     user = request.user
     team1, team2 = api.get_data(season, equip1_name, equip2_name)
     equip1 = EstadistiquesEquip()
@@ -55,8 +51,10 @@ def charging(request, user_id, season, equip1_name, equip2_name):
 
     temporada = Temporada()
     temporada.user = user
+
     temporada.any = season
     temporada.titul = f"Season {int(season)-1}/{season[-2:]}"
+
     temporada.save()
 
     equip1.temporada = temporada
@@ -64,15 +62,27 @@ def charging(request, user_id, season, equip1_name, equip2_name):
     equip2.temporada = temporada
     equip2.user = user
 
-    final_template = 'loading.html'
-    final_context = {
-        'fin': "yes",
-        'user_id': user_id,
-        'season': season,
-        'team1': equip1_name,
-        'team2': equip2_name
+    copy_all(equip1, team1)
+    copy_all(equip2, team2)
+
+    equip1.save()
+    equip2.save()
+
+
+    comp = Comparacio()
+    comp.user = user
+    comp.temporada = temporada
+    comp.estadistiquesEquip1 = equip1
+    comp.estadistiquesEquip2 = equip2
+
+    comp.save()
+
+    context = {
+        "team1": team1,
+        "team2": team2
     }
-    return render(request, final_template, final_context)
+    template = '../../dataGoal/templates/make-comparative-selection.html'
+    return render(request, template, context)
 
 def copy_all(equip, team):
     equip.nom = team.name
@@ -94,18 +104,3 @@ def copy_all(equip, team):
 
     equip.derrotas_local = team.stats['local']['defeats']
     equip.derrotas_visitant = team.stats['visitor']['defeats']
-
-
-@login_required
-def make_comparative_selection(request, user_id, season, equip1_name, equip2_name):
-    comps = Comparacio.objects.filter(user=user_id, season=season)
-    context = {}
-    for comp in comps:
-        nom1 = comp.estadistiquesEquip1.nom
-        nom2 = comp.estadistiquesEquip2.nom
-
-        if equip1_name == nom1 and equip2_name == nom2:
-            context['comp'] = comp
-
-    template = ''
-    return (request, template, context)
