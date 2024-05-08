@@ -5,32 +5,25 @@ from django.template import loader
 from . import api
 from django.http import JsonResponse, HttpResponse
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
 from dataGoal.models import EstadistiquesEquip, Comparacio, Temporada
 
 
 
-class dashboardClass (generic.TemplateView):
+class dashboardClass(LoginRequiredMixin, generic.TemplateView):
     template_name = 'dashboard.html'
 
     def get_context_data(self, **kwargs):
-        if Comparacio.objects.order_by('-last_save_date').exists():
-            latest_comp = Comparacio.objects.order_by('-last_save_date')
-            latest_comp = latest_comp[0]
-
-            context = {
-                'latest_comp': latest_comp,
-                'temp': latest_comp.temporada.titul,
-                'nom1': latest_comp.estadistiquesEquip1.nom,
-                'escut1_url': latest_comp.estadistiquesEquip1.escut_url,
-                'nom2': latest_comp.estadistiquesEquip2.nom,
-                'escut2_url': latest_comp.estadistiquesEquip2.escut_url
-            }
-        else:
-            context = {}
-
+        usuario_actual = self.request.user
+        comparaciones_ordenadas = Comparacio.objects.filter(user=usuario_actual).order_by('-last_save_date')
+        context = {}
+        if comparaciones_ordenadas:
+            print("Length: ", len(comparaciones_ordenadas))
+            length = len(comparaciones_ordenadas) if len(comparaciones_ordenadas) < 5 else 5
+            context['comps'] = comparaciones_ordenadas[:length]
         return context
 
-
+@login_required
 def make_comparative(request):
     selected_year = request.GET.get('Seasons')
     selected_team1 = request.GET.get('Team1')
@@ -48,12 +41,15 @@ def make_comparative(request):
     return render(request, template, context)
 
 
+@login_required
 def make_comparative_selection(request, season, equip1_name, equip2_name):
+    user = request.user
     team1, team2 = api.get_data(season, equip1_name, equip2_name)
     equip1 = EstadistiquesEquip()
     equip2 = EstadistiquesEquip()
 
     temporada = Temporada()
+    temporada.user = user
 
     temporada.any = season
     temporada.titul = f"Season {int(season)-1}/{season[-2:]}"
@@ -61,7 +57,9 @@ def make_comparative_selection(request, season, equip1_name, equip2_name):
     temporada.save()
 
     equip1.temporada = temporada
+    equip1.user = user
     equip2.temporada = temporada
+    equip2.user = user
 
     copy_all(equip1, team1)
     copy_all(equip2, team2)
@@ -71,6 +69,7 @@ def make_comparative_selection(request, season, equip1_name, equip2_name):
 
 
     comp = Comparacio()
+    comp.user = user
     comp.temporada = temporada
     comp.estadistiquesEquip1 = equip1
     comp.estadistiquesEquip2 = equip2

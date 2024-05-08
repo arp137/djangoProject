@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="../static/stylesDashboard.css">
+    <link rel="stylesheet" href="../static/stylesDash.css">
     <link rel="icon" href="../static/images/logo.png">
 </head>
 <body>
@@ -21,42 +21,17 @@
             </a>
         </div>
 
-            <div class="league" id="comp1">
-                <img src="{{ escut1_url }}" alt="{{nom1}}">
-                <span>{{nom1}}</span>
+        {% for comp in comps %}
+            <div class="league" id="{{ comp.pk }}">
+                <img id="img1" src="{{ comp.estadistiquesEquip1.escut_url }}">
+                <span id="nom1">{{ comp.estadistiquesEquip1.nom }}</span>
                 <span>vs</span>
-                <img src="{{ escut2_url }}" alt="{{nom2}}">
-                <span>{{nom2}}</span>
-                <span>{{temp}}</span>
+                <img id="img2" src="{{ comp.estadistiquesEquip2.escut_url }}">
+                <span id="nom2">{{ comp.estadistiquesEquip2.nom }}</span>
+                <span id="temp">{{ comp.temporada.titul }}</span>
             </div>
+        {% endfor %}
 
-        <div class="league" id="premier-league">
-            <img alt="Manchester City">
-            <span>vs</span>
-            <img alt="Liverpool">
-            <span>2019/20</span>
-        </div>
-
-        <div class="league" id="serie-a">
-            <img alt="Inter Milan">
-            <span>vs</span>
-            <img alt="Napoli">
-            <span>2020/21</span>
-        </div>
-
-        <div class="league" id="segunda">
-            <img alt="Team 1">
-            <span>vs</span>
-            <img alt="Team 2">
-            <span>2023/24</span>
-        </div>
-
-        <div class="league" id="ligue1">
-            <img alt="Paris Saint Germain">
-            <span>vs</span>
-            <img alt="Marseille">
-            <span>2021/22</span>
-        </div>
     </main>
 
    <div class="bottom_panel">

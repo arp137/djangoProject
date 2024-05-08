@@ -1,12 +1,15 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Temporada (models.Model):
+    user = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
     any = models.CharField(max_length=50)
     titul = models.CharField(max_length=50)
 
 class EstadistiquesEquip(models.Model):
+    user = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
     temporada = models.ForeignKey(Temporada, on_delete=models.CASCADE)
     nom = models.CharField(max_length=50)
     abreviacio = models.CharField(max_length=3)
@@ -73,6 +76,7 @@ class EstadistiquesEquip(models.Model):
         return self.puntos_local + self.puntos_visitant
 
 class Comparacio(models.Model):
+    user = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
     last_save_date = models.DateTimeField(default=timezone.now)
     temporada = models.ForeignKey(Temporada, on_delete=models.CASCADE)
     estadistiquesEquip1 = models.ForeignKey(EstadistiquesEquip, on_delete=models.CASCADE, related_name='equip1')
