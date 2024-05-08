@@ -48,3 +48,36 @@ body {
   opacity: 1;
   text-align: left;
 }
+
+
+
+.top_panel {
+  width: 100%;
+  height: 70px;
+  min-width: 100%;
+  min-height: 70px;
+  background: rgba(0,9,22,1);
+  opacity: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.back_b {
+    position: absolute;
+    display: block;
+    top: -7%;
+    left: 1%;
+    width: 100px;
+    margin: 20px auto;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    font-family: Rockwell, serif;
+    border-radius: 8px;
+    background-color: white;
+    transition: background-color 0.3s ease;
+}
