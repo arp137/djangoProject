@@ -104,23 +104,18 @@ def copy_all(equip, team):
 
 
 @login_required
-def retrieve_comparison(request, user_id, season, equip1_name, equip2_name):
+def retrieve_comparison(request, user_id, season_id, equip1_id, equip2_id):
     temporada = Temporada.objects.filter(
-        any=season,
-        titul=f"Season {int(season) - 1}/{season[-2:]}"
+        id=season_id
     ).first()
-    instancia_105 = EstadistiquesEquip.objects.get(id=105)
-    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-    print('|' + instancia_105.nom + '|')
-    print('|' + equip1_name + '|')
-    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+
     equip1 = EstadistiquesEquip.objects.get(
-        nom=equip1_name,
+        id=equip1_id,
         temporada=temporada
     )
 
     equip2 = EstadistiquesEquip.objects.get(
-        nom=equip2_name,
+        id=equip2_id,
         temporada=temporada
     )
     comparacio = Comparacio.objects.get(
