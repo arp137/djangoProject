@@ -16,7 +16,7 @@ class dashboardClass(LoginRequiredMixin, generic.TemplateView):
     def get_context_data(self, **kwargs):
         usuario_actual = self.request.user
         comparaciones_ordenadas = Comparacio.objects.filter(user=usuario_actual).order_by('-last_save_date')
-        context = {}
+        context = {'user_id': usuario_actual.id}
         if comparaciones_ordenadas:
             print("Length: ", len(comparaciones_ordenadas))
             length = len(comparaciones_ordenadas) if len(comparaciones_ordenadas) < 5 else 5
@@ -31,6 +31,7 @@ def make_comparative(request):
     teams_without = api.get_teams_without_selected(teams, selected_team1) if selected_team1 and teams else None
 
     context = {
+        'user_id': request.user.id,
         "years": api.get_years(),
         "selected_year": selected_year,
         "teams": teams,
@@ -42,7 +43,7 @@ def make_comparative(request):
 
 
 @login_required
-def make_comparative_selection(request, season, equip1_name, equip2_name):
+def make_comparative_selection(request, user_id, season, equip1_name, equip2_name):
     user = request.user
     team1, team2 = api.get_data(season, equip1_name, equip2_name)
     equip1 = EstadistiquesEquip()

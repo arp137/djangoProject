@@ -17,22 +17,34 @@
     <main>
         <div class="league" id="add-league">
             <a href="{% url 'make-comp' %}" class="full-link">
-                <span>+</span>
+                <span id="plus">+</span>
             </a>
         </div>
 
         {% for comp in comps %}
-            <div class="league" id="{{ comp.pk }}">
-                <img id="img1" src="{{ comp.estadistiquesEquip1.escut_url }}">
-                <span id="nom1">{{ comp.estadistiquesEquip1.nom }}</span>
-                <span>vs</span>
-                <img id="img2" src="{{ comp.estadistiquesEquip2.escut_url }}">
-                <span id="nom2">{{ comp.estadistiquesEquip2.nom }}</span>
-                <span id="temp">{{ comp.temporada.titul }}</span>
+            <div class="league">
+                    <a href="{% url 'get-comp' user_id comp.temporada.any comp.estadistiquesEquip1.nom comp.estadistiquesEquip2.nom %}" class="full-link">
+                    <img id="img1" src="{{ comp.estadistiquesEquip1.escut_url }}">
+                    <span id="nom1">{{ comp.estadistiquesEquip1.nom }}</span>
+                    <span>vs</span>
+                    <img id="img2" src="{{ comp.estadistiquesEquip2.escut_url }}">
+                    <span id="nom2">{{ comp.estadistiquesEquip2.nom }}</span>
+                    <span id="temp">{{ comp.temporada.titul }}</span>
+                </a>
+
             </div>
         {% endfor %}
 
+
+
     </main>
+
+    <script>
+
+    function cancelAction() {
+        window.location.href = "{% url 'dashboard' %}";
+    }
+    </script>
 
    <div class="bottom_panel">
        <div class="logo"></div>
