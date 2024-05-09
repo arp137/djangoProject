@@ -11,7 +11,8 @@
             MAKE A COMPARATIVE
         </h1>
 
-        <form>
+        <form method="get" id="comparative-form">
+            {% csrf_token %}
             <select name="Seasons" id="temporades-select" onchange="this.form.submit()">
                 <option value="">-- Choose a season --</option>
                 {% for year in years %}
@@ -28,15 +29,18 @@
             {% endif %}
 
             {% if teams_without %}
-                <select name="Team2" id="equip2-select">
+                <select name="Team2" id="equip2-select"
+                        onchange="this.form.submit()">
                     <option value="">-- Choose another team --</option>
                     {% for team in teams_without %}
                         <option value="{{ team }}" {% if selected_team2 == team %}selected{% endif %}>{{ team }}</option>
                     {% endfor %}
                 </select>
             {% endif %}
-
-             <button type="button" class="cancel" id="cancel-button" onclick="cancelAction()">Cancel</button>
+            <button type="button" class="cancel" id="cancel-button" onclick="cancelAction()">Cancel</button>
+    </form>
+    <form method="post" id="accept-form">
+        {% csrf_token %}
         <button type="button" class="accept" id="accept-button" onclick="validateForm()">Accept</button>
     </form>
 
@@ -50,8 +54,7 @@
         if (!season || !team1 || !team2) {
             alert('Please select all options before submitting.');
         } else {
-            var url = user_id + "/" + season + "/" + team1 + "/" + team2 + "/";
-            window.location.href = url;
+            document.getElementById("accept-form").submit()
         }
     }
 
