@@ -9,7 +9,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from dataGoal.models import EstadistiquesEquip, Comparacio, Temporada
 
 
-
 class dashboardClass(LoginRequiredMixin, generic.TemplateView):
     template_name = 'dashboard.html'
 
@@ -22,6 +21,7 @@ class dashboardClass(LoginRequiredMixin, generic.TemplateView):
             length = len(comparaciones_ordenadas) if len(comparaciones_ordenadas) < 5 else 5
             context['comps'] = comparaciones_ordenadas[:length]
         return context
+
 
 @login_required
 def make_comparative(request):
@@ -43,31 +43,27 @@ def make_comparative(request):
 
 
 @login_required
-def make_comparative_selection(request, user_id, season, equip1_name, equip2_name):
+def make_comparative_selection(request, season, equip1_name, equip2_name):
     user = request.user
     team1, team2 = api.get_data(season, equip1_name, equip2_name)
     equip1 = EstadistiquesEquip()
     equip2 = EstadistiquesEquip()
 
     temporada = Temporada()
-    temporada.user = user
 
     temporada.any = season
-    temporada.titul = f"Season {int(season)-1}/{season[-2:]}"
+    temporada.titul = f"Season {int(season) - 1}/{season[-2:]}"
 
     temporada.save()
 
     equip1.temporada = temporada
-    equip1.user = user
     equip2.temporada = temporada
-    equip2.user = user
 
     copy_all(equip1, team1)
     copy_all(equip2, team2)
 
     equip1.save()
     equip2.save()
-
 
     comp = Comparacio()
     comp.user = user
@@ -83,6 +79,7 @@ def make_comparative_selection(request, user_id, season, equip1_name, equip2_nam
     }
     template = '../../dataGoal/templates/make-comparative-selection.html'
     return render(request, template, context)
+
 
 def copy_all(equip, team):
     equip.nom = team.name
@@ -104,3 +101,34 @@ def copy_all(equip, team):
 
     equip.derrotas_local = team.stats['local']['defeats']
     equip.derrotas_visitant = team.stats['visitor']['defeats']
+
+
+@login_required
+def retrieve_comparison(request, user_id, season, equip1_name, equip2_name):
+    temporada = Temporada.objects.filter(
+        any=season,
+        titul=f"Season {int(season) - 1}/{season[-2:]}"
+    ).first()
+    instancia_105 = EstadistiquesEquip.objects.get(id=105)
+    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    print('|' + instancia_105.nom + '|')
+    print('|' + equip1_name + '|')
+    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    equip1 = EstadistiquesEquip.objects.get(
+        nom=equip1_name,
+        temporada=temporada
+    )
+
+    equip2 = EstadistiquesEquip.objects.get(
+        nom=equip2_name,
+        temporada=temporada
+    )
+    comparacio = Comparacio.objects.get(
+        user=user_id,
+        temporada=temporada,
+        estadistiquesEquip1=equip1,
+        estadistiquesEquip2=equip2,
+    )
+    print(equip1.gols_favor_local)
+    template = '../../dataGoal/templates/retrieve_comparative_selection.html'
+    return render(request, template, {'comparacio': comparacio})
