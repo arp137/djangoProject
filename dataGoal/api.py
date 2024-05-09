@@ -131,9 +131,6 @@ def get_data(year, team1, team2):
             if match['result'] == "x-x":  # Partit no jugat
                 continue
             if match['local'] in (team1, team2) or match['visitor'] in (team1, team2):
-                if (match['local'], match['visitor']) in [(team1, team2), (team2, team1)]:
-                    print(
-                        f"Round {round_num}: {match['local']} vs {match['visitor']} - Result: {match['result']} - Stadium: {match['stadium']}")
 
                 if match['local'] == team1:
                     if inicial1 == True:
