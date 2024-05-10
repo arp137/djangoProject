@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="../../static/stylesMakeComp.css" rel="stylesheet" />
+    <link href="../static/images/logo.png" rel="icon" />
+    <title>Data Goal - Make a comparative</title>
+</head>
+<body>
+    <div class="make_a_comparative">
+        <h1 class="title1">
+            EDIT COMPARATIVE
+        </h1>
+
+        <form>
+            <select name="Seasons" id="temporades-select" onchange="this.form.submit()">
+                <option value=""> --Edit Season-- </option>
+                {% for year in years %}
+                    <option value="{{ year.year }}" {% if selected_year == year.year %}selected{% endif %}>Season 20{{ year.title }}</option>
+                {% endfor %}
+            </select>
+
+            <select name="Team1" id="equip1-select" onchange="this.form.submit()">
+                <option value="">--Edit team 1--</option>
+                {% for team in teams %}
+                    <option value="{{ team }}" {% if selected_team1 == team %}selected{% endif %}>{{ team }}</option>
+                {% endfor %}
+            </select>
+                <select name="Team2" id="equip2-select">
+                    <option value="">--Edit team 2--</option>
+                    {% for team in teams_without %}
+                        <option value="{{ team }}" {% if selected_team2 == team %}selected{% endif %}>{{ team }}</option>
+                    {% endfor %}
+                </select>
+             <button type="button" class="cancel" id="cancel-button" onclick="cancelAction()">Cancel</button>
+        <button type="button" class="accept" id="accept-button" onclick="this.form.submit()">Accept</button>
+    </form>
+
+    <script>
+
+    function cancelAction() {
+        window.history.back();
+    }
+    </script>
+
+
+    </div>
+
+    <div class="bottom_panel">
+                <div class="logo"></div>
+            <span class="copyright">© Copyright 2024 - Data Goal</span>
+    </div>
+</body>
+</html>

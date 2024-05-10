@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <title>Data Goal - Get comparative</title>
-   <link href="../../../../../../static/stylesMakeCompSelection.css" rel="stylesheet" />
-   <link href="../static/images/logo.png" rel="icon" />
+    <title>Data Goal - Get comparative</title>
+    <link href="../../../../../../static/stylesMakeCompSelection.css" rel="stylesheet" />
+    <link href="../static/images/logo.png" rel="icon" />
 </head>
-
 
 <body>
    <div class="make_a_comparative">
        <div class="top_panel">
-           <a class="back_b" href="{% url 'dashboard' %}">Back</a>
+           <a class="back_b" href="{% url 'dashboard' %}">BACK</a>
+           <a class="edit_b" href="{% url 'edit-comp' comparacio.id %}">EDIT</a>
+           <a class="remove_b">REMOVE</a>
        </div>
-
-
        <div class="gray_box">
             <div class="stats1">
                 <div class="team1name">
@@ -23,7 +22,7 @@
                      <h3>Local</h3>
                 </div>
                 <div class="visitante">
-                     <h3>Visiting</h3>
+                     <h3>Away</h3>
                 </div>
                 <div class="total">
                      <h3>Total</h3>

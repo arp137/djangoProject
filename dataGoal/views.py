@@ -1,9 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.template import loader
-
 from . import api
 from django.http import JsonResponse, HttpResponse
+from django.utils import timezone
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from dataGoal.models import EstadistiquesEquip, Comparacio, Temporada
@@ -74,6 +74,7 @@ def make_comparative_selection(request, season, equip1_name, equip2_name):
     comp.save()
 
     context = {
+        'comparacio': comp,
         "team1": team1,
         "team2": team2
     }
@@ -127,3 +128,54 @@ def retrieve_comparison(request, user_id, season_id, equip1_id, equip2_id):
     print(equip1.gols_favor_local)
     template = '../../dataGoal/templates/retrieve_comparative_selection.html'
     return render(request, template, {'comparacio': comparacio})
+
+
+def edit_comparison(request, comp_id):
+    comparacio = Comparacio.objects.get(id=comp_id)
+    default = [comparacio.temporada.any, comparacio.estadistiquesEquip1.nom, comparacio.estadistiquesEquip2.nom]
+
+    selected_year = request.GET.get('Seasons')
+    selected_team1 = request.GET.get('Team1')
+    selected_team2 = request.GET.get('Team2')
+
+    teams = api.get_teams(selected_year)
+    teams_without = api.get_teams_without_selected(teams, selected_team1)
+
+    if request.GET.get('Seasons') and request.GET.get('Team1') and request.GET.get('Team2'):
+        if default[0] != selected_year or default[1] != selected_team1 or default[2] != selected_team2:
+            temporada = Temporada()
+            temporada.any = str(selected_year)
+            temporada.titul = f"Season {int(selected_year) - 1}/{selected_year[-2:]}"
+            temporada.save()
+
+            team1, team2 = api.get_data(comparacio.temporada.any, selected_team1, selected_team2)
+            equipEst1 = EstadistiquesEquip()
+            equipEst2 = EstadistiquesEquip()
+
+            equipEst1.temporada = temporada
+            equipEst2.temporada = temporada
+
+            copy_all(equipEst1, team1)
+            copy_all(equipEst2, team2)
+
+            equipEst1.save()
+            equipEst2.save()
+
+            comparacio.edit(temporada, equipEst1, equipEst2)
+            return redirect('/dashboard/')
+
+    context = {
+        'user_id': request.user.id,
+        "years": api.get_years(),
+        "selected_year": selected_year,
+        "teams": teams,
+        "selected_team1": selected_team1,
+        "teams_without": teams_without,
+    }
+
+    template = '../../dataGoal/templates/edit-comparative.html'
+    return render(request, template, context)
+
+
+
+    

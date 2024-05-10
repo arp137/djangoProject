@@ -2,17 +2,20 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+
 # Create your models here.
-class Temporada (models.Model):
+class Temporada(models.Model):
     any = models.CharField(max_length=50)
     titul = models.CharField(max_length=50)
+
 
 class EstadistiquesEquip(models.Model):
     temporada = models.ForeignKey(Temporada, on_delete=models.CASCADE)
     nom = models.CharField(max_length=50)
     abreviacio = models.CharField(max_length=3)
     estadi = models.CharField(max_length=50)
-    escut_url = models.URLField(max_length=200, default='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCugpPDzvVCn-fLGeKlz8A772i7SvZJ8OyJA&usqp=CAU')
+    escut_url = models.URLField(max_length=200,
+                                default='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCugpPDzvVCn-fLGeKlz8A772i7SvZJ8OyJA&usqp=CAU')
 
     gols_favor_local = models.IntegerField(default=0)
     gols_favor_visitant = models.IntegerField(default=0)
@@ -73,10 +76,20 @@ class EstadistiquesEquip(models.Model):
     def puntos_totals(self):
         return self.puntos_local + self.puntos_visitant
 
+
 class Comparacio(models.Model):
     user = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
     last_save_date = models.DateTimeField(default=timezone.now)
     temporada = models.ForeignKey(Temporada, on_delete=models.CASCADE)
     estadistiquesEquip1 = models.ForeignKey(EstadistiquesEquip, on_delete=models.CASCADE, related_name='equip1')
     estadistiquesEquip2 = models.ForeignKey(EstadistiquesEquip, on_delete=models.CASCADE, related_name='equip2')
+
+    def edit(self, new_temp, new_equip1, new_equip2):
+        self.temporada = new_temp
+        self.estadistiquesEquip1 = new_equip1
+        self.estadistiquesEquip2 = new_equip2
+
+        self.save_base()
+
+
 

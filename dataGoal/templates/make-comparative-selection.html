@@ -1,96 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Data Goal - Get comparative</title>
-    <link href="../../../../../../static/stylesMakeCompSelection.css" rel="stylesheet" />
-    <link href="../static/images/logo.png" rel="icon" />
+   <title>Data Goal - Get comparative</title>
+   <link href="../../../../../../static/stylesMakeCompSelection.css" rel="stylesheet" />
+   <link href="../static/images/logo.png" rel="icon" />
 </head>
 
+
 <body>
-    <div class="make_a_comparative">
-        <div class="top_panel">
-            <a class="back_b" href="{% url 'dashboard' %}">Back</a>
-        </div>
-
-        <div class="gray_box">
-
-             <div class="stats1">
-                 <h3>{{team1.name}}</h3>
-                 <div class="puntos">
-                     <h4>Puntos</h4>
-                     <ul>
-                         <li>Local: {{ team1.stats.local.points }}</li>
-                         <li>Visitante: {{ team1.stats.visitor.points }}</li>
-                         <li>Total: {{ team1.stats.total.points }}</li>
-                     </ul>
+   <div class="make_a_comparative">
+       <div class="top_panel">
+           <a class="back_b" href="{% url 'dashboard' %}">BACK</a>
+           <a class="edit_b" href="{% url 'edit-comp' comparacio.id %}">EDIT</a>
+           <a class="remove_b">REMOVE</a>
+       </div>
+       <div class="gray_box">
+            <div class="stats1">
+                <div class="team1name">
+                     <h3>{{team1.name}}</h3>
                 </div>
-
-                <div class="victories">
-                    <h4>Victories</h4>
+                <div class="local">
+                     <h3>Local</h3>
+                </div>
+                <div class="visitante">
+                     <h3>Away</h3>
+                </div>
+                <div class="total">
+                     <h3>Total</h3>
+                </div>
+                <div class="puntos">
+                    <h3>Points</h3>
                     <ul>
-                    <li>Local: {{ team1.stats.local.victories }}</li>
-                    <li>Visitante: {{ team1.stats.visitor.victories }}</li>
-                    <li>Total: {{ team1.stats.total.victories }}</li>
+                        <li>{{ team1.stats.local.points }}</li>
+                        <li>{{ team1.stats.visitor.points }}</li>
+                        <li>{{ team1.stats.total.points }}</li>
                     </ul>
                 </div>
 
-                 <div class="draws">
-                     <h4>Draws</h4>
-                     <ul>
-                         <li>Local: {{ team1.stats.local.draws }}</li>
-                         <li>Visitante: {{ team1.stats.visitor.draws }}</li>
-                         <li>Total: {{ team1.stats.total.draws }}</li>
-                     </ul>
-                 </div>
 
-                 <div class="defeats">
-                     <h4>Defeats</h4>
-                     <ul>
-                         <li>Local: {{ team1.stats.local.defeats }}</li>
-                         <li>Visitante: {{ team1.stats.visitor.defeats }}</li>
-                         <li>Total: {{ team1.stats.total.defeats }}</li>
-                     </ul>
-                 </div>
+               <div class="victories">
+                   <h3>Victories</h3>
+                   <ul>
+                       <li>{{ team1.stats.local.victories }}</li>
+                       <li>{{ team1.stats.visitor.victories }}</li>
+                       <li>{{ team1.stats.total.victories }}</li>
+                   </ul>
+               </div>
 
-                 <div class="goles_a_favor">
-                     <h4>Goles a favor</h4>
-                     <ul>
-                         <li>Local: {{ team1.stats.local.goals_for }}</li>
-                         <li>Visitante: {{ team1.stats.visitor.goals_for }}</li>
-                         <li>Total: {{ team1.stats.total.goals_for }}</li>
-                     </ul>
-                 </div>
 
-                 <div class="goles_en_contra">
-                     <h4>Goles en contra</h4>
-                     <ul>
-                         <li>Local: {{ team1.stats.local.goals_against }}</li>
-                         <li>Visitante: {{ team1.stats.visitor.goals_against }}</li>
-                         <li>Total: {{ team1.stats.total.goals_against }}</li>
-                     </ul>
-                 </div>
+                <div class="draws">
+                    <h3>Draws</h3>
+                    <ul>
+                        <li>{{ team1.stats.local.draws }}</li>
+                        <li>{{ team1.stats.visitor.draws }}</li>
+                        <li>{{ team1.stats.total.draws }}</li>
+                    </ul>
+                </div>
 
-                 <div class="diferencia_goles">
-                     <h4>Diferencia de Goles</h4>
-                     <ul>
-                         <li>Local: {{ team1.stats.local.goal_diff }}</li>
-                         <li>Visitante: {{ team1.stats.visitor.goal_diff }}</li>
-                         <li>Total: {{ team1.stats.total.goal_diff }}</li>
-                     </ul>
-                 </div>
-             </div>
-        </div>
-        <div class="second_gray_box"></div>
 
-        <h1 class="title1">
-            GET COMPARATIVE
-        </h1>
+                <div class="defeats">
+                    <h3>Defeats</h3>
+                    <ul>
+                        <li>{{ team1.stats.local.defeats }}</li>
+                        <li>{{ team1.stats.visitor.defeats }}</li>
+                        <li>{{ team1.stats.total.defeats }}</li>
+                    </ul>
+                </div>
 
-    </div>
 
-    <div class="bottom_panel">
-        <div class="logo"></div>
-        <span class="copyright">© Copyright 2024 - Data Goal</span>
-    </div>
+                <div class="goles_a_favor">
+                    <h3>Scored goals</h3>
+                    <ul>
+                        <li>{{ team1.stats.local.goals_for }}</li>
+                        <li>{{ team1.stats.visitor.goals_for }}</li>
+                        <li>{{ team1.stats.total.goals_for }}</li>
+                    </ul>
+                </div>
+
+
+                <div class="goles_en_contra">
+                    <h3>Conceded goals</h3>
+                    <ul>
+                        <li>{{ team1.stats.local.goals_against }}</li>
+                        <li>{{ team1.stats.visitor.goals_against }}</li>
+                        <li>{{ team1.stats.total.goals_against }}</li>
+                    </ul>
+                </div>
+
+
+                <div class="diferencia_goles">
+                    <h3>Goal difference</h3>
+                    <ul>
+                        <li>{{ team1.stats.local.goal_diff }}</li>
+                        <li>{{ team1.stats.visitor.goal_diff }}</li>
+                        <li>{{ team1.stats.total.goal_diff }}</li>
+                    </ul>
+                </div>
+            </div>
+       </div>
+       <div class="second_gray_box"></div>
+
+
+       <h1 class="title1">
+           GET COMPARATIVE
+       </h1>
+   </div>
+   <div class="bottom_panel">
+       <div class="logo"></div>
+       <span class="copyright">© Copyright 2024 - Data Goal</span>
+   </div>
 </body>
 </html>
+

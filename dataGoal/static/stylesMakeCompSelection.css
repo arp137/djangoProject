@@ -26,9 +26,6 @@ body {
  overflow: hidden;
 }
 
-
-
-
 .logo {
  width: 60px;
  height: 66px;
@@ -73,11 +70,10 @@ body {
 }
 
 
-.back_b {
+.top_panel a {
    position: absolute;
    display: block;
    top: -7%;
-   left: 1%;
    width: 100px;
    margin: 20px auto;
    padding: 10px 20px;
@@ -91,6 +87,17 @@ body {
    transition: background-color 0.3s ease;
 }
 
+.back_b {
+  left: 1%;
+}
+
+.edit_b {
+  left: 69%;
+}
+
+.remove_b {
+  left: 81%;
+}
 
 .gray_box {
  width: 601px;
