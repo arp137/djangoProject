@@ -46,31 +46,32 @@ def make_comparative(request):
 def make_comparative_selection(request, season, equip1_name, equip2_name):
     user = request.user
     team1, team2 = api.get_data(season, equip1_name, equip2_name)
+    equip1 = EstadistiquesEquip()
+    equip2 = EstadistiquesEquip()
 
-    temporada, created = Temporada.objects.get_or_create(
-        any=season,
-        titul=f"Season {int(season) - 1}/{season[-2:]}"
-    )
+    temporada = Temporada()
 
-    equip1 = EstadistiquesEquip.objects.filter(temporada=temporada, nom=equip1_name).first()
-    equip2 = EstadistiquesEquip.objects.filter(temporada=temporada, nom=equip2_name).first()
+    temporada.any = season
+    temporada.titul = f"Season {int(season) - 1}/{season[-2:]}"
 
-    if not equip1:
-        equip1 = EstadistiquesEquip(temporada=temporada, nom=equip1_name)
-        copy_all(equip1, team1)
-        equip1.save()
+    temporada.save()
 
-    if not equip2:
-        equip2 = EstadistiquesEquip(temporada=temporada, nom=equip2_name)
-        copy_all(equip2, team2)
-        equip2.save()
+    equip1.temporada = temporada
+    equip2.temporada = temporada
 
-    comp = Comparacio.objects.create(
-        user=user,
-        temporada=temporada,
-        estadistiquesEquip1=equip1,
-        estadistiquesEquip2=equip2
-    )
+    copy_all(equip1, team1)
+    copy_all(equip2, team2)
+
+    equip1.save()
+    equip2.save()
+
+    comp = Comparacio()
+    comp.user = user
+    comp.temporada = temporada
+    comp.estadistiquesEquip1 = equip1
+    comp.estadistiquesEquip2 = equip2
+
+    comp.save()
 
     context = {
         "team1": team1,
@@ -103,19 +104,18 @@ def copy_all(equip, team):
 
 
 @login_required
-def retrieve_comparison(request, user_id, season, equip1_id, equip2_id):
+def retrieve_comparison(request, user_id, season_id, equip1_id, equip2_id):
     temporada = Temporada.objects.filter(
-        any=season,
-        titul=f"Season {int(season) - 1}/{season[-2:]}"
+        id=season_id
     ).first()
 
     equip1 = EstadistiquesEquip.objects.get(
-        nom=equip1_id,
+        id=equip1_id,
         temporada=temporada
     )
 
     equip2 = EstadistiquesEquip.objects.get(
-        nom=equip2_id,
+        id=equip2_id,
         temporada=temporada
     )
     comparacio = Comparacio.objects.get(

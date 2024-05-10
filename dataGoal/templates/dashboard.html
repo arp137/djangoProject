@@ -23,7 +23,7 @@
 
         {% for comp in comps %}
             <div class="league">
-                    <a href="{% url 'get-comp' user_id comp.temporada.any comp.estadistiquesEquip1.nom comp.estadistiquesEquip2.nom %}" class="full-link">
+                <a href="{% url 'get-comp' user_id comp.temporada.id comp.estadistiquesEquip1.id comp.estadistiquesEquip2.id %}" class="full-link">
                     <img id="img1" src="{{ comp.estadistiquesEquip1.escut_url }}">
                     <span id="nom1">{{ comp.estadistiquesEquip1.nom }}</span>
                     <span>vs</span>
@@ -31,20 +31,9 @@
                     <span id="nom2">{{ comp.estadistiquesEquip2.nom }}</span>
                     <span id="temp">{{ comp.temporada.titul }}</span>
                 </a>
-
             </div>
         {% endfor %}
-
-
-
     </main>
-
-    <script>
-
-    function cancelAction() {
-        window.location.href = "{% url 'dashboard' %}";
-    }
-    </script>
 
    <div class="bottom_panel">
        <div class="logo"></div>
