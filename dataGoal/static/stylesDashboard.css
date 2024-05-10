@@ -1,0 +1,168 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../static/images/camp_nou_dif.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+}
+
+
+
+main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+    align-items: start;
+    margin-top: 7.5%;
+    margin-bottom: 7.5%;
+}
+
+.league {
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    min-height: 200px;
+    max-height: 200px;
+}
+
+.league {
+
+}
+
+.league:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.league img {
+    width: 100px;
+    height: 100px;
+}
+
+
+.full-link {
+    height: 100%;
+    width: 100%;
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    color: inherit; /* Hereda el color de texto del elemento padre */
+}
+
+.full-link span {
+    font-size: 14px;
+}
+
+.full-link#add-comp  {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    width: 100%;
+    height: 100%;
+}
+
+.full-link#add-comp span  {
+    font-size: 60px;
+}
+
+.logout_b {
+    position: absolute;
+    left: 85%;
+    padding-top: 5px;
+    width: 120px;
+    font-size: 20px;
+    margin: 20px auto;
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: Rockwell, serif;
+    color: black;
+    background-color: mintcream;
+    transition: background-color 0.3s ease;
+    opacity: 80%;
+}
+
+.logout_b:hover {
+    opacity: 100%;
+}
+
+.top_panel {
+  width: 100%;
+  height: 70px;
+  min-width: 100%;
+  min-height: 70px;
+  background: rgba(0,9,22,1);
+  opacity: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+
+.logo {
+  width: 60px;
+  height: 66px;
+  background: url("../static/images/logo.png") no-repeat center center;
+  background-size: cover;
+  opacity: 1;
+  position: relative;
+  top: 5%;
+  left: 3%;
+  overflow: hidden;
+}
+
+.titulo {
+  width: 162px;
+  color: white;
+  position: absolute;
+  top: 30%;
+  left: 9%;
+  font-weight: bold;
+    font-family: Rockwell, serif;
+  font-size: 25px;
+  opacity: 1;
+  text-align: left;
+}
+
+.bottom_panel {
+  width: 100%;
+  height: 70px;
+  min-width: 100%;
+  min-height: 70px;
+  background: rgba(0,9,22,1);
+  opacity: 1;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  overflow: hidden;
+}
+
+.logo {
+  width: 60px;
+  height: 66px;
+  background: url("../static/images/logo.png") no-repeat center center;
+  background-size: cover;
+  opacity: 1;
+  position: relative;
+  top: 5%;
+  left: 3%;
+  overflow: hidden;
+}
+
+.copyright {
+  width: 162px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 45%;
+  left: 9%;
+  font-family: Inter, serif;
+  font-size: 12px;
+  opacity: 1;
+  text-align: left;
+}
