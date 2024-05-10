@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.template import loader
 from . import api
 from django.http import JsonResponse, HttpResponse
+from django.utils import timezone
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from dataGoal.models import EstadistiquesEquip, Comparacio, Temporada
@@ -143,7 +144,7 @@ def edit_comparison(request, comp_id):
     if request.GET.get('Seasons') and request.GET.get('Team1') and request.GET.get('Team2'):
         if default[0] != selected_year or default[1] != selected_team1 or default[2] != selected_team2:
             temporada = Temporada()
-            temporada.any = selected_year
+            temporada.any = str(selected_year)
             temporada.titul = f"Season {int(selected_year) - 1}/{selected_year[-2:]}"
             temporada.save()
 
@@ -161,8 +162,7 @@ def edit_comparison(request, comp_id):
             equipEst2.save()
 
             comparacio.edit(temporada, equipEst1, equipEst2)
-
-        return redirect('/dashboard/')
+            return redirect('/dashboard/')
 
     context = {
         'user_id': request.user.id,
