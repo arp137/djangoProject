@@ -1,5 +1,3 @@
-import time
-
 from behave import *
 from splinter.browser import Browser
 
@@ -17,15 +15,24 @@ def step_impl(context, username, password):
 
 
 @when('I create a comparative')
-def create_comp(context):
+def step_impl(context):
+    from dataGoal.models import Comparacio
     assert context.browser is not None
     context.browser.visit("http://127.0.0.1:8000/make-comp/")
     select_element = context.browser.find_by_xpath("//*[@id='temporades-select']")
-
+    context.comparative_counter = Comparacio.objects.count()
     select_element.select('2024')
 
     context.browser.find_by_id('equip1-select').select('Real Madrid')
     context.browser.find_by_id('equip2-select').select('Barcelona')
     context.browser.find_by_id('accept-button').click()
-    print(context.browser.url)
     assert context.browser.url == "http://127.0.0.1:8000/dashboard/"
+
+
+@then('There are {count:n} comparative')
+def step_impl(context, count):
+    from dataGoal.models import Comparacio
+    print(context.comparative_counter)
+    comparatives = Comparacio.objects.count() - context.comparative_counter
+    print(comparatives)
+    assert count == comparatives
