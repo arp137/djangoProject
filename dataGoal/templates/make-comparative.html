@@ -36,8 +36,8 @@
                 </select>
             {% endif %}
 
-             <button type="button" class="cancel" id="cancel-button" onclick="cancelAction()">Cancel</button>
-        <button type="button" class="accept" id="accept-button" onclick="validateForm()">Accept</button>
+            <button type="button" class="cancel" id="cancel-button" onclick="cancelAction()">Cancel</button>
+            <button type="button" class="accept" id="accept-button" onclick="this.form.submit()">Accept</button>
     </form>
 
     <script>
