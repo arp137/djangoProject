@@ -1,50 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="../static/stylesConfirmDelete.css" rel="stylesheet" />
-    <link href="../static/images/logo.png" rel="icon" />
+    <link href="../../static/stylesConfirmDelete.css" rel="stylesheet" />
+    <link href="../../static/images/logo.png" rel="icon" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmation Message</title>
-    <style>
-        .confirmation-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #f9f9f9;
-            padding: 60px; /* Aumenta el padding */
-            border: 1px solid #ccc;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            max-width: 600px;
-            text-align: center;
-        }
-        .confirmation-box p {
-            margin-bottom: 30px; /* Aumenta el margen inferior */
-            font-size: 24px; /* Aumenta el tamaño de fuente */
-        }
-        .confirmation-box button {
-            margin: 10px; /* Aumenta el margen */
-            padding: 20px 40px; /* Aumenta el padding */
-            font-size: 16px; /* Aumenta el tamaño de fuente */
-            border: none;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
 
 <div class="confirmation-box">
     <form method="post">
         {% csrf_token %}
-        <p style="text-align: center;">Are you sure you want to delete the comparative?</p>
-        <div style="display: flex; justify-content: center;">
-            <button style="margin-left: 10px;" class="delete" onclick="this.form.submit()">Delete</button>
-            <button class="back" onclick="cancelAction()">Back</button>
-        </div>
+        <p>Are you sure you want to delete the comparative?</p>
+        <button class="back" onclick="cancelAction()">Back</button>
+        <button class="delete" onclick="this.form.submit()">Confirm</button>
     </form>
 </div>
 
