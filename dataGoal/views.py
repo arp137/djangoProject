@@ -162,7 +162,8 @@ def edit_comparison(request, comp_id):
             equipEst2.save()
 
             comparacio.edit(temporada, equipEst1, equipEst2)
-            return redirect('/dashboard/')
+
+        return redirect('/dashboard/')
 
     context = {
         'user_id': request.user.id,

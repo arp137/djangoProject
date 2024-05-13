@@ -85,6 +85,7 @@ class Comparacio(models.Model):
     estadistiquesEquip2 = models.ForeignKey(EstadistiquesEquip, on_delete=models.CASCADE, related_name='equip2')
 
     def edit(self, new_temp, new_equip1, new_equip2):
+        self.last_save_date = timezone.now()
         self.temporada = new_temp
         self.estadistiquesEquip1 = new_equip1
         self.estadistiquesEquip2 = new_equip2
