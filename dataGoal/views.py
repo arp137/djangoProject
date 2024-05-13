@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.template import loader
 from . import api
 from django.http import JsonResponse, HttpResponse
@@ -72,6 +72,7 @@ def make_comparative(request):
     template = '../../dataGoal/templates/make-comparative.html'
     return render(request, template, context)
 
+
 def copy_all(equip, team):
     equip.nom = team.name
     equip.abreviacio = team.abreviation
@@ -115,7 +116,6 @@ def retrieve_comparison(request, user_id, season_id, equip1_id, equip2_id):
         estadistiquesEquip1=equip1,
         estadistiquesEquip2=equip2,
     )
-    print(equip1.gols_favor_local)
     template = '../../dataGoal/templates/retrieve_comparative_selection.html'
     return render(request, template, {'comparacio': comparacio})
 
@@ -123,7 +123,7 @@ def retrieve_comparison(request, user_id, season_id, equip1_id, equip2_id):
 def edit_comparison(request, comp_id):
     comparacio = Comparacio.objects.get(id=comp_id)
     default = [comparacio.temporada.any, comparacio.estadistiquesEquip1.nom, comparacio.estadistiquesEquip2.nom]
-
+    default_id = [comparacio.temporada.id, comparacio.estadistiquesEquip1.id, comparacio.estadistiquesEquip2.id]
     selected_year = request.GET.get('Seasons')
     selected_team1 = request.GET.get('Team1')
     selected_team2 = request.GET.get('Team2')
@@ -157,6 +157,9 @@ def edit_comparison(request, comp_id):
 
     context = {
         'user_id': request.user.id,
+        'def_year_id': default_id[0],
+        'def_team1_id': default_id[1],
+        'def_team2_id': default_id[2],
         "years": api.get_years(),
         "selected_year": selected_year,
         "teams": teams,
@@ -168,5 +171,19 @@ def edit_comparison(request, comp_id):
     return render(request, template, context)
 
 
+def confirm_delete_view(request, comp_id):
+    comparacio = get_object_or_404(Comparacio, id=comp_id)
+    default_id = [comparacio.temporada.id, comparacio.estadistiquesEquip1.id, comparacio.estadistiquesEquip2.id]
 
-    
+    if request.method == 'POST':
+        comparacio.delete()
+        return redirect('/dashboard/')
+
+    context = {
+        'user_id': request.user.id,
+        'def_year_id': default_id[0],
+        'def_team1_id': default_id[1],
+        'def_team2_id': default_id[2]
+    }
+
+    return render(request, 'confirm-delete.html', context)

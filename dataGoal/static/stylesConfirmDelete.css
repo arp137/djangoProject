@@ -1,0 +1,60 @@
+body {
+  background: url("images/camp_nou_dif.jpg") fixed center;
+  background-size: cover;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.confirmation-box button.delete {
+    background-color: red;
+    color: white;
+    padding: 10px 35px;
+    border: none;
+    cursor: pointer;
+}
+
+.confirmation-box button.back {
+    background-color: green;
+
+}
+
+
+.bottom_panel {
+  width: 100%;
+  height: 70px;
+  min-width: 100%;
+  min-height: 70px;
+  background: rgba(0,9,22,1);
+  opacity: 1;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  overflow: hidden;
+}
+
+
+.logo {
+  width: 60px;
+  height: 66px;
+  background: url("images/logo.png") no-repeat center center;
+  background-size: cover;
+  opacity: 1;
+  position: relative;
+  top: 5%;
+  left: 3%;
+  overflow: hidden;
+}
+
+.copyright {
+  width: 162px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 45%;
+  left: 9%;
+  font-family: Inter, serif;
+  font-size: 12px;
+  opacity: 1;
+  text-align: left;
+}

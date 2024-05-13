@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <link href="../../static/stylesMakeComp.css" rel="stylesheet" />
-    <link href="../static/images/logo.png" rel="icon" />
+    <link href="../../static/images/logo.png" rel="icon" />
     <title>Data Goal - Make a comparative</title>
 </head>
 <body>
@@ -38,7 +38,8 @@
     <script>
 
     function cancelAction() {
-        window.history.back();
+        var newURL = "http://127.0.0.1:8000/make-comp/" + "{{ user_id }}" + "/" + "{{def_year_id}}" + "/" + "{{def_team1_id}}" + "/" + "{{def_team2_id}}" + "/";
+        window.location.href = newURL;
     }
     </script>
 
