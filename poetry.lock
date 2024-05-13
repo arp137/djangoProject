@@ -15,6 +15,26 @@ files = [
 tests = ["mypy (>=0.800)", "pytest", "pytest-asyncio"]
 
 [[package]]
+name = "behave"
+version = "1.2.6"
+description = "behave is behaviour-driven development, Python style"
+optional = false
+python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
+files = [
+    {file = "behave-1.2.6-py2.py3-none-any.whl", hash = "sha256:ebda1a6c9e5bfe95c5f9f0a2794e01c7098b3dde86c10a95d8621c5907ff6f1c"},
+    {file = "behave-1.2.6.tar.gz", hash = "sha256:b9662327aa53294c1351b0a9c369093ccec1d21026f050c3bd9b3e5cccf81a86"},
+]
+
+[package.dependencies]
+parse = ">=1.8.2"
+parse-type = ">=0.4.2"
+six = ">=1.11"
+
+[package.extras]
+develop = ["coverage", "invoke (>=0.21.0)", "modernize (>=0.5)", "path.py (>=8.1.2)", "pathlib", "pycmd", "pylint", "pytest (>=3.0)", "pytest-cov", "tox"]
+docs = ["sphinx (>=1.6)", "sphinx-bootstrap-theme (>=0.6)"]
+
+[[package]]
 name = "certifi"
 version = "2024.2.2"
 description = "Python package for providing Mozilla's CA Bundle."
@@ -516,6 +536,37 @@ files = [
 ]
 
 [[package]]
+name = "parse"
+version = "1.20.1"
+description = "parse() is the opposite of format()"
+optional = false
+python-versions = "*"
+files = [
+    {file = "parse-1.20.1-py2.py3-none-any.whl", hash = "sha256:76ddd5214255ae711db4c512be636151fbabaa948c6f30115aecc440422ca82c"},
+    {file = "parse-1.20.1.tar.gz", hash = "sha256:09002ca350ad42e76629995f71f7b518670bcf93548bdde3684fd55d2be51975"},
+]
+
+[[package]]
+name = "parse-type"
+version = "0.6.2"
+description = "Simplifies to build parse types based on the parse module"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*"
+files = [
+    {file = "parse_type-0.6.2-py2.py3-none-any.whl", hash = "sha256:06d39a8b70fde873eb2a131141a0e79bb34a432941fb3d66fad247abafc9766c"},
+    {file = "parse_type-0.6.2.tar.gz", hash = "sha256:79b1f2497060d0928bc46016793f1fca1057c4aacdf15ef876aa48d75a73a355"},
+]
+
+[package.dependencies]
+parse = {version = ">=1.18.0", markers = "python_version >= \"3.0\""}
+six = ">=1.15"
+
+[package.extras]
+develop = ["build (>=0.5.1)", "coverage (>=4.4)", "pylint", "pytest (<5.0)", "pytest (>=5.0)", "pytest-cov", "pytest-html (>=1.19.0)", "ruff", "tox (>=2.8,<4.0)", "twine (>=1.13.0)", "virtualenv (<20.22.0)", "virtualenv (>=20.0.0)"]
+docs = ["Sphinx (>=1.6)", "sphinx-bootstrap-theme (>=0.6.0)"]
+testing = ["pytest (<5.0)", "pytest (>=5.0)", "pytest-html (>=1.19.0)"]
+
+[[package]]
 name = "pillow"
 version = "10.3.0"
 description = "Python Imaging Library (Fork)"
@@ -662,6 +713,26 @@ files = [
 ]
 
 [[package]]
+name = "splinter"
+version = "0.21.0"
+description = "browser abstraction for web acceptance testing"
+optional = false
+python-versions = "*"
+files = [
+    {file = "splinter-0.21.0-py3-none-any.whl", hash = "sha256:4c9e5962ce25f468b2dd52effbd1445afd7466740f238e564c6b70f7fda9368f"},
+    {file = "splinter-0.21.0.tar.gz", hash = "sha256:60cbbec9209acefccf39608d677eecdb248bbd700023663ce406595322c38fe5"},
+]
+
+[package.dependencies]
+urllib3 = ">=1.26.14,<3.0"
+
+[package.extras]
+django = ["Django (>=2.0.6)", "cssselect", "lxml (>=4.2.4)"]
+flask = ["Flask (>=2.3.2)", "cssselect", "lxml (>=4.2.4)"]
+selenium = ["selenium (>=4.1.0,<4.17.0)"]
+zope-testbrowser = ["cssselect", "lxml (>=4.2.4)", "zope.testbrowser (>=6.0)"]
+
+[[package]]
 name = "sqlparse"
 version = "0.4.4"
 description = "A non-validating SQL parser."
@@ -705,7 +776,18 @@ h2 = ["h2 (>=4,<5)"]
 socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
 zstd = ["zstandard (>=0.18.0)"]
 
+[[package]]
+name = "your-app"
+version = "0.1.0"
+description = "Your Python application."
+optional = false
+python-versions = "*"
+files = [
+    {file = "your_app-0.1.0-py2.py3-none-any.whl", hash = "sha256:e20429a1b5ec7536a25ffb2f9b453d2cd2e8b28384e81215ca57bdcea5d3509b"},
+    {file = "your_app-0.1.0.tar.gz", hash = "sha256:a633491d6808fd285cbbbfe959542337ceca0bcf72d422d2b67d9ef0be625a88"},
+]
+
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "bd212fea1117770afcf41a6980142d38f9df8e1227cf6ea8617a2924fa01c22b"
+content-hash = "594723c664f49e2baa7fbf3db27feaa2125841550aebd4f3fe34017fdc4e1373"

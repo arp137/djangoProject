@@ -1,9 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.template import loader
 from . import api
-from django.http import JsonResponse, HttpResponse
-from django.utils import timezone
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from dataGoal.models import EstadistiquesEquip, Comparacio, Temporada

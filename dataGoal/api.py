@@ -1,6 +1,5 @@
 import requests
 import time
-import matplotlib.pyplot as plt
 import random
 
 API_KEYM = 'ae35a20f9c5e9701e61aae3c11a7aa82'  # MINE

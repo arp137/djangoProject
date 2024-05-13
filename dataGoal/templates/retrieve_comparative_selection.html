@@ -7,7 +7,6 @@
 </head>
 
 <body>
-   <div class="make_a_comparative">
        <div class="top_panel">
            <a class="back_b" href="{% url 'dashboard' %}">BACK</a>
            <a class="edit_b" href="{% url 'edit-comp' comparacio.id %}">EDIT</a>
@@ -98,12 +97,88 @@
             </div>
        </div>
        <div class="second_gray_box"></div>
+            <div class="stats1">
+                <div class="team1name">
+                     <h3>{{comparacio.estadistiquesEquip2.nom}}</h3>
+                </div>
+                <div class="local">
+                     <h3>Local</h3>
+                </div>
+                <div class="visitante">
+                     <h3>Away</h3>
+                </div>
+                <div class="total">
+                     <h3>Total</h3>
+                </div>
+                <div class="puntos">
+                    <h3>Points</h3>
+                    <ul>
+                        <li>{{ comparacio.estadistiquesEquip2.puntos_local }}</li>
+                        <li>{{ comparacio.estadistiquesEquip2.puntos_visitant }}</li>
+                        <li>{{ comparacio.estadistiquesEquip2.puntos_totals }}</li>
+                    </ul>
+                </div>
 
 
-       <h1 class="title1">
-           GET COMPARATIVE
-       </h1>
-   </div>
+               <div class="victories">
+                   <h3>Victories</h3>
+                   <ul>
+                       <li>{{ comparacio.estadistiquesEquip2.victorias_local }}</li>
+                       <li>{{ comparacio.estadistiquesEquip2.victorias_visitant }}</li>
+                       <li>{{ comparacio.estadistiquesEquip2.victorias_totals }}</li>
+                   </ul>
+               </div>
+
+
+                <div class="draws">
+                    <h3>Draws</h3>
+                    <ul>
+                        <li>{{ comparacio.estadistiquesEquip2.empates_local }}</li>
+                        <li>{{ comparacio.estadistiquesEquip2.empates_visitant }}</li>
+                        <li>{{ comparacio.estadistiquesEquip2.empates_totals }}</li>
+                    </ul>
+                </div>
+
+
+                <div class="defeats">
+                    <h3>Defeats</h3>
+                    <ul>
+                        <li>{{ comparacio.estadistiquesEquip2.derrotas_local }}</li>
+                        <li>{{ comparacio.estadistiquesEquip2.derrotas_visitant }}</li>
+                        <li>{{ comparacio.estadistiquesEquip2.derrotas_totals }}</li>
+                    </ul>
+                </div>
+
+
+                <div class="goles_a_favor">
+                    <h3>Scored goals</h3>
+                    <ul>
+                        <li>{{ comparacio.estadistiquesEquip2.gols_favor_local }}</li>
+                        <li>{{ comparacio.estadistiquesEquip2.gols_favor_visitant }}</li>
+                        <li>{{ comparacio.estadistiquesEquip2.gols_favor_totals }}</li>
+                    </ul>
+                </div>
+
+
+                <div class="goles_en_contra">
+                    <h3>Conceded goals</h3>
+                    <ul>
+                        <li>{{ comparacio.estadistiquesEquip2.gols_en_contra_local }}</li>
+                        <li>{{ comparacio.estadistiquesEquip2.gols_en_contra_visitant }}</li>
+                        <li>{{ comparacio.estadistiquesEquip2.gols_en_contra_totals }}</li>
+                    </ul>
+                </div>
+
+
+                <div class="diferencia_goles">
+                    <h3>Goal difference</h3>
+                    <ul>
+                        <li>{{ comparacio.estadistiquesEquip2diferencia_gols_local }}</li>
+                        <li>{{ comparacio.estadistiquesEquip2.diferencia_gols_visitant }}</li>
+                        <li>{{ comparacio.estadistiquesEquip2.diferencia_gols_totals }}</li>
+                    </ul>
+                </div>
+            </div>
    <div class="bottom_panel">
        <div class="logo"></div>
        <span class="copyright">© Copyright 2024 - Data Goal</span>
