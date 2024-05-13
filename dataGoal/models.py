@@ -78,7 +78,7 @@ class EstadistiquesEquip(models.Model):
 
 
 class Comparacio(models.Model):
-    user = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, default=1, on_delete=models.DO_NOTHING)
     last_save_date = models.DateTimeField(default=timezone.now)
     temporada = models.ForeignKey(Temporada, on_delete=models.CASCADE)
     estadistiquesEquip1 = models.ForeignKey(EstadistiquesEquip, on_delete=models.CASCADE, related_name='equip1')

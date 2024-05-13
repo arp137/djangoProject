@@ -1,0 +1,95 @@
+body {
+  background: url("images/camp_nou_dif.jpg") fixed center;
+  background-size: cover;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+
+.bottom_panel {
+  width: 100%;
+  height: 70px;
+  min-width: 100%;
+  min-height: 70px;
+  background: rgba(0,9,22,1);
+  opacity: 1;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  overflow: hidden;
+}
+
+
+.logo {
+  width: 60px;
+  height: 66px;
+  background: url("images/logo.png") no-repeat center center;
+  background-size: cover;
+  opacity: 1;
+  position: relative;
+  top: 5%;
+  left: 3%;
+  overflow: hidden;
+}
+
+.copyright {
+  width: 162px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 45%;
+  left: 9%;
+  font-family: Inter, serif;
+  font-size: 12px;
+  opacity: 1;
+  text-align: left;
+}
+
+.confirmation-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f9f9f9;
+  padding: 60px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+}
+
+button {
+  width: 120px;
+  height: 50px;
+  border-radius: 25px;
+  border: none;
+
+  font-family: Inter, serif;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  top: 80%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+
+  opacity: 85%;
+}
+
+#back {
+  left: 30%;
+  background: #FB2828;
+}
+
+#delete {
+  left: 60%;
+  background: #37CA03;
+}
+
+button:hover{
+  opacity: 100%;
+}

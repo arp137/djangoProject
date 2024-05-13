@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <link href="../../static/stylesMakeComp.css" rel="stylesheet" />
-    <link href="../static/images/logo.png" rel="icon" />
-    <title>Data Goal - Make a comparative</title>
+    <link href="../../static/images/logo.png" rel="icon" />
+    <title>Data Goal - Edit comparative</title>
 </head>
 <body>
     <div class="make_a_comparative">
@@ -31,14 +31,15 @@
                         <option value="{{ team }}" {% if selected_team2 == team %}selected{% endif %}>{{ team }}</option>
                     {% endfor %}
                 </select>
-             <button type="button" class="cancel" id="cancel-button" onclick="cancelAction()">Cancel</button>
-        <button type="button" class="accept" id="accept-button" onclick="this.form.submit()">Accept</button>
+            <button type="button" class="cancel" id="cancel-button" onclick="cancelAction()">Cancel</button>
+            <button type="button" class="accept" id="accept-button" onclick="this.form.submit()">Accept</button>
     </form>
 
     <script>
 
     function cancelAction() {
-        window.history.back();
+        var newURL = "http://127.0.0.1:8000/make-comp/" + "{{ user_id }}" + "/" + "{{def_year_id}}" + "/" + "{{def_team1_id}}" + "/" + "{{def_team2_id}}" + "/";
+        window.location.href = newURL;
     }
     </script>
 

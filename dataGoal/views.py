@@ -1,6 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
+from django.template import loader
 from . import api
+from django.http import JsonResponse, HttpResponse
+from django.utils import timezone
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from dataGoal.models import EstadistiquesEquip, Comparacio, Temporada
@@ -14,7 +17,6 @@ class dashboardClass(LoginRequiredMixin, generic.TemplateView):
         comparaciones_ordenadas = Comparacio.objects.filter(user=usuario_actual).order_by('-last_save_date')
         context = {'user_id': usuario_actual.id}
         if comparaciones_ordenadas:
-            print("Length: ", len(comparaciones_ordenadas))
             length = len(comparaciones_ordenadas) if len(comparaciones_ordenadas) < 5 else 5
             context['comps'] = comparaciones_ordenadas[:length]
         return context
@@ -24,8 +26,40 @@ class dashboardClass(LoginRequiredMixin, generic.TemplateView):
 def make_comparative(request):
     selected_year = request.GET.get('Seasons')
     selected_team1 = request.GET.get('Team1')
+    selected_team2 = request.GET.get('Team2')
     teams = api.get_teams(selected_year) if selected_year else None
     teams_without = api.get_teams_without_selected(teams, selected_team1) if selected_team1 and teams else None
+
+    if selected_year and selected_team1 and selected_team2:
+        user = request.user
+        team1, team2 = api.get_data(selected_year, selected_team1, selected_team2)
+        equip1 = EstadistiquesEquip()
+        equip2 = EstadistiquesEquip()
+
+        temporada = Temporada()
+
+        temporada.any = selected_year
+        temporada.titul = f"Season {int(selected_year) - 1}/{selected_year[-2:]}"
+
+        temporada.save()
+
+        equip1.temporada = temporada
+        equip2.temporada = temporada
+
+        copy_all(equip1, team1)
+        copy_all(equip2, team2)
+
+        equip1.save()
+        equip2.save()
+
+        comp = Comparacio()
+        comp.user = user
+        comp.temporada = temporada
+        comp.estadistiquesEquip1 = equip1
+        comp.estadistiquesEquip2 = equip2
+
+        comp.save()
+        return redirect('/dashboard/')
 
     context = {
         'user_id': request.user.id,
@@ -36,46 +70,6 @@ def make_comparative(request):
         "teams_without": teams_without
     }
     template = '../../dataGoal/templates/make-comparative.html'
-    return render(request, template, context)
-
-
-@login_required
-def make_comparative_selection(request, season, equip1_name, equip2_name):
-    user = request.user
-    team1, team2 = api.get_data(season, equip1_name, equip2_name)
-    equip1 = EstadistiquesEquip()
-    equip2 = EstadistiquesEquip()
-
-    temporada = Temporada()
-
-    temporada.any = season
-    temporada.titul = f"Season {int(season) - 1}/{season[-2:]}"
-
-    temporada.save()
-
-    equip1.temporada = temporada
-    equip2.temporada = temporada
-
-    copy_all(equip1, team1)
-    copy_all(equip2, team2)
-
-    equip1.save()
-    equip2.save()
-
-    comp = Comparacio()
-    comp.user = user
-    comp.temporada = temporada
-    comp.estadistiquesEquip1 = equip1
-    comp.estadistiquesEquip2 = equip2
-
-    comp.save()
-
-    context = {
-        'comparacio': comp,
-        "team1": team1,
-        "team2": team2
-    }
-    template = '../../dataGoal/templates/make-comparative-selection.html'
     return render(request, template, context)
 
 
@@ -122,7 +116,6 @@ def retrieve_comparison(request, user_id, season_id, equip1_id, equip2_id):
         estadistiquesEquip1=equip1,
         estadistiquesEquip2=equip2,
     )
-    print(equip1.gols_favor_local)
     template = '../../dataGoal/templates/retrieve_comparative_selection.html'
     return render(request, template, {'comparacio': comparacio})
 
@@ -130,7 +123,7 @@ def retrieve_comparison(request, user_id, season_id, equip1_id, equip2_id):
 def edit_comparison(request, comp_id):
     comparacio = Comparacio.objects.get(id=comp_id)
     default = [comparacio.temporada.any, comparacio.estadistiquesEquip1.nom, comparacio.estadistiquesEquip2.nom]
-
+    default_id = [comparacio.temporada.id, comparacio.estadistiquesEquip1.id, comparacio.estadistiquesEquip2.id]
     selected_year = request.GET.get('Seasons')
     selected_team1 = request.GET.get('Team1')
     selected_team2 = request.GET.get('Team2')
@@ -164,6 +157,9 @@ def edit_comparison(request, comp_id):
 
     context = {
         'user_id': request.user.id,
+        'def_year_id': default_id[0],
+        'def_team1_id': default_id[1],
+        'def_team2_id': default_id[2],
         "years": api.get_years(),
         "selected_year": selected_year,
         "teams": teams,
@@ -175,5 +171,19 @@ def edit_comparison(request, comp_id):
     return render(request, template, context)
 
 
+def confirm_delete_view(request, comp_id):
+    comparacio = get_object_or_404(Comparacio, id=comp_id)
+    default_id = [comparacio.temporada.id, comparacio.estadistiquesEquip1.id, comparacio.estadistiquesEquip2.id]
 
-    
+    if request.method == 'POST':
+        comparacio.delete()
+        return redirect('/dashboard/')
+
+    context = {
+        'user_id': request.user.id,
+        'def_year_id': default_id[0],
+        'def_team1_id': default_id[1],
+        'def_team2_id': default_id[2]
+    }
+
+    return render(request, 'confirm-delete.html', context)

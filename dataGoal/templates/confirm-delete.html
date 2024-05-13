@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="../../static/stylesConfirmDelete.css" rel="stylesheet" />
+    <link href="../../static/images/logo.png" rel="icon" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation Message</title>
+</head>
+<body>
+
+<div class="confirmation-box">
+    <form method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete the comparative?</p>
+        <button class="back" onclick="cancelAction()">Back</button>
+        <button class="delete" onclick="this.form.submit()">Confirm</button>
+    </form>
+</div>
+
+<div class="bottom_panel">
+    <div class="logo"></div>
+    <span class="copyright">© Copyright 2024 - Data Goal</span>
+</div>
+
+ <script>
+
+    function cancelAction() {
+        var newURL = "http://127.0.0.1:8000/make-comp/" + "{{ user_id }}" + "/" + "{{def_year_id}}" + "/" + "{{def_team1_id}}" + "/" + "{{def_team2_id}}" + "/";
+        window.location.href = newURL;
+    }
+    </script>
+
+</body>
+</html>
