@@ -133,6 +133,13 @@ def edit_comparison(request, comp_id):
 
     if request.GET.get('Seasons') and request.GET.get('Team1') and request.GET.get('Team2'):
         if default[0] != selected_year or default[1] != selected_team1 or default[2] != selected_team2:
+            estadistiques1 = comparacio.estadistiquesEquip1
+            estadistiques2 = comparacio.estadistiquesEquip2
+            temporada = comparacio.temporada
+            estadistiques1.delete()
+            estadistiques2.delete()
+            temporada.delete()
+
             temporada = Temporada()
             temporada.any = str(selected_year)
             temporada.titul = f"Season {int(selected_year) - 1}/{selected_year[-2:]}"
@@ -176,6 +183,12 @@ def confirm_delete_view(request, comp_id):
     default_id = [comparacio.temporada.id, comparacio.estadistiquesEquip1.id, comparacio.estadistiquesEquip2.id]
 
     if request.method == 'POST':
+        estadistiques1 = comparacio.estadistiquesEquip1
+        estadistiques2 = comparacio.estadistiquesEquip2
+        temporada = comparacio.temporada
+        estadistiques1.delete()
+        estadistiques2.delete()
+        temporada.delete()
         comparacio.delete()
         return redirect('/dashboard/')
 

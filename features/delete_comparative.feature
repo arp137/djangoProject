@@ -6,3 +6,5 @@ Feature: Delete a comparative between two teams
     And I click on the comparative
     And I click on the remove button and I accept to delete it
     Then There is one less comparative
+    And There are two less Team Statistics
+    And There is one Season less

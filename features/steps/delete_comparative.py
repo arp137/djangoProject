@@ -27,10 +27,12 @@ def step_impl(context):
 
 @given("I click on the remove button and I accept to delete it")
 def step_impl(context):
-    from dataGoal.models import Comparacio
+    from dataGoal.models import Comparacio, EstadistiquesEquip, Temporada
     remove_link = context.browser.find_by_text('REMOVE')
     remove_link.first.click()
     context.browser.before_deleting = Comparacio.objects.all().count()
+    context.browser.statistics_before = EstadistiquesEquip.objects.all().count()
+    context.browser.seasons_before = Temporada.objects.all().count()
     confirm_button = context.browser.find_by_xpath("//button[@class='delete']")
     confirm_button.click()
     assert context.browser.url == "http://127.0.0.1:8000/dashboard/"
@@ -41,3 +43,19 @@ def step_impl(context):
     from dataGoal.models import Comparacio
     current_comparative = Comparacio.objects.all().count()
     assert current_comparative + 1 == context.browser.before_deleting
+
+
+@then('There are two less Team Statistics')
+def step_impl(context):
+    from dataGoal.models import EstadistiquesEquip
+    current_statistics = EstadistiquesEquip.objects.all().count()
+    print(current_statistics)
+    print(context.browser.statistics_before)
+    assert current_statistics + 2 == context.browser.statistics_before
+
+
+@then('There is one Season less')
+def step_impl(context):
+    from dataGoal.models import Temporada
+    current_season = Temporada.objects.all().count()
+    assert current_season + 1 == context.browser.seasons_before
