@@ -49,8 +49,6 @@ def step_impl(context):
 def step_impl(context):
     from dataGoal.models import EstadistiquesEquip
     current_statistics = EstadistiquesEquip.objects.all().count()
-    print(current_statistics)
-    print(context.browser.statistics_before)
     assert current_statistics + 2 == context.browser.statistics_before
 
 
