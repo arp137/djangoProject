@@ -4,7 +4,6 @@ from behave import *
 @given("Exists a user {username}")
 def step_impl(context, username):
     from django.contrib.auth.models import User
-    print(username)
     assert User.objects.filter(username=username).exists()
 
 
@@ -30,7 +29,7 @@ def step_impl(context):
     from dataGoal.models import Comparacio, EstadistiquesEquip, Temporada
     remove_link = context.browser.find_by_text('REMOVE')
     remove_link.first.click()
-    context.browser.before_deleting = Comparacio.objects.all().count()
+    context.browser.comparatives_before = Comparacio.objects.all().count()
     context.browser.statistics_before = EstadistiquesEquip.objects.all().count()
     context.browser.seasons_before = Temporada.objects.all().count()
     confirm_button = context.browser.find_by_xpath("//button[@class='delete']")
@@ -42,7 +41,7 @@ def step_impl(context):
 def step_impl(context):
     from dataGoal.models import Comparacio
     current_comparative = Comparacio.objects.all().count()
-    assert current_comparative + 1 == context.browser.before_deleting
+    assert current_comparative + 1 == context.browser.comparatives_before
 
 
 @then('There are two less Team Statistics')
