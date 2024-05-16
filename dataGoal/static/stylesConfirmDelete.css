@@ -57,15 +57,15 @@ body {
   border-radius: 25px;
   border: 1px solid #ccc;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 800px;
-  max-height: 300px;
+  max-width: 550px;
+  max-height: 250px;
   justify-content: center;
   margin-top: 40px;
 }
 
 button {
-  width: 130px;
-  height: 70px;
+  width: 120px;
+  height: 60px;
   border-radius: 25px;
   border: none;
   font-family: Rockwell, serif;
@@ -80,12 +80,12 @@ button {
 
 button.back {
   margin-right: 30px;
-  background: #37CA03; /* Green background for back button */
+  background: #FB2828; /* Green background for back button */
 }
 
 button.delete {
   margin-left: 90px;
-  background: #FB2828; /* Red background for delete button */
+  background: #37CA03; /* Red background for delete button */
 }
 
 button:hover {
