@@ -24,14 +24,21 @@
         {% for comp in comps %}
             <div class="league">
                 <a href="{% url 'get-comp' user_id comp.temporada.id comp.estadistiquesEquip1.id comp.estadistiquesEquip2.id %}" class="full-link">
-                    <img id="img1" src="{{ comp.estadistiquesEquip1.escut_url }}">
-                    <span id="nom1">{{ comp.estadistiquesEquip1.nom }}</span>
-                    <span>vs</span>
-                    <img id="img2" src="{{ comp.estadistiquesEquip2.escut_url }}">
-                    <span id="nom2">{{ comp.estadistiquesEquip2.nom }}</span>
+                   <br><div class="teams-info">
+                       <div class="team1">
+                           <img id="img1" src="{{ comp.estadistiquesEquip1.escut_url }}"><br>
+                           <span id="nom1">{{ comp.estadistiquesEquip1.nom }}</span>
+                       </div>
+                       <span>vs</span>
+                       <div class="team2">
+                           <img id="img2" src="{{ comp.estadistiquesEquip2.escut_url }}"><br>
+                           <span id="nom2">{{ comp.estadistiquesEquip2.nom }}</span>
+                       </div>
+                   </div><br>
                     <span id="temp">{{ comp.temporada.titul }}</span>
                 </a>
             </div>
+
         {% endfor %}
     </main>
 
