@@ -12,7 +12,7 @@
 <div class="confirmation-box">
     <form method="post">
         {% csrf_token %}
-        <p>Are you sure you want to delete the comparative?</p>
+        <p class = "confirmation-text">Are you sure you want to delete the comparative?</p>
         <button class="back" onclick="cancelAction()">Back</button>
         <button class="delete" onclick="this.form.submit()">Confirm</button>
     </form>
