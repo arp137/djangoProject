@@ -13,6 +13,7 @@
        <a class="remove_b" href="{% url 'confirm-delete' comparacio.id %}">REMOVE</a>
    </div>
    <div class="gray_box">
+       <img id="img1" src="{{ comparacio.estadistiquesEquip1.escut_url }}">
         <div class="stats1">
             <div class="team1name">
                  <h3>{{comparacio.estadistiquesEquip1.nom}}</h3>
@@ -97,6 +98,7 @@
         </div>
    </div>
    <div class="second_gray_box">
+       <img id="img2" src="{{ comparacio.estadistiquesEquip2.escut_url }}">
         <div class="stats1">
             <div class="team1name">
                  <h3>{{comparacio.estadistiquesEquip2.nom}}</h3>

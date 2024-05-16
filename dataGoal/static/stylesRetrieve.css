@@ -105,7 +105,7 @@ body {
 .gray_box {
  width: 601px;
  height: 532px;
- background: rgba(230, 230, 230, 0.8); /* Cambia el valor alfa para ajustar la transparencia */
+ background: rgba(255, 255, 255, 1); ; /* Cambia el valor alfa para ajustar la transparencia */
  position: fixed;
  top: 13%;
  left: 5%;
@@ -117,7 +117,7 @@ body {
 .second_gray_box {
  width: 601px;
  height: 532px;
- background: rgba(230, 230, 230, 0.8); /* Cambia el valor alfa para ajustar la transparencia */
+ background: rgba(255, 255, 255, 1);
  position: fixed;
  top: 13%;
  right: 5%;
@@ -144,6 +144,16 @@ body {
  position: absolute;
  top: 25%;
  left: 325px;
+}
+
+.gray_box img#img1,
+.second_gray_box img#img2 {
+  width: 70px;
+  height: auto;
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 
