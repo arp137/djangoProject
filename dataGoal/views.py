@@ -183,14 +183,18 @@ def confirm_delete_view(request, comp_id):
     default_id = [comparacio.temporada.id, comparacio.estadistiquesEquip1.id, comparacio.estadistiquesEquip2.id]
 
     if request.method == 'POST':
-        estadistiques1 = comparacio.estadistiquesEquip1
-        estadistiques2 = comparacio.estadistiquesEquip2
-        temporada = comparacio.temporada
-        estadistiques1.delete()
-        estadistiques2.delete()
-        temporada.delete()
-        comparacio.delete()
-        return redirect('/dashboard/')
+        if request.POST.get('confirmation') == 'true':  # Se confirmó la eliminación
+            estadistiques1 = comparacio.estadistiquesEquip1
+            estadistiques2 = comparacio.estadistiquesEquip2
+            temporada = comparacio.temporada
+            estadistiques1.delete()
+            estadistiques2.delete()
+            temporada.delete()
+            comparacio.delete()
+            return redirect('/dashboard/')
+        else:
+            # No se confirmó la eliminación, puedes manejarlo de alguna manera
+            pass
 
     context = {
         'user_id': request.user.id,

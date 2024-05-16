@@ -13,8 +13,9 @@
     <form method="post">
         {% csrf_token %}
         <p>Are you sure you want to delete the comparative?</p>
-        <button class="back" onclick="cancelAction()">Back</button>
-        <button class="delete" onclick="this.form.submit()">Confirm</button>
+        <input type="hidden" name="confirmation" id="confirmation" value="false">
+        <button class="back" type="button" onclick="cancelAction()">Back</button>
+        <button class="delete" type="button" onclick="confirmAction()">Confirm</button>
     </form>
 </div>
 
@@ -23,13 +24,17 @@
     <span class="copyright">© Copyright 2024 - Data Goal</span>
 </div>
 
- <script>
-
+<script>
     function cancelAction() {
-        var newURL = "http://127.0.0.1:8000/make-comp/" + "{{ user_id }}" + "/" + "{{def_year_id}}" + "/" + "{{def_team1_id}}" + "/" + "{{def_team2_id}}" + "/";
+        var newURL = "http://127.0.0.1:8000/make-comp/{{ user_id }}/{{def_year_id}}/{{def_team1_id}}/{{def_team2_id}}/";
         window.location.href = newURL;
     }
-    </script>
+
+    function confirmAction() {
+        document.getElementById("confirmation").value = "true";
+        document.querySelector("form").submit();
+    }
+</script>
 
 </body>
 </html>
