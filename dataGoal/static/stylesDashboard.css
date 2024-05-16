@@ -14,9 +14,6 @@ body {
     margin-top: 10px; /* Espacio adicional encima del elemento */
 }
 
-
-
-
 main {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -36,6 +33,26 @@ main {
     min-height: 200px;
     max-height: 200px;
 }
+
+#add-league {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: center; /* Centra verticalmente el contenido */
+     /* Opcional: Haz que el contenedor ocupe toda la altura de la pantalla */
+}
+
+#add-comp {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: center; /* Centra verticalmente el contenido */
+    width: 100%; /* Opcional: Haz que el enlace ocupe todo el ancho del contenedor */
+    height: 100%; /* Opcional: Haz que el enlace ocupe toda la altura del contenedor */
+}
+
+#plus {
+    font-size: 36px; /* Ajusta el tamaño de la fuente según sea necesario */
+}
+
 
 .teams-info {
     display: flex;
