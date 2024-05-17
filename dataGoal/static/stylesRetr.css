@@ -126,24 +126,27 @@ body {
 }
 
 
-.team1name{
- position: relative;
- text-align: center;
- line-height: 200px;
+.team1name {
+  text-align: center; /* Centreja el text horitzontalment */
+  position: absolute;
+  top: 27%; /* Desplaça el text al 50% de l'altura del pare */
+  left: 50%; /* Desplaça el text al 50% de l'amplada del pare */
+  transform: translate(-50%, -50%); /* Centreja exactament el text a la posició */
+  height: 20%; /* Altura del text */
 }
 
 
 .local{
  position: absolute;
  top: 25%;
- left: 200px;
+ left: 33.5%;
 }
 
 
 .visitante{
  position: absolute;
  top: 25%;
- left: 325px;
+ left: 56.5%;
 }
 
 .gray_box img#img1,
@@ -160,7 +163,7 @@ body {
 .total{
  position: absolute;
  top: 25%;
- left: 475px;
+ left: 79.5%;
 }
 
 
