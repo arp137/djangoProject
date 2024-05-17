@@ -103,7 +103,7 @@ body {
 
 
 .gray_box {
- width: 38%;
+ width: 40%;
  height: 72%;
  background: rgba(255, 255, 255, 1); ; /* Cambia el valor alfa para ajustar la transparencia */
  position: fixed;
@@ -115,7 +115,7 @@ body {
 
 
 .second_gray_box {
- width: 38%;
+ width: 40%;
  height: 72%;
  background: rgba(255, 255, 255, 1);
  position: fixed;
@@ -170,14 +170,14 @@ body {
 .puntos h3 {
  position: absolute;
  top: 31.5%;
- left: 50px;
+ left: 8%;
 }
 
 
 .puntos ul li:nth-child(1) {
  position: absolute;
  top: 35%;
- left: 212px;
+ left: 36%;
  list-style: none;
  padding: 0;
 }
@@ -186,7 +186,7 @@ body {
 .puntos ul li:nth-child(2) {
  position: absolute;
  top: 35%;
- left: 345px;
+ left: 59%;
  list-style: none;
  padding: 0;
 }
@@ -195,7 +195,7 @@ body {
 .puntos ul li:nth-child(3) {
  position: absolute;
  top: 35%;
- left: 475px;
+ left: 81%;
  list-style: none;
  padding: 0;
 }
@@ -204,14 +204,14 @@ body {
 .victories h3 {
  position: absolute;
  top: 40%;
- left: 50px;
+ left: 8%;
 }
 
 
 .victories ul li:nth-child(1) {
  position: absolute;
  top: 44%;
- left: 212px;
+ left: 36%;
  list-style: none;
  padding: 0;
 }
@@ -220,7 +220,7 @@ body {
 .victories ul li:nth-child(2) {
  position: absolute;
  top: 44%;
- left: 350px;
+ left: 59%;
  list-style: none;
  padding: 0;
 }
@@ -229,7 +229,7 @@ body {
 .victories ul li:nth-child(3) {
  position: absolute;
  top: 44%;
- left: 475px;
+ left: 81%;
  list-style: none;
  padding: 0;
 }
@@ -238,14 +238,14 @@ body {
 .draws h3 {
    position: absolute;
    top: 48.5%;
-   left: 50px;
+   left: 8%;
 }
 
 
 .draws ul li:nth-child(1) {
  position: absolute;
  top: 52%;
- left: 212px;
+ left: 36%;
  list-style: none;
  padding: 0;
 }
@@ -254,7 +254,7 @@ body {
 .draws ul li:nth-child(2) {
  position: absolute;
  top: 52%;
- left: 350px;
+ left: 59%;
  list-style: none;
  padding: 0;
 }
@@ -263,7 +263,7 @@ body {
 .draws ul li:nth-child(3) {
  position: absolute;
  top: 52%;
- left: 475px;
+ left: 81%;
  list-style: none;
  padding: 0;
 }
@@ -272,14 +272,14 @@ body {
 .defeats h3 {
    position: absolute;
    top: 57%;
-   left: 50px;
+   left: 8%;
 }
 
 
 .defeats ul li:nth-child(1) {
  position: absolute;
  top: 60%;
- left: 212px;
+ left: 36%;
  list-style: none;
  padding: 0;
 }
@@ -288,7 +288,7 @@ body {
 .defeats ul li:nth-child(2) {
  position: absolute;
  top: 60%;
- left: 350px;
+ left: 59%;
  list-style: none;
  padding: 0;
 }
@@ -297,7 +297,7 @@ body {
 .defeats ul li:nth-child(3) {
  position: absolute;
  top: 60%;
- left: 475px;
+ left: 81%;
  list-style: none;
  padding: 0;
 }
@@ -306,14 +306,14 @@ body {
 .goles_a_favor h3 {
    position: absolute;
    top: 65.5%;
-   left: 50px;
+   left: 8%;
 }
 
 
 .goles_a_favor ul li:nth-child(1) {
  position: absolute;
  top: 69%;
- left: 212px;
+ left: 36%;
  list-style: none;
  padding: 0;
 }
@@ -322,7 +322,7 @@ body {
 .goles_a_favor ul li:nth-child(2) {
  position: absolute;
  top: 69%;
- left: 350px;
+ left: 59%;
  list-style: none;
  padding: 0;
 }
@@ -331,7 +331,7 @@ body {
 .goles_a_favor ul li:nth-child(3) {
  position: absolute;
  top: 69%;
- left: 475px;
+ left: 81%;
  list-style: none;
  padding: 0;
 }
@@ -342,14 +342,14 @@ body {
 .goles_en_contra h3 {
    position: absolute;
    top: 74%;
-   left: 50px;
+   left: 8%;
 }
 
 
 .goles_en_contra ul li:nth-child(1) {
  position: absolute;
  top: 78%;
- left: 212px;
+ left: 36%;
  list-style: none;
  padding: 0;
 }
@@ -358,7 +358,7 @@ body {
 .goles_en_contra ul li:nth-child(2) {
  position: absolute;
  top: 78%;
- left: 350px;
+ left: 59%;
  list-style: none;
  padding: 0;
 }
@@ -367,7 +367,7 @@ body {
 .goles_en_contra ul li:nth-child(3) {
  position: absolute;
  top: 78%;
- left: 475px;
+ left: 81%;
  list-style: none;
  padding: 0;
 }
@@ -376,14 +376,14 @@ body {
 .diferencia_goles h3 {
    position: absolute;
    top: 82.5%;
-   left: 50px;
+   left: 8%;
 }
 
 
 .diferencia_goles ul li:nth-child(1) {
  position: absolute;
  top: 87%;
- left: 212px;
+ left: 36%;
  list-style: none;
  padding: 0;
 }
@@ -392,7 +392,7 @@ body {
 .diferencia_goles ul li:nth-child(2) {
  position: absolute;
  top: 87%;
- left: 350px;
+ left: 59%;
  list-style: none;
  padding: 0;
 }
@@ -401,7 +401,7 @@ body {
 .diferencia_goles ul li:nth-child(3) {
  position: absolute;
  top: 87%;
- left: 475px;
+ left: 81%;
  list-style: none;
  padding: 0;
 }
