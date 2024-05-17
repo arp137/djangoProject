@@ -103,8 +103,8 @@ body {
 
 
 .gray_box {
- width: 601px;
- height: 532px;
+ width: 38%;
+ height: 72%;
  background: rgba(255, 255, 255, 1); ; /* Cambia el valor alfa para ajustar la transparencia */
  position: fixed;
  top: 13%;
@@ -115,8 +115,8 @@ body {
 
 
 .second_gray_box {
- width: 601px;
- height: 532px;
+ width: 38%;
+ height: 72%;
  background: rgba(255, 255, 255, 1);
  position: fixed;
  top: 13%;
