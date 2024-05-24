@@ -1,190 +1,245 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
 <head>
-    <title>Data Goal - Get comparative</title>
+    <title itemprop="name">Data Goal - Get comparative</title>
     <link href="../../../../../../static/stylesRetr.css" rel="stylesheet" />
     <link href="../../../../../../static/images/logo.png" rel="icon" />
 </head>
-
 <body>
-   <div class="top_panel">
-       <a class="back_b" href="{% url 'dashboard' %}">BACK</a>
-       <a class="edit_b" href="{% url 'edit-comp' comparacio.id %}">EDIT</a>
-       <a class="remove_b" href="{% url 'confirm-delete' comparacio.id %}">REMOVE</a>
+   <div class="top_panel" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/WebPageElement">
+       <a class="back_b" href="{% url 'dashboard' %}" itemprop="url">BACK</a>
+       <a class="edit_b" href="{% url 'edit-comp' comparacio.id %}" itemprop="url">EDIT</a>
+       <a class="remove_b" href="{% url 'confirm-delete' comparacio.id %}" itemprop="url">REMOVE</a>
    </div>
-   <div class="gray_box">
-       <img id="img1" src="{{ comparacio.estadistiquesEquip1.escut_url }}">
-        <div class="stats1">
-            <div class="team1name">
-                 <h3>{{comparacio.estadistiquesEquip1.nom}}</h3>
-            </div>
-            <div class="local">
-                 <h3>Local</h3>
-            </div>
-            <div class="visitante">
-                 <h3>Away</h3>
-            </div>
-            <div class="total">
-                 <h3>Total</h3>
-            </div>
-            <div class="puntos">
-                <h3>Points</h3>
-                <ul>
-                    <li>{{ comparacio.estadistiquesEquip1.puntos_local }}</li>
-                    <li>{{ comparacio.estadistiquesEquip1.puntos_visitant }}</li>
-                    <li>{{ comparacio.estadistiquesEquip1.puntos_totals }}</li>
-                </ul>
-            </div>
-
-
+   <div class="gray_box" itemscope itemtype="http://schema.org/SportsTeam">
+       <img id="img1" src="{{ comparacio.estadistiquesEquip1.escut_url }}" alt="Team 1 Logo" itemprop="logo">
+       <div class="stats1">
+           <div class="team1name">
+               <h3 itemprop="name">{{ comparacio.estadistiquesEquip1.nom }}</h3>
+           </div>
+           <div class="local">
+               <h3>Local</h3>
+           </div>
+           <div class="visitante">
+               <h3>Away</h3>
+           </div>
+           <div class="total">
+               <h3>Total</h3>
+           </div>
+           <div class="puntos">
+               <h3>Points</h3>
+               <ul>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Local</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip1.puntos_local }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Away</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip1.puntos_visitant }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Total</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip1.puntos_totals }}</span>
+                   </li>
+               </ul>
+           </div>
            <div class="victories">
                <h3>Victories</h3>
                <ul>
-                   <li>{{ comparacio.estadistiquesEquip1.victorias_local }}</li>
-                   <li>{{ comparacio.estadistiquesEquip1.victorias_visitant }}</li>
-                   <li>{{ comparacio.estadistiquesEquip1.victorias_totals }}</li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Local</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip1.victorias_local }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Away</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip1.victorias_visitant }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Total</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip1.victorias_totals }}</span>
+                   </li>
                </ul>
            </div>
-
-
-            <div class="draws">
-                <h3>Draws</h3>
-                <ul>
-                    <li>{{ comparacio.estadistiquesEquip1.empates_local }}</li>
-                    <li>{{ comparacio.estadistiquesEquip1.empates_visitant }}</li>
-                    <li>{{ comparacio.estadistiquesEquip1.empates_totals }}</li>
-                </ul>
-            </div>
-
-
-            <div class="defeats">
-                <h3>Defeats</h3>
-                <ul>
-                    <li>{{ comparacio.estadistiquesEquip1.derrotas_local }}</li>
-                    <li>{{ comparacio.estadistiquesEquip1.derrotas_visitant }}</li>
-                    <li>{{ comparacio.estadistiquesEquip1.derrotas_totals }}</li>
-                </ul>
-            </div>
-
-
-            <div class="goles_a_favor">
-                <h3>Scored goals</h3>
-                <ul>
-                    <li>{{ comparacio.estadistiquesEquip1.gols_favor_local }}</li>
-                    <li>{{ comparacio.estadistiquesEquip1.gols_favor_visitant }}</li>
-                    <li>{{ comparacio.estadistiquesEquip1.gols_favor_totals }}</li>
-                </ul>
-            </div>
-
-
-            <div class="goles_en_contra">
-                <h3>Conceded goals</h3>
-                <ul>
-                    <li>{{ comparacio.estadistiquesEquip1.gols_en_contra_local }}</li>
-                    <li>{{ comparacio.estadistiquesEquip1.gols_en_contra_visitant }}</li>
-                    <li>{{ comparacio.estadistiquesEquip1.gols_en_contra_totals }}</li>
-                </ul>
-            </div>
-
-
-            <div class="diferencia_goles">
-                <h3>Goal difference</h3>
-                <ul>
-                    <li>{{ comparacio.estadistiquesEquip1.diferencia_gols_local }}</li>
-                    <li>{{ comparacio.estadistiquesEquip1.diferencia_gols_visitant }}</li>
-                    <li>{{ comparacio.estadistiquesEquip1.diferencia_gols_totals }}</li>
-                </ul>
-            </div>
-        </div>
+           <div class="draws">
+               <h3>Draws</h3>
+               <ul>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Local</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip1.empates_local }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Away</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip1.empates_visitant }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Total</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip1.empates_totals }}</span>
+                   </li>
+               </ul>
+           </div>
+           <div class="defeats">
+               <h3>Defeats</h3>
+               <ul>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Local</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip1.derrotas_local }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Away</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip1.derrotas_visitant }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Total</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip1.derrotas_totals }}</span>
+                   </li>
+               </ul>
+           </div>
+           <div class="goles_a_favor">
+               <h3>Scored goals</h3>
+               <ul>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Local</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip1.gols_favor_local }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Away</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip1.gols_favor_visitant }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Total</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip1.gols_favor_totals }}</span>
+                   </li>
+               </ul>
+           </div>
+           <div class="goles_en_contra">
+               <h3>Conceded goals</h3>
+               <ul>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Local</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip1.gols_en_contra_local }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Away</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip1.gols_en_contra_visitant }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Total</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip1.gols_en_contra_totals }}</span>
+                   </li>
+               </ul>
+           </div>
+           <div class="diferencia_goles">
+               <h3>Goal difference</h3>
+               <ul>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Local</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip1.diferencia_gols_local }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Away</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip1.diferencia_gols_visitant }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Total</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip1.diferencia_gols_totals }}</span>
+                   </li>
+               </ul>
+           </div>
+       </div>
    </div>
-   <div class="second_gray_box">
-       <img id="img2" src="{{ comparacio.estadistiquesEquip2.escut_url }}">
-        <div class="stats1">
-            <div class="team1name">
-                 <h3>{{comparacio.estadistiquesEquip2.nom}}</h3>
-            </div>
-            <div class="local">
-                 <h3>Local</h3>
-            </div>
-            <div class="visitante">
-                 <h3>Away</h3>
-            </div>
-            <div class="total">
-                 <h3>Total</h3>
-            </div>
-            <div class="puntos">
-                <h3>Points</h3>
-                <ul>
-                    <li>{{ comparacio.estadistiquesEquip2.puntos_local }}</li>
-                    <li>{{ comparacio.estadistiquesEquip2.puntos_visitant }}</li>
-                    <li>{{ comparacio.estadistiquesEquip2.puntos_totals }}</li>
-                </ul>
-            </div>
-
-
+   <div class="second_gray_box" itemscope itemtype="http://schema.org/SportsTeam">
+       <img id="img2" src="{{ comparacio.estadistiquesEquip2.escut_url }}" alt="Team 2 Logo" itemprop="logo">
+       <div class="stats1">
+           <div class="team1name">
+               <h3 itemprop="name">{{ comparacio.estadistiquesEquip2.nom }}</h3>
+           </div>
+           <div class="local">
+               <h3>Local</h3>
+           </div>
+           <div class="visitante">
+               <h3>Away</h3>
+           </div>
+           <div class="total">
+               <h3>Total</h3>
+           </div>
+           <div class="puntos">
+               <h3>Points</h3>
+               <ul>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Local</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip2.puntos_local }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Away</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip2.puntos_visitant }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Total</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip2.puntos_totals }}</span>
+                   </li>
+               </ul>
+           </div>
            <div class="victories">
                <h3>Victories</h3>
                <ul>
-                   <li>{{ comparacio.estadistiquesEquip2.victorias_local }}</li>
-                   <li>{{ comparacio.estadistiquesEquip2.victorias_visitant }}</li>
-                   <li>{{ comparacio.estadistiquesEquip2.victorias_totals }}</li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Local</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip2.victorias_local }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Away</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip2.victorias_visitant }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Total</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip2.victorias_totals }}</span>
+                   </li>
                </ul>
            </div>
-
-
-            <div class="draws">
-                <h3>Draws</h3>
-                <ul>
-                    <li>{{ comparacio.estadistiquesEquip2.empates_local }}</li>
-                    <li>{{ comparacio.estadistiquesEquip2.empates_visitant }}</li>
-                    <li>{{ comparacio.estadistiquesEquip2.empates_totals }}</li>
-                </ul>
-            </div>
-
-
-            <div class="defeats">
-                <h3>Defeats</h3>
-                <ul>
-                    <li>{{ comparacio.estadistiquesEquip2.derrotas_local }}</li>
-                    <li>{{ comparacio.estadistiquesEquip2.derrotas_visitant }}</li>
-                    <li>{{ comparacio.estadistiquesEquip2.derrotas_totals }}</li>
-                </ul>
-            </div>
-
-
-            <div class="goles_a_favor">
-                <h3>Scored goals</h3>
-                <ul>
-                    <li>{{ comparacio.estadistiquesEquip2.gols_favor_local }}</li>
-                    <li>{{ comparacio.estadistiquesEquip2.gols_favor_visitant }}</li>
-                    <li>{{ comparacio.estadistiquesEquip2.gols_favor_totals }}</li>
-                </ul>
-            </div>
-
-
-            <div class="goles_en_contra">
-                <h3>Conceded goals</h3>
-                <ul>
-                    <li>{{ comparacio.estadistiquesEquip2.gols_en_contra_local }}</li>
-                    <li>{{ comparacio.estadistiquesEquip2.gols_en_contra_visitant }}</li>
-                    <li>{{ comparacio.estadistiquesEquip2.gols_en_contra_totals }}</li>
-                </ul>
-            </div>
-
-
-            <div class="diferencia_goles">
-                <h3>Goal difference</h3>
-                <ul>
-                    <li>{{ comparacio.estadistiquesEquip2.diferencia_gols_local }}</li>
-                    <li>{{ comparacio.estadistiquesEquip2.diferencia_gols_visitant }}</li>
-                    <li>{{ comparacio.estadistiquesEquip2.diferencia_gols_totals }}</li>
-                </ul>
-            </div>
-        </div>
-   </div>
-   <div class="bottom_panel">
-       <div class="logo"></div>
-       <span class="copyright">© Copyright 2024 - Data Goal</span>
+           <div class="draws">
+               <h3>Draws</h3>
+               <ul>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Local</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip2.empates_local }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Away</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip2.empates_visitant }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Total</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip2.empates_totals }}</span>
+                   </li>
+               </ul>
+           </div>
+           <div class="defeats">
+               <h3>Defeats</h3>
+               <ul>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Local</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip2.derrotas_local }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Away</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip2.derrotas_visitant }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Total</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip2.derrotas_totals }}</span>
+                   </li>
+               </ul>
+           </div>
+           <div class="goles_a_favor">
+               <h3>Scored goals</h3>
+               <ul>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Local</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip2.gols_favor_local }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Away</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip2.gols_favor_visitant }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Total</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip2.gols_favor_totals }}</span>
+                   </li>
+               </ul>
+           </div>
+           <div class="goles_en_contra">
+               <h3>Conceded goals</h3>
+               <ul>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Local</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip2.gols_en_contra_local }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Away</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip2.gols_en_contra_visitant }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Total</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip2.gols_en_contra_totals }}</span>
+                   </li>
+               </ul>
+           </div>
+           <div class="diferencia_goles">
+               <h3>Goal difference</h3>
+               <ul>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Local</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip2.diferencia_gols_local }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Away</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip2.diferencia_gols_visitant }}</span>
+                   </li>
+                   <li itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                       <span itemprop="name">Total</span>: <span itemprop="value">{{ comparacio.estadistiquesEquip2.diferencia_gols_totals }}</span>
+                   </li>
+               </ul>
+           </div>
+       </div>
    </div>
 </body>
 </html>
