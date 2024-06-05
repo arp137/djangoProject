@@ -1,42 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:WebPage">
 <head>
     <link href="../static/stylesLog.css" rel="stylesheet" />
-    <link href="../static/images/logo.png" rel="icon" />
-    <title>Data Goal - Login</title>
+    <link href="../static/images/logo.png" rel="icon" property="v:image" />
+    <title property="v:name">Data Goal - Login</title>
 </head>
 <body>
-    <div class="login_div">
+    <div class="login_div" property="v:mainContentOfPage" typeof="v:WebPageElement">
             <div class="gray_box"></div>
-            <span class="tituloDataGoal">Data Goal</span>
+            <span class="tituloDataGoal" property="v:headline">Data Goal</span>
             <form method="POST" action="{% url 'login' %}" autocomplete="off">
-
                 {% csrf_token %}
-
-                <input type="text" name="username" placeholder="Username" class="email_box" value="">
-                <input type="password" name="password" placeholder="Password" class="password_box" value="">
-                <input type="submit" class="login_botton" value="LOGIN">
-
+                <input type="text" name="username" placeholder="Username" class="email_box" value="" property="v:username">
+                <input type="password" name="password" placeholder="Password" class="password_box" value="" property="v:password">
+                <input type="submit" class="login_botton" value="LOGIN" property="v:submit">
                 {% if error_message %}
-                <script>
+                <script property="v:error" type="application/javascript">
                     window.onload = function() {
                         window.alert("{{ error_message }}");
                     };
                 </script>
                 {% endif %}
-
             </form>
-
-            <span class="dhaa">Don’t have an account? <a href="{% url 'register' %}">Register!</a></span>
-            <div class="laliga"></div>
-
+            <span class="dhaa" property="v:dontHaveAccount">Don’t have an account? <a href="{% url 'register' %}" property="v:registerLink">Register!</a></span>
+            <div class="laliga" property="v:additionalContent"></div>
     </div>
-
-    <div class="bottom_panel">
-        <a href="{% url 'user_logout' %} ">
-            <div class="logo"></div>
+    <div class="bottom_panel" typeof="v:WPFooter">
+        <a href="{% url 'user_logout' %}" property="v:logoutLink">
+            <div class="logo" property="v:logo"></div>
         </a>
-            <span class="copyright">© Copyright 2024 - Data Goal</span>
+            <span class="copyright" property="v:copyright">© Copyright 2024 - Data Goal</span>
     </div>
 </body>
 </html>

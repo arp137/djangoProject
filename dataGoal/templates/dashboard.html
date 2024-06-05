@@ -1,53 +1,51 @@
 <!DOCTYPE html>
-<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<html lang="en" vocab="http://schema.org/" typeof="WebPage">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title itemprop="name">Dashboard</title>
+    <title property="name">Dashboard</title>
     <link rel="stylesheet" href="../static/stylesDashboard.css">
     <link rel="icon" href="../static/images/logo.png">
 </head>
 <body>
-    <div class="top_panel" itemscope itemtype="http://schema.org/WPHeader">
-        <span class="titulo" itemprop="headline">Data Goal</span>
+    <div class="top_panel" typeof="WPHeader">
+        <span class="titulo" property="headline">Data Goal</span>
         <a class="logout_b" href="{% url 'user_logout' %}">Log out</a>
         <div class="logo"></div>
     </div>
-
-    <main itemscope itemtype="http://schema.org/WebPageElement">
-        <div class="league" id="add-league" itemscope itemtype="http://schema.org/SportsOrganization">
+    <main typeof="WebPageElement">
+        <div class="league" id="add-league" typeof="SportsOrganization">
             <a href="{% url 'make-comp' %}" class="full-link" id="add-comp">
                 <span id="plus">+</span>
             </a>
         </div>
-
         {% for comp in comps %}
-            <div class="league" itemscope itemtype="http://schema.org/SportsEvent">
+            <div class="league" typeof="SportsEvent">
                 <a href="{% url 'get-comp' user_id comp.temporada.id comp.estadistiquesEquip1.id comp.estadistiquesEquip2.id %}" class="full-link">
-                    <br><div class="teams-info" itemprop="name">
-                        <div class="team1" itemscope itemtype="http://schema.org/SportsTeam">
-                            <img id="img1" src="{{ comp.estadistiquesEquip1.escut_url }}" itemprop="logo"><br>
-                            <span id="nom1" itemprop="name">{{ comp.estadistiquesEquip1.nom }}</span>
+                    <br>
+                    <div class="teams-info" typeof="name">
+                        <div class="team1" typeof="SportsTeam">
+                            <img id="img1" src="{{ comp.estadistiquesEquip1.escut_url }}" property="logo" alt="Logo del primer equipo"><br>
+                            <span id="nom1" property="name">{{ comp.estadistiquesEquip1.nom }}</span>
                         </div>
                         <span>vs</span>
-                        <div class="team2" itemscope itemtype="http://schema.org/SportsTeam">
-                            <img id="img2" src="{{ comp.estadistiquesEquip2.escut_url }}" itemprop="logo"><br>
-                            <span id="nom2" itemprop="name">{{ comp.estadistiquesEquip2.nom }}</span>
+                        <div class="team2" typeof="SportsTeam">
+                            <img id="img2" src="{{ comp.estadistiquesEquip2.escut_url }}" property="logo" alt="Logo del segundo equipo"><br>
+                            <span id="nom2" property="name">{{ comp.estadistiquesEquip2.nom }}</span>
                         </div>
                     </div><br>
-                    <span id="temp" itemprop="description">{{ comp.temporada.titul }}</span><br>
-                    <time itemprop="startDate" datetime="{{ comp.startDate|date:'c' }}">{{ comp.startDate|date:'F j, Y, g:i a' }}</time><br>
-                    <div itemprop="location" itemscope itemtype="http://schema.org/Place">
-                        <span itemprop="name">{{ comp.location }}</span>
+                    <span id="temp" typeof="SportsSeason">{{ comp.temporada.titul }}</span><br>
+                    <time typeof="startDate" datetime="{{ comp.startDate|date:'c' }}">{{ comp.startDate|date:'F j, Y, g:i a' }}</time><br>
+                    <div typeof="Place">
+                        <span property="name">{{ comp.location }}</span>
                     </div>
                 </a>
             </div>
         {% endfor %}
     </main>
-
-   <div class="bottom_panel" itemscope itemtype="http://schema.org/WPFooter">
-       <div class="logo"></div>
-       <span class="copyright">©️ Copyright 2024 - Data Goal</span>
-   </div>
+    <div class="bottom_panel" typeof="WPFooter">
+        <div class="logo"></div>
+        <span class="copyright">©️ Copyright 2024 - Data Goal</span>
+    </div>
 </body>
 </html>

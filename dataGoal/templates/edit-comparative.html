@@ -1,31 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<html lang="en" vocab="http://schema.org/" typeof="WebPage">
 <head>
     <link href="../../static/stylesMakeComp.css" rel="stylesheet" />
     <link href="../../static/images/logo.png" rel="icon" />
-    <title itemprop="name">Data Goal - Edit comparative</title>
+    <title property="name">Data Goal - Edit comparative</title>
 </head>
 <body>
-    <div class="make_a_comparative" itemscope itemtype="http://schema.org/WebPageElement">
-        <h1 class="title1" itemprop="headline">
+    <div class="make_a_comparative" property="mainEntity" typeof="WebPageElement">
+        <h1 class="title1" property="headline">
             EDIT COMPARATIVE
         </h1>
-
         <form>
-            <select name="Seasons" id="temporades-select" onchange="this.form.submit()" itemprop="season">
+            <select name="Seasons" id="temporades-select" onchange="this.form.submit()" property="season">
                 <option value=""> --Edit Season-- </option>
                 {% for year in years %}
                     <option value="{{ year.year }}" {% if selected_year == year.year %}selected{% endif %}>Season 20{{ year.title }}</option>
                 {% endfor %}
             </select>
-
-            <select name="Team1" id="equip1-select" onchange="this.form.submit()" itemprop="sportsTeam">
+            <select name="Team1" id="equip1-select" onchange="this.form.submit()" property="sportsTeam">
                 <option value="">--Edit team 1--</option>
                 {% for team in teams %}
                     <option value="{{ team }}" {% if selected_team1 == team %}selected{% endif %}>{{ team }}</option>
                 {% endfor %}
             </select>
-            <select name="Team2" id="equip2-select" itemprop="sportsTeam">
+            <select name="Team2" id="equip2-select" property="sportsTeam">
                 <option value="">--Edit team 2--</option>
                 {% for team in teams_without %}
                     <option value="{{ team }}" {% if selected_team2 == team %}selected{% endif %}>{{ team }}</option>
@@ -34,7 +32,6 @@
             <button type="button" class="cancel" id="cancel-button" onclick="cancelAction()">Cancel</button>
             <button type="button" class="accept" id="accept-button" onclick="this.form.submit()">Accept</button>
         </form>
-
         <script>
         function cancelAction() {
             var newURL = "http://127.0.0.1:8000/make-comp/" + "{{ user_id }}" + "/" + "{{def_year_id}}" + "/" + "{{def_team1_id}}" + "/" + "{{def_team2_id}}" + "/";
@@ -42,10 +39,9 @@
         }
         </script>
     </div>
-
-    <div class="bottom_panel" itemscope itemtype="http://schema.org/WPFooter">
-        <div class="logo"></div>
-        <span class="copyright">© Copyright 2024 - Data Goal</span>
+    <div class="bottom_panel" property="footer" typeof="WPFooter">
+        <div class="logo" property="logo"></div>
+        <span class="copyright">© <span property="copyrightYear">2024</span> - <span property="copyrightHolder">Data Goal</span></span>
     </div>
 </body>
 </html>

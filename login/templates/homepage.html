@@ -1,29 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:WebPage">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
+    <title property="v:name">Homepage</title>
     <link rel="stylesheet" href="../static/stylesHome.css">
-    <link rel="icon" href="../static/images/logo.png"  />
-
+    <link rel="icon" href="../static/images/logo.png" property="v:image" />
 </head>
-
 <body>
-    <video autoplay muted loop id="myVideo">
+    <video autoplay muted loop id="myVideo" property="v:video">
         <source src="../static/intro.mp4" type="video/mp4">
     </video>
-
-    <div class="top_panel">
+    <div class="top_panel" property="v:mainContentOfPage" typeof="v:WebPageElement">
         <div class="userIcon"></div>
-        <span class="titulo">Data Goal</span>
-        <a class="register_b" href="{% url 'register' %}">Register</a>
-        <a class="login_b" href="{% url 'login' %}">Login</a>
-        <a class="dashboard-link" href="{% url 'user_logout' %}" >
+        <span class="titulo" property="v:headline">Data Goal</span>
+        <a class="register_b" href="{% url 'register' %}" property="v:url">Register</a>
+        <a class="login_b" href="{% url 'login' %}" property="v:url">Login</a>
+        <a class="dashboard-link" href="{% url 'user_logout' %}" property="v:url">
             <div class="logo"></div>
         </a>
     </div>
-
 </body>
 </html>
-
